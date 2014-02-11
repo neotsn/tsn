@@ -1,0 +1,21 @@
+			<br />
+			<center>
+				<table class="topbar_table" cellspacing="0px" cellpadding="0px">
+					<tr>
+						<td height="30" align="right" class="topbar">
+							<span class="bluebar">
+								<a href="./myspot.php" class="bluebar">My Spot</a> :: 
+								<!-- IF not S_IS_BOT -->
+									<!-- IF S_USER_LOGGED_IN -->
+										<!-- IF S_DISPLAY_PM --> &nbsp;<a href="{U_PRIVATEMSGS}" class="bluebar">{PRIVATE_MESSAGE_INFO}<!-- IF PRIVATE_MESSAGE_INFO_UNREAD -->, {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a><!-- ENDIF -->
+										<!-- ELSE --><a href="{U_REGISTER}" class="bluebar">{L_REGISTER}</a>
+									<!-- ENDIF -->
+								<!-- ENDIF --> :: <a href="./index.php" class="bluebar">Forums</a>
+								:: <a href="chat.html" class="bluebar" target="_search">Chat</a>
+								<!-- IF U_ACP --> :: <a href="{U_ACP}" class="bluebar">{L_ACP}</a><!-- ENDIF -->
+							</span>
+						</td>
+					</tr>
+				</table>
+			<div id="divQuickQuips"></div>
+			</center>

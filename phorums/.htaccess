@@ -1,0 +1,28 @@
+
+RewriteEngine on
+#
+# Uncomment the statement below if you want to make use of
+# HTTP authentication and it does not already work.
+# This could be required if you are for example using PHP via Apache CGI.
+#
+#<IfModule mod_rewrite.c>
+#RewriteEngine on
+#RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+#</IfModule>
+
+<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>
+RewriteCond %{HTTP_HOST} ^phorums.the-spot.net$ [OR]
+RewriteCond %{HTTP_HOST} ^www.phorums.the-spot.net$
+RewriteRule ^(.*)$ http://www.the-spot.net/phorums [R=301,L]
+
+# Use PHP5 as default
+AddHandler application/x-httpd-php5 .php .php4 .php3 .phtml
+
