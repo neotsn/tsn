@@ -1,0 +1,13 @@
+User-Agent: *
+Disallow: /cgi-bin/
+Disallow: /_vti_bin/
+Disallow: /_vti_cnf/
+Disallow: /_vti_log/
+Disallow: /_vti_map/
+Disallow: /_vti_pvt/
+Disallow: /_vti_txt/
+Disallow: /_private/
+Disallow: /pizzy/docs/
+
+
+Sitemap: http://www.automapit.com/sitemaps/7070/sitemap.xml
