@@ -1,211 +1,147 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
+<!DOCTYPE html>
+<html lang="{S_USER_LANG}">
 <head>
-
-<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
-<meta http-equiv="content-language" content="{S_USER_LANG}" />
-<meta http-equiv="content-style-type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="resource-type" content="document" />
-<meta name="distribution" content="global" />
-<meta name="copyright" content="2002-2006 phpBB Group" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-{META}
-<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
-
-<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css" />
-<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /> 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
-<script type="text/javascript">
-// <![CDATA[
-<!-- IF S_USER_PM_POPUP -->
-	if ({S_NEW_PM})
-	{
-		popup('{UA_POPUP_PM}', 400, 225, '_phpbbprivmsg');
-	}
-<!-- ENDIF -->
-
-function popup(url, width, height, name)
-{
-	if (!name)
-	{
-		name = '_popup';
-	}
-
-	window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
-	return false;
-}
-
-function jumpto()
-{
-	var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
-	var perpage = '{PER_PAGE}';
-	var base_url = '{A_BASE_URL}';
-
-	if (page !== null && !isNaN(page) && page > 0)
-	{
-		document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * perpage);
-	}
-}
-
-/**
-* Find a member
-*/
-function find_username(url)
-{
-	popup(url, 760, 570, '_usersearch');
-	return false;
-}
-
-/**
-* Mark/unmark checklist
-* id = ID of parent container, name = name prefix, state = state [true/false]
-*/
-function marklist(id, name, state)
-{
-	var parent = document.getElementById(id);
-	if (!parent)
-	{
-		eval('parent = document.' + id);
-	}
-
-	if (!parent)
-	{
-		return;
-	}
-
-	var rb = parent.getElementsByTagName('input');
-	
-	for (var r = 0; r < rb.length; r++)
-	{
-		if (rb[r].name.substr(0, name.length) == name)
-		{
-			rb[r].checked = state;
+	<meta charset="utf-8">
+	<meta name="description" content="the-spot.net - What you need...to know.">
+	<meta name="copyright" content="2002-2014 thepizzy.net">
+	<meta name="resource-type" content="document">
+	<meta name="distribution" content="global">
+	<meta name="keywords" content="social, community, network, college, young adult, hangout">
+	{META}
+	<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->
+		{PAGE_TITLE}</title>
+	<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css"/>
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css"/>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		// <![CDATA[
+		<!-- IF S_USER_PM_POPUP -->
+		if ({S_NEW_PM}) {
+			popup('{UA_POPUP_PM}', 400, 225, '_phpbbprivmsg');
 		}
-	}
-}
+		<!-- ENDIF -->
 
-<!-- IF ._file -->
-
-	/**
-	* Play quicktime file by determining it's width/height
-	* from the displayed rectangle area
-	*
-	* Only defined if there is a file block present.
-	*/
-	function play_qt_file(obj)
-	{
-		var rectangle = obj.GetRectangle();
-
-		if (rectangle)
-		{
-			rectangle = rectangle.split(',')
-			var x1 = parseInt(rectangle[0]);
-			var x2 = parseInt(rectangle[2]);
-			var y1 = parseInt(rectangle[1]);
-			var y2 = parseInt(rectangle[3]);
-
-			var width = (x1 < 0) ? (x1 * -1) + x2 : x2 - x1;
-			var height = (y1 < 0) ? (y1 * -1) + y2 : y2 - y1;
+		function popup(url, width, height, name) {
+			if (!name) {
+				name = '_popup';
+			}
+			window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
+			return false;
 		}
-		else
-		{
+
+		function jumpto() {
+			var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
+			var perpage = '{PER_PAGE}';
+			var base_url = '{A_BASE_URL}';
+
+			if (page !== null && !isNaN(page) && page > 0) {
+				document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * perpage);
+			}
+		}
+
+		/**
+		 * Find a member
+		 */
+		function find_username(url) {
+			popup(url, 760, 570, '_usersearch');
+			return false;
+		}
+
+		/**
+		 * Mark/unmark checklist
+		 * id = ID of parent container, name = name prefix, state = state [true/false]
+		 */
+		function marklist(id, name, state) {
+			var parent = document.getElementById(id);
+			if (!parent) {
+				eval('parent = document.' + id);
+			}
+
+			if (!parent) {
+				return;
+			}
+
+			var rb = parent.getElementsByTagName('input');
+
+			for (var r = 0; r < rb.length; r++) {
+				if (rb[r].name.substr(0, name.length) == name) {
+					rb[r].checked = state;
+				}
+			}
+		}
+
+		<!-- IF ._file -->
+
+		/**
+		 * Play quicktime file by determining it's width/height
+		 * from the displayed rectangle area
+		 *
+		 * Only defined if there is a file block present.
+		 */
+		function play_qt_file(obj) {
+			var rectangle = obj.GetRectangle();
 			var width = 200;
 			var height = 0;
+
+			if (rectangle) {
+				rectangle = rectangle.split(',')
+				var x1 = parseInt(rectangle[0]);
+				var x2 = parseInt(rectangle[2]);
+				var y1 = parseInt(rectangle[1]);
+				var y2 = parseInt(rectangle[3]);
+
+				width = (x1 < 0) ? (x1 * -1) + x2 : x2 - x1;
+				height = (y1 < 0) ? (y1 * -1) + y2 : y2 - y1;
+			}
+
+			obj.width = width;
+			obj.height = height + 16;
+			obj.SetControllerVisible(true);
+			obj.Play();
 		}
-
-		obj.width = width;
-		obj.height = height + 16;
-
-		obj.SetControllerVisible(true);
-
-		obj.Play();
-	}
-<!-- ENDIF -->
-
-// ]]>
-</script>
-<!-- AJAX Scripts -->
-<script type="text/javascript">
-<!--	/* These Scripts make use of prototype.js */
-
-	/**** AJAX Twitter ****/
-	//new Ajax.PeriodicalUpdater('divTwitterFeed', 'modules/twitter.php', { method: 'get', frequency: 300, });
-	/**** AJAX Youtube Feed ****/
-	//new Ajax.Updater('divYoutubeFeed', 'modules/youtube.php', {method: 'get'});
-	/***** AJAX Special Report  Box *****/
-	new Ajax.Updater('divSpecialReport', 'module_news.php?sid='+Math.random, {method: 'get'});
-	/***** AJAX Mini Forum Index *****/
-	new Ajax.Updater('divMiniForumIndex', 'module_mini_index.php?sid='+Math.random, {method: 'get'});
-	/***** AJAX Mini Profile Box *****/
-	new Ajax.Updater('divMiniProfile', 'module_mini_profile.php?sid='+Math.random, {method: 'get'});
-	/***** AJAX QuickQuips *****/
-	new Ajax.PeriodicalUpdater('divQuickQuips', 'module_quickquips.php?sid='+Math.random, 
-	{
-		method: 'get',
-		frequency: 30
-	});
-	
-	/***** AJAX Update New Posts *****/
-	new Ajax.PeriodicalUpdater('divNewPosts', 'module_update_posts.php?sid='+Math.random,
-	{
-		method: 'get',
-		frequency: 10,
-		decay: 2,
-		onSuccess: function(transport) {
-			var response = transport.responseText || "";
-			
-			var currentPosts = document.getElementById('divNewPosts');
-			currentPosts.innerHTML = (currentPosts.innerHTML == reponse) ? "" : response;
-		}
-	});
-
--->
-</script>
+		<!-- ENDIF -->
+	</script>
+	<script src="js/myspot.js"></script>
 </head>
 <body class="{S_CONTENT_DIRECTION}">
-
 <a name="top"></a>
-<table cellspacing="0px" cellpadding="0px" class="pagetable">
-	<tr>
-		<td width="50%" rowspan="6" class="bkgd-left"></td>
-		<td width="950px" height="125" class="header">
-			<div id="menubar">
-			<table class="menubar" cellspacing="0px" cellpadding="0px">
-				<tr>
-					<td height="30" align="right" class="userlinks">
-						<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}" class="userlinks">{L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->
-						<!-- IF U_RESTORE_PERMISSIONS -->|&nbsp;<a href="{U_RESTORE_PERMISSIONS}" class="userlinks">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
-						<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
-						<!-- IF not S_IS_BOT -->
-							<!-- IF S_USER_LOGGED_IN -->
-								<!-- IF S_DISPLAY_PM -->|&nbsp;<a href="{U_PRIVATEMSGS}" class="userlinks">{PRIVATE_MESSAGE_INFO}<!-- IF PRIVATE_MESSAGE_INFO_UNREAD -->, {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a><!-- ENDIF -->
-							<!-- ELSE -->|&nbsp;<a href="{U_REGISTER}" class="userlinks">{L_REGISTER}</a>
-							<!-- ENDIF -->
+
+<div class="tsn8_page_wrapper">
+	<div class="tsn8_wrapper tsn8_header_wrapper">
+			<span class="tsn8_header_image">
+				<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}" class="userlinks">{L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->
+				<!-- IF U_RESTORE_PERMISSIONS -->|&nbsp;<a href="{U_RESTORE_PERMISSIONS}" class="userlinks">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
+				<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span
+					style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
+				<!-- IF not S_IS_BOT -->
+					<!-- IF S_USER_LOGGED_IN -->
+						<!-- IF S_DISPLAY_PM -->|&nbsp;<a href="{U_PRIVATEMSGS}" class="userlinks">{PRIVATE_MESSAGE_INFO}
+				<!-- IF PRIVATE_MESSAGE_INFO_UNREAD -->, {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a>
 						<!-- ENDIF -->
-					</td>
-				</tr>
-				<tr>
-					<td height="65"></td>
-				</tr>
-				<tr>
-					<td height="30" class="userlinks" align="{S_CONTENT_FLOW_END}">
-						<a href="{U_FAQ}" class="userlinks">{L_FAQ}</a>
-						<!-- IF S_DISPLAY_SEARCH -->&nbsp;|&nbsp;<a href="{U_SEARCH}" class="userlinks">{L_SEARCH}</a><!-- ENDIF -->
-						<!-- IF not S_IS_BOT -->
-							<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}" class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
-							<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
-						<!-- ENDIF -->
-					</td>
-				</tr>
-			</table>
-			</div>
-		</td>
-		<td width="50%" rowspan="6" class="bkgd-right"></td>
-	</tr>
-	<tr>
-		<td width="950px" class="content" valign="top">
-			<div class="content-head">
-				<!-- INCLUDE topbar.html -->
-			<div id="wrapcentre">
+					<!-- ELSE -->
+						|&nbsp;<a href="{U_REGISTER}" class="userlinks">{L_REGISTER}</a>
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+			</span>
+	</div>
+	<div class="tsn8_wrapper tsn8_top_menu_wrapper">
+			<span class="tsn8_left_menu_items">
+				<a href="./myspot.php" class="bluebar">My Spot</a>
+				<!-- IF not S_IS_BOT --><!-- IF not S_USER_LOGGED_IN --> :: <a href="{U_REGISTER}" class="bluebar">{L_REGISTER}</a><!-- ENDIF --><!-- ENDIF -->
+				:: <a href="./index.php" class="bluebar">Forums</a>
+				:: <a href="chat.html" class="bluebar" target="_search">Chat</a>
+				<!-- IF U_ACP --> :: <a href="{U_ACP}" class="bluebar">{L_ACP}</a><!-- ENDIF -->
+			</span>
+			<span class="tsn8_right_menu_items">
+				<a href="{U_FAQ}" class="userlinks">{L_FAQ}</a>
+				<!-- IF S_DISPLAY_SEARCH -->&nbsp;|&nbsp;<a href="{U_SEARCH}" class="userlinks">{L_SEARCH}</a><!-- ENDIF -->
+				<!-- IF not S_IS_BOT -->
+					<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}" class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
+					<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
+				<!-- ENDIF -->
+			</span>
+	</div>
+	<!--<div id="divQuickQuips"></div>-->
+	<div class="tsn8_wrapper tsn8_content_wrapper">
