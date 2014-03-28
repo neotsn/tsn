@@ -3,9 +3,24 @@
  */
 
 $(document).on('ready', function () {
-	$.ajax({
-		url: "module_mini_profile.php?sid=" + Math.random()
-	}).done(function (data) {
-		$('#divMiniProfile').html(data);
-	});
+
+	// Get mini profile
+	ajax_fetch_html('module_mini_profile.php?', 'divMiniProfile', false);
+
+	// Get tsn Special Report
+	ajax_fetch_html('module_news.php?', 'divSpecialReport', false);
+
 });
+
+function ajax_fetch_html(url, elementid, refetch) {
+	$.ajax({
+		url: url + "sid=" + Math.random()
+	}).done(function (data) {
+		$('#' + elementid).html(data);
+		if (refetch) {
+			setTimeout(function () {
+				ajax_fetch_html(url, elementid, refetch);
+			}, 30000);
+		}
+	});
+}

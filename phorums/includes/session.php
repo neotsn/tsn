@@ -1837,9 +1837,9 @@
 		/**
 		 * Format user date
 		 *
-		 * @param int    $gmepoch   unix timestamp
-		 * @param string $format    date format in date() notation. | used to indicate relative dates, for example |d m Y|, h:i is translated to Today, h:i.
-		 * @param bool   $forcedate force non-relative date format.
+		 * @param int         $gmepoch   unix timestamp
+		 * @param bool|string $format    date format in date() notation. | used to indicate relative dates, for example |d m Y|, h:i is translated to Today, h:i.
+		 * @param bool        $forcedate force non-relative date format.
 		 *
 		 * @return mixed translated date
 		 */

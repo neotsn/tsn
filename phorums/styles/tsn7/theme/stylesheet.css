@@ -33,20 +33,20 @@ body {
 	margin: 0px;
 }
 
+div.tsn8_page_wrapper {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: auto;
+	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed 15% 0;
+}
+
 div.tsn8_wrapper {
 	position: relative;
 	display: block;
 	max-width: 1250px;
 	min-width: 950px;
 	margin: 0 auto;
-}
-
-div.tsn8_page_wrapper {
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 500px;
-	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat 15%;
 }
 
 div.tsn8_header_wrapper {
@@ -63,6 +63,10 @@ span.tsn8_header_image {
 	text-align: right;
 	vertical-align: bottom;
 	padding: 5px;
+}
+
+p.tsn8_loading {
+	text-align: center;
 }
 
 div.tsn8_top_menu_wrapper {
@@ -87,6 +91,22 @@ div.tsn8_content_wrapper {
 	padding: 5px;
 }
 
+table.tsn8_myspot_content_wrapper td {
+	vertical-align: top;
+}
+
+td.tsn8_myspot_left_sidebar {
+	width: 25%;
+}
+
+td.tsn8_myspot_center_content {
+	width: 60%;
+}
+
+td.tsn8_myspot_right_sidebar {
+	width: 15%;
+}
+
 div.tsn8_bottom_menu_wrapper {
 	text-align: center;
 	vertical-align: middle;
@@ -107,6 +127,12 @@ span.tsn8_copyright_info {
 	width: 100%;
 }
 
+div.tsn8_myspot_module_wrapper {
+	display: block;
+	position: relative;
+	vertical-align: top;
+}
+
 div.tsn8_myspot_wrapper {
 	border-radius: 3px;
 	box-shadow: 0 1px 2px #ccc;
@@ -120,6 +146,7 @@ span.tsn8_myspot_module_avatar {
 	display: block;
 	text-align: center;
 	float: left;
+	margin: 0 5px;
 }
 
 span.tsn8_myspot_module_header {
@@ -135,7 +162,7 @@ div.tsn8_myspot_module_content {
 	padding: 5px;
 	font-size: 0.85em;
 	color: #333;
-	text-align: center;
+	text-align: left;
 }
 
 span.tsn8_myspot_profile_info {
@@ -221,6 +248,26 @@ span.tsn8_warning_message {
 	margin-bottom: 5px;
 }
 
+div.tsn8_myspot_mini_profile_wrapper {
+	min-width: 275px;
+	max-width: 25%;
+}
+
+div.tsn8_myspot_tsn_news_wrapper {
+	min-width: 500px;
+	max-width: 100%;
+}
+
+p.tsn8_myspot_special_report_header {
+	font-size: 1.5em;
+	color: #587eaa;
+	margin-bottom: 5px;
+	padding: 3px;
+	display: block;
+	font-weight: bold;
+}
+
+/**********************************************/
 #wrapheader {
 	min-height: 120px;
 	height: 120px;
