@@ -2,13 +2,16 @@
 <table class="tsn8_myspot_content_wrapper">
 	<tr>
 		<td class="tsn8_myspot_left_sidebar">
-			<!-- //IF S_USER_LOGGED_IN -->
+			<!-- IF S_USER_LOGGED_IN -->
 			<div id="divMiniProfile" class="tsn8_myspot_module_wrapper">
 				<p class="tsn8_loading">Loading Profile...<br/>
 					<img src="styles/tsn7/theme/images/tsn8/ajax-loader.gif"/>
 				</p>
 			</div>
-			<!-- //ENDIF -->
+			<input type="hidden" id="login_status" value="1"/>
+			<!-- ELSE -->
+			<input type="hidden" id="login_status" value="0"/>
+			<!-- ENDIF -->
 			<div id="divMiniForumIndex" class="tsn8_myspot_module_wrapper">
 				<p class="tsn8_loading">Loading Forums...<br/>
 					<img src="styles/tsn7/theme/images/tsn8/ajax-loader.gif"/>
@@ -35,9 +38,6 @@
 			</div>
 		</td>
 		<td class="tsn8_myspot_right_sidebar">
-			<!-- //INCLUDE modules/twitter-stats.html -->
-			<!-- //INCLUDE modules/flickr_pics.html -->
-			<!-- //INCLUDE modules/niftystuff.html -->
 		</td>
 	</tr>
 </table>

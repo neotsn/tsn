@@ -1,33 +1,54 @@
 <!-- IF not S_USER_LOGGED_IN -->
-	<form method="post" action="{S_LOGIN_ACTION}">
-	
-	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<th align="center"><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></th>
-	</tr>
-	<tr>
-		<td class="row1" align="center">
-			<span class="genmed">{L_USERNAME}:</span><br />
-			<input class="post" type="text" name="username" size="10" /><br />
-			<span class="genmed">{L_PASSWORD}:</span><br />
-			<input class="post" type="password" name="password" size="10" /><br />
-			<!-- IF S_AUTOLOGIN_ENABLED --><input type="checkbox" class="radio" name="autologin" /> <span class="gensmall">{L_LOG_ME_IN}</span><br /><!-- ENDIF -->
-			<input type="submit" class="btnmain" name="login" value="{L_LOGIN}" /></td>
-	</tr>
-	</table>
-	{S_FORM_TOKEN}
-	</form>
-	<br clear="all" />
+<div class="tsn8_myspot_mini_profile_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">Welcome, Visitor!</span>
+
+	<div class="tsn8_myspot_module_content">
+		<form method="post" action="{S_LOGIN_ACTION}">
+			<span class="tsn8_myspot_login_fields">
+				<p>{L_USERNAME}:<br/><input class="post" type="text" name="username" size="10"/></p>
+				<p>{L_PASSWORD}:<br/><input class="post" type="password" name="password" size="10"/></p><br/>
+				<input type="submit" class="btnmain" name="login" value="{L_LOGIN}"/><br/><br/>
+			</span>
+			{S_FORM_TOKEN}
+			<span class="tsn8_myspot_module_footer"><!-- IF S_AUTOLOGIN_ENABLED --><input type="checkbox" class="radio"
+																						  name="autologin"/>&nbsp;&nbsp;{L_LOG_ME_IN}<!-- ENDIF --></span>
+		</form>
+	</div>
+</div>
 <!-- ENDIF -->
-<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
-		<table class="tablebg" width="100%" cellspacing="1">
-		<tr>
-			<th>{L_BIRTHDAYS}</th>
-		</tr>
-		<tr>
-			<td class="row1" width="100%"><p class="genmed"><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}:<br /><b>{BIRTHDAY_LIST}</b><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p></td>
-		</tr>
-		</table>
-<br clear="all" />
+<!-- //IF S_DISPLAY_BIRTHDAY_LIST -->
+<!-- IF BIRTHDAY_LIST -->
+<div class="tsn8_myspot_mini_birthday_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">{L_BIRTHDAYS}</span>
+
+	<div class="tsn8_myspot_module_content">
+		{L_CONGRATULATIONS}:<br/><b>{BIRTHDAY_LIST}</b>
+	</div>
+</div>
 <!-- ENDIF -->
-	<!-- INCLUDE modules/mini_forumlist_body.html -->
+<div class="tsn8_myspot_mini_forums_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">tsn{L_FORUM}s</span>
+	<ul class="tsn8_mini_forum_list">
+		<!-- BEGIN forumrow -->
+		<!-- IF forumrow.S_IS_CAT -->
+		<li class="tsn8_mini_forum_category" style="background-image: url('{forumrow.FORUM_FOLDER_IMG_SRC}');"><a
+				href="{forumrow.U_VIEWFORUM}" class="myspot_forum_name">{forumrow.FORUM_NAME}</a></li>
+		<!-- ELSEIF forumrow.S_IS_LINK -->
+		<li class="tsn8_mini_forum_link" style="background-image: url('{forumrow.FORUM_FOLDER_IMG_SRC}');"><a
+				class="myspot_forumlink" href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></li>
+		<!-- ELSE -->
+		<!-- IF forumrow.S_NO_CAT -->
+		<li class="tsn8_mini_forum_category" style="background-image: url('{forumrow.FORUM_FOLDER_IMG_SRC}');">
+			{L_FORUM}s
+		</li>
+		<!-- ENDIF -->
+		<li class="tsn8_mini_forum_listing" style="background-image: url('{forumrow.FORUM_FOLDER_IMG_SRC}');"><a
+				class="myspot_forumlink" href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></li>
+		<!-- ENDIF -->
+		<!-- BEGINELSE -->
+		<li class="tsn8_mini_forum_listing" style="background-image: url('{forumrow.FORUM_FOLDER_IMG_SRC}');">
+			{L_NO_FORUMS}
+		</li>
+		<!-- END forumrow -->
+	</ul>
+</div>
