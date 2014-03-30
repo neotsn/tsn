@@ -110,38 +110,39 @@
 
 <div class="tsn8_page_wrapper">
 	<div class="tsn8_wrapper tsn8_header_wrapper">
-			<span class="tsn8_header_image">
-				<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}" class="userlinks">{L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->
-				<!-- IF U_RESTORE_PERMISSIONS -->|&nbsp;<a href="{U_RESTORE_PERMISSIONS}" class="userlinks">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
-				<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span
-					style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
-				<!-- IF not S_IS_BOT -->
-					<!-- IF S_USER_LOGGED_IN -->
-						<!-- IF S_DISPLAY_PM -->|&nbsp;<a href="{U_PRIVATEMSGS}" class="userlinks">{PRIVATE_MESSAGE_INFO}
-				<!-- IF PRIVATE_MESSAGE_INFO_UNREAD -->, {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a>
-						<!-- ENDIF -->
-					<!-- ELSE -->
-						|&nbsp;<a href="{U_REGISTER}" class="userlinks">{L_REGISTER}</a>
+		<span class="tsn8_header_image">
+			<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}" class="userlinks">{L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->
+			<!-- IF U_RESTORE_PERMISSIONS -->|&nbsp;<a href="{U_RESTORE_PERMISSIONS}" class="userlinks">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
+			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span
+				style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
+			<!-- IF not S_IS_BOT -->
+				<!-- IF S_USER_LOGGED_IN -->
+					<!-- IF S_DISPLAY_PM -->|&nbsp;<a href="{U_PRIVATEMSGS}" class="userlinks">{PRIVATE_MESSAGE_INFO}
+			<!-- IF PRIVATE_MESSAGE_INFO_UNREAD -->, {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a>
 					<!-- ENDIF -->
+				<!-- ELSE -->
+					|&nbsp;<a href="{U_REGISTER}" class="userlinks">{L_REGISTER}</a>
 				<!-- ENDIF -->
-			</span>
+			<!-- ENDIF -->
+		</span>
 	</div>
 	<div class="tsn8_wrapper tsn8_top_menu_wrapper">
-			<span class="tsn8_left_menu_items">
-				<a href="./myspot.php" class="bluebar">My Spot</a>
-				<!-- IF not S_IS_BOT --><!-- IF not S_USER_LOGGED_IN --> :: <a href="{U_REGISTER}" class="bluebar">{L_REGISTER}</a><!-- ENDIF --><!-- ENDIF -->
-				:: <a href="./index.php" class="bluebar">Forums</a>
-				:: <a href="chat.html" class="bluebar" target="_search">Chat</a>
-				<!-- IF U_ACP --> :: <a href="{U_ACP}" class="bluebar">{L_ACP}</a><!-- ENDIF -->
-			</span>
-			<span class="tsn8_right_menu_items">
-				<a href="{U_FAQ}" class="userlinks">{L_FAQ}</a>
-				<!-- IF S_DISPLAY_SEARCH -->&nbsp;|&nbsp;<a href="{U_SEARCH}" class="userlinks">{L_SEARCH}</a><!-- ENDIF -->
-				<!-- IF not S_IS_BOT -->
-					<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}" class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
-					<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
-				<!-- ENDIF -->
-			</span>
+		<span class="tsn8_left_menu_items">
+			<a href="./myspot.php" class="bluebar">My Spot</a>
+			<!-- IF not S_IS_BOT --><!-- IF not S_USER_LOGGED_IN --> :: <a href="{U_REGISTER}" class="bluebar">{L_REGISTER}</a><!-- ENDIF --><!-- ENDIF -->
+			:: <a href="./index.php" class="bluebar">Forums</a>
+			:: <a href="chat.html" class="bluebar" target="_search">Chat</a>
+			<!-- IF U_ACP --> :: <a href="{U_ACP}" class="bluebar">{L_ACP}</a><!-- ENDIF -->
+		</span>
+		<span class="tsn8_right_menu_items">
+			<a href="{U_FAQ}" class="userlinks">{L_FAQ}</a>
+			<!-- IF S_DISPLAY_SEARCH -->&nbsp;|&nbsp;<a href="{U_SEARCH}" class="userlinks">{L_SEARCH}</a><!-- ENDIF -->
+			<!-- IF not S_IS_BOT -->
+				<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}"
+																class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
+				<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
+			<!-- ENDIF -->
+		</span>
 	</div>
 	<!--<div id="divQuickQuips"></div>-->
 	<div class="tsn8_wrapper tsn8_content_wrapper">

@@ -79,20 +79,20 @@
 			if (!isset($sort_ary['options'][$selected])) {
 				if ($sort_ary['default'] !== false) {
 					$selected = $$key = $sort_ary['default'];
-				} else {
+			} else {
 					@reset($sort_ary['options']);
 					$selected = $$key = key($sort_ary['options']);
-				}
+			}
 			}
 
 			$sort_ary['output'] = '<select name="' . $name . '" id="' . $name . '">';
 			foreach ($sort_ary['options'] as $option => $text) {
 				$sort_ary['output'] .= '<option value="' . $option . '"' . (($selected == $option) ? ' selected="selected"' : '') . '>' . $text . '</option>';
-			}
+		}
 			$sort_ary['output'] .= '</select>';
 
 			$u_sort_param .= ($selected !== $sort_ary['default']) ? ((strlen($u_sort_param)) ? '&amp;' : '') . "{$name}={$selected}" : '';
-		}
+	}
 
 		return;
 	}
@@ -149,15 +149,15 @@
 			}
 
 			if (!$display_jumpbox) {
-				$template->assign_block_vars('jumpbox_forums', array(
-						'FORUM_ID'      => ($select_all) ? 0 : -1,
-						'FORUM_NAME'    => ($select_all) ? $user->lang['ALL_FORUMS'] : $user->lang['SELECT_FORUM'],
-						'S_FORUM_COUNT' => $iteration)
-				);
+			$template->assign_block_vars('jumpbox_forums', array(
+					'FORUM_ID'      => ($select_all) ? 0 : -1,
+					'FORUM_NAME'    => ($select_all) ? $user->lang['ALL_FORUMS'] : $user->lang['SELECT_FORUM'],
+					'S_FORUM_COUNT' => $iteration)
+			);
 
-				$iteration++;
+			$iteration++;
 				$display_jumpbox = true;
-			}
+		}
 
 			$template->assign_block_vars('jumpbox_forums', array(
 					'FORUM_ID'      => $row['forum_id'],
@@ -167,13 +167,13 @@
 					'S_IS_CAT'      => ($row['forum_type'] == FORUM_CAT) ? true : false,
 					'S_IS_LINK'     => ($row['forum_type'] == FORUM_LINK) ? true : false,
 					'S_IS_POST'     => ($row['forum_type'] == FORUM_POST) ? true : false)
-			);
+		);
 
 			for ($i = 0; $i < $padding; $i++) {
 				$template->assign_block_vars('jumpbox_forums.level', array());
 			}
 			$iteration++;
-		}
+	}
 		$db->sql_freeresult($result);
 		unset($padding_store);
 
@@ -202,7 +202,7 @@
 		// Check bump time
 		if ($last_post_time + $bump_time > time()) {
 			return false;
-		}
+	}
 
 		// Check bumper, only topic poster and last poster are allowed to bump
 		if ($topic_poster != $user->data['user_id'] && $last_topic_poster != $user->data['user_id']) {
@@ -240,14 +240,14 @@
 					if (preg_match('#(?:[^\w]|^)(' . $word . ')(?:[^\w]|$)#i', $text, $match)) {
 						if (empty($match[1])) {
 							continue;
-						}
+					}
 
 						$pos = utf8_strpos($text, $match[1]);
 						if ($pos !== false) {
 							$word_indizes[] = $pos;
 						}
-					}
 				}
+			}
 			}
 			unset($match);
 
@@ -268,7 +268,7 @@
 					if (isset($word_indizes[$word]) && ($i == $word_indizes[$word])) {
 						if ($final_text_index < $i - $sequence_length - 1) {
 							$final_text .= '... ' . preg_replace('#^([^ ]*)#', '', utf8_substr($text, $i - $sequence_length, $sequence_length));
-						} else {
+					} else {
 							// if the final text is already nearer to the current word than $sequence_length we only append the text
 							// from its current index on and distribute the unused length to all other sequenes
 							$sequence_length += (int)(($final_text_index - $i + $sequence_length + 1) / (2 * $wordnum));
@@ -294,8 +294,8 @@
 								if (($j > $sequence_length && $word >= $wordnum) || utf8_strlen($final_text) > $length) {
 									$final_text .= ' ...';
 									break;
-								}
-							} else {
+							}
+						} else {
 								// make sure the text really reaches the end
 								$j -= 4;
 							}
@@ -304,16 +304,16 @@
 							if ($j > $sequence_length) {
 								$j = 0;
 							}
-						}
 					}
 				}
-				return str_replace($characters, $entities, $final_text);
 			}
+				return str_replace($characters, $entities, $final_text);
+		}
 		}
 
 		if (!sizeof($words) || !sizeof($word_indizes)) {
 			return str_replace($characters, $entities, ((utf8_strlen($text) >= $length + 3) ? utf8_substr($text, 0, $length) . '...' : $text));
-		}
+	}
 	}
 
 	/**
@@ -345,7 +345,7 @@
 	function strip_bbcode(&$text, $uid = '') {
 		if (!$uid) {
 			$uid = '[0-9a-z]{5,}';
-		}
+	}
 
 		$text = preg_replace("#\[\/?[a-z0-9\*\+\-]+(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:$uid)\]#", ' ', $text);
 
@@ -364,7 +364,7 @@
 
 		if (!$text) {
 			return '';
-		}
+	}
 
 		$text = censor_text($text);
 
@@ -373,7 +373,7 @@
 			if (!class_exists('bbcode')) {
 				global $phpbb_root_path, $phpEx;
 				include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-			}
+		}
 
 			if (empty($bbcode)) {
 				$bbcode = new bbcode($bitfield);
@@ -403,7 +403,7 @@
 
 		if (!$text) {
 			return;
-		}
+	}
 
 		if (!class_exists('parse_message')) {
 			include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
@@ -463,7 +463,7 @@
 			if ($next_split !== false) {
 				$split = ($split !== false) ? min($split, $next_split) : $next_split;
 			}
-		}
+	}
 
 		if ($split !== false) {
 			// an HTML entity was found, so the URL has to end before it
@@ -472,18 +472,18 @@
 			$relative_url = '';
 		} else if ($relative_url) {
 			// same for $relative_url
-			$split = false;
+		$split = false;
 			foreach ($chars as $char) {
 				$next_split = strpos($relative_url, $char);
 				if ($next_split !== false) {
-					$split = ($split !== false) ? min($split, $next_split) : $next_split;
-				}
+				$split = ($split !== false) ? min($split, $next_split) : $next_split;
 			}
+		}
 
 			if ($split !== false) {
 				$append = substr($relative_url, $split);
 				$relative_url = substr($relative_url, 0, $split);
-			}
+		}
 		}
 
 		// if the last character of the url is a punctuation mark, exclude it from the url
@@ -564,7 +564,7 @@
 	function make_clickable($text, $server_url = false, $class = 'postlink') {
 		if ($server_url === false) {
 			$server_url = generate_board_url();
-		}
+	}
 
 		static $magic_url_match;
 		static $magic_url_replace;
@@ -607,7 +607,7 @@
 		// Nothing to do?
 		if ($text === '') {
 			return '';
-		}
+	}
 
 		// We moved the word censor checks in here because we call this function quite often - and then only need to do the check once
 		if (!isset($censors) || !is_array($censors)) {
@@ -616,7 +616,7 @@
 			// We check here if the user is having viewing censors disabled (and also allowed to do so).
 			if (!$user->optionget('viewcensors') && $config['allow_nocensors'] && $auth->acl_get('u_chgcensors')) {
 				$censors = array();
-			} else {
+		} else {
 				$censors = $cache->obtain_word_list();
 			}
 		}
@@ -646,7 +646,7 @@
 
 		if ($force_option || !$config['allow_smilies'] || !$user->optionget('viewsmilies')) {
 			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/.*? \/><!\-\- s\1 \-\->#', '\1', $text);
-		} else {
+	} else {
 			$root_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? generate_board_url() . '/' : $phpbb_root_path;
 			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/(.*?) \/><!\-\- s\1 \-\->#', '<img src="' . $root_path . $config['smilies_path'] . '/\2 />', $text);
 		}
@@ -664,7 +664,7 @@
 	function parse_attachments($forum_id, &$message, &$attachments, &$update_count, $preview = false) {
 		if (!sizeof($attachments)) {
 			return;
-		}
+	}
 
 		global $template, $cache, $user;
 		global $extensions, $config, $phpbb_root_path, $phpEx;
@@ -688,7 +688,7 @@
 			// If is_orphan is set, we need to retrieve the attachments again...
 			if (!isset($attachment['extension']) && !isset($attachment['physical_filename'])) {
 				$attach_ids[(int)$attachment['attach_id']] = $pos;
-			}
+		}
 		}
 
 		// Grab attachments (security precaution)
@@ -710,10 +710,10 @@
 				// If we preview attachments we will set some retrieved values here
 				if ($preview) {
 					$row['attach_comment'] = $attachments[$attach_ids[$row['attach_id']]]['attach_comment'];
-				}
+			}
 
 				$new_attachment_data[$attach_ids[$row['attach_id']]] = $row;
-			}
+		}
 			$db->sql_freeresult($result);
 
 			$attachments = $new_attachment_data;
@@ -749,7 +749,7 @@
 			if (isset($extensions[$attachment['extension']])) {
 				if ($user->img('icon_topic_attach', '') && !$extensions[$attachment['extension']]['upload_icon']) {
 					$upload_icon = $user->img('icon_topic_attach', '');
-				} else if ($extensions[$attachment['extension']]['upload_icon']) {
+			} else if ($extensions[$attachment['extension']]['upload_icon']) {
 					$upload_icon = '<img src="' . $phpbb_root_path . $config['upload_icons_path'] . '/' . trim($extensions[$attachment['extension']]['upload_icon']) . '" alt="" />';
 				}
 			}
@@ -792,14 +792,14 @@
 								// If the dimensions could not be determined or the image being 0x0 we display it as a link for safety purposes
 								if ($dimension === false || empty($dimension[0]) || empty($dimension[1])) {
 									$display_cat = ATTACHMENT_CATEGORY_NONE;
-								} else {
+							} else {
 									$display_cat = ($dimension[0] <= $config['img_link_width'] && $dimension[1] <= $config['img_link_height']) ? ATTACHMENT_CATEGORY_IMAGE : ATTACHMENT_CATEGORY_NONE;
 								}
-							}
-						} else {
+						}
+					} else {
 							$display_cat = ATTACHMENT_CATEGORY_NONE;
 						}
-					}
+				}
 				}
 
 				// Make some descisions based on user options being set.
@@ -900,7 +900,7 @@
 							'S_FILE' => true,
 						);
 						break;
-				}
+			}
 
 				$l_download_count = (!isset($attachment['download_count']) || $attachment['download_count'] == 0) ? $user->lang[$l_downloaded_viewed . '_NONE'] : (($attachment['download_count'] == 1) ? sprintf($user->lang[$l_downloaded_viewed], $attachment['download_count']) : sprintf($user->lang[$l_downloaded_viewed . 'S'], $attachment['download_count']));
 
@@ -908,7 +908,7 @@
 					'U_DOWNLOAD_LINK'  => $download_link,
 					'L_DOWNLOAD_COUNT' => $l_download_count
 				);
-			}
+		}
 
 			$template->assign_block_vars('_file', $block_array);
 
@@ -937,14 +937,14 @@
 
 		if (isset($replace['from'])) {
 			$message = str_replace($replace['from'], $replace['to'], $message);
-		}
+	}
 
 		$unset_tpl = array_unique($unset_tpl);
 
 		// Needed to let not display the inlined attachments at the end of the post again
 		foreach ($unset_tpl as $index) {
 			unset($attachments[$index]);
-		}
+	}
 	}
 
 	/**
@@ -975,7 +975,7 @@
 	 * @param int    $max_length       Maximum length of string (multibyte character count as 1 char / Html entity count as 1 char)
 	 * @param int    $max_store_length Maximum character length of string (multibyte character count as 1 char / Html entity count as entity chars).
 	 * @param bool   $allow_reply      Allow Re: in front of string
-	 *                                 NOTE: This parameter can cause undesired behavior (returning strings longer than $max_store_legnth) and is deprecated.
+	 *                                 NOTE: This parameter can cause undesired behavior (returning strings longer than $max_store_length) and is deprecated.
 	 * @param string $append           String to be appended
 	 */
 	function truncate_string($string, $max_length = 60, $max_store_length = 255, $allow_reply = false, $append = '') {
@@ -1007,12 +1007,12 @@
 			do {
 				array_pop($chars);
 				$string = implode('', $chars);
-			} while (!empty($chars) && utf8_strlen($string) > $max_store_length);
+		} while (!empty($chars) && utf8_strlen($string) > $max_store_length);
 		}
 
 		if ($strip_reply) {
 			$string = 'Re: ' . $string;
-		}
+	}
 
 		if ($append != '' && $stripped) {
 			$string = $string . $append;
@@ -1025,12 +1025,12 @@
 	 * Get username details for placing into templates.
 	 * This function caches all modes on first call, except for no_profile and anonymous user - determined by $user_id.
 	 *
-	 * @param string      $mode               Can be profile (for getting an url to the profile), username (for obtaining the username), colour (for obtaining the user colour), full (for obtaining a html string representing a coloured link to the users profile) or no_profile (the same as full but forcing no profile link)
-	 * @param int         $user_id            The users id
-	 * @param string      $username           The users name
-	 * @param string      $username_colour    The users colour
-	 * @param bool|string $guest_username     optional parameter to specify the guest username. It will be used in favor of the GUEST language variable then.
-	 * @param bool|string $custom_profile_url optional parameter to specify a profile url. The user id get appended to this url as &amp;u={user_id}
+	 * @param string $mode               Can be profile (for getting an url to the profile), username (for obtaining the username), colour (for obtaining the user colour), full (for obtaining a html string representing a coloured link to the users profile) or no_profile (the same as full but forcing no profile link)
+	 * @param int    $user_id            The users id
+	 * @param string $username           The users name
+	 * @param string $username_colour    The users colour
+	 * @param string $guest_username     optional parameter to specify the guest username. It will be used in favor of the GUEST language variable then.
+	 * @param string $custom_profile_url optional parameter to specify a profile url. The user id get appended to this url as &amp;u={user_id}
 	 *
 	 * @return string A string consisting of what is wanted based on $mode.
 	 * @author BartVB, Acyd Burn
@@ -1098,7 +1098,7 @@
 					return $profile_url;
 				}
 			// no break;
-		}
+	}
 
 		if (($mode == 'full' && !$profile_url) || $mode == 'no_profile') {
 			return str_replace(array('{USERNAME_COLOUR}', '{USERNAME}'), array($username_colour, $username), (!$username_colour) ? $_profile_cache['tpl_noprofile'] : $_profile_cache['tpl_noprofile_colour']);
@@ -1129,7 +1129,7 @@
 				// Lookup the ($n % 8)th bit of the byte
 				$bit = 7 - ($n & 7);
 				return (bool)(ord($c) & (1 << $bit));
-			} else {
+		} else {
 				return false;
 			}
 		}
@@ -1140,10 +1140,10 @@
 
 			if (strlen($this->data) >= $byte + 1) {
 				$this->data[$byte] = $this->data[$byte] | chr(1 << $bit);
-			} else {
+		} else {
 				$this->data .= str_repeat("\0", $byte - strlen($this->data));
 				$this->data .= chr(1 << $bit);
-			}
+		}
 		}
 
 		function clear($n) {
@@ -1152,7 +1152,7 @@
 			if (strlen($this->data) >= $byte + 1) {
 				$bit = 7 - ($n & 7);
 				$this->data[$byte] = $this->data[$byte] & ~chr(1 << $bit);
-			}
+		}
 		}
 
 		function get_blob() {
@@ -1169,10 +1169,10 @@
 
 			for ($i = 0; $i < $len; ++$i) {
 				$bin .= str_pad(decbin(ord($this->data[$i])), 8, '0', STR_PAD_LEFT);
-			}
+		}
 
 			return $bin;
-		}
+	}
 
 		function get_all_set() {
 			return array_keys(array_filter(str_split($this->get_bin())));

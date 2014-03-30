@@ -15,20 +15,11 @@
 	$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-// Report all errors, except notices and deprecation messages
-	if (!defined('E_DEPRECATED')) {
-		define('E_DEPRECATED', 8192);
-	}
-	error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
-
+	require($phpbb_root_path . 'includes/startup.' . $phpEx);
 	require($phpbb_root_path . 'config.' . $phpEx);
 
 	if (!defined('PHPBB_INSTALLED') || empty($dbms) || empty($acm_type)) {
 		exit;
-	}
-
-	if (version_compare(PHP_VERSION, '6.0.0-dev', '<')) {
-		@set_magic_quotes_runtime(0);
 	}
 
 // Load Extensions
@@ -55,12 +46,10 @@
 		require($phpbb_root_path . 'includes/constants.' . $phpEx);
 		require($phpbb_root_path . 'includes/functions.' . $phpEx);
 
-		/** @var dbal|dbal_mysql $db */
 		$db = new $sql_db();
 		$cache = new cache();
 
 		// Connect to DB
-
 		if (!@$db->sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, false)) {
 			exit;
 		}
@@ -146,11 +135,11 @@
 		// Expire time of seven days if not recached
 		$expire_time = 7 * 86400;
 		$recache = false;
-		$update_time = time();
 
 		// Re-cache stylesheet data if necessary
 		if ($recompile || empty($theme['theme_data'])) {
 			$recache = (empty($theme['theme_data'])) ? true : false;
+			$update_time = time();
 
 			// We test for stylesheet.css because it is faster and most likely the only file changed on common themes
 			if (!$recache && $theme['theme_mtime'] < @filemtime("{$phpbb_root_path}styles/" . $theme['theme_path'] . '/theme/stylesheet.css')) {
@@ -202,10 +191,10 @@
 
 		// Parse Theme Data
 		$replace = array(
-			'{T_THEME_PATH}'         => "{$phpbb_root_path}styles/" . $theme['theme_path'] . '/theme',
-			'{T_TEMPLATE_PATH}'      => "{$phpbb_root_path}styles/" . $theme['template_path'] . '/template',
-			'{T_IMAGESET_PATH}'      => "{$phpbb_root_path}styles/" . $theme['imageset_path'] . '/imageset',
-			'{T_IMAGESET_LANG_PATH}' => "{$phpbb_root_path}styles/" . $theme['imageset_path'] . '/imageset/' . $user_image_lang,
+			'{T_THEME_PATH}'         => "{$phpbb_root_path}styles/" . rawurlencode($theme['theme_path']) . '/theme',
+			'{T_TEMPLATE_PATH}'      => "{$phpbb_root_path}styles/" . rawurlencode($theme['template_path']) . '/template',
+			'{T_IMAGESET_PATH}'      => "{$phpbb_root_path}styles/" . rawurlencode($theme['imageset_path']) . '/imageset',
+			'{T_IMAGESET_LANG_PATH}' => "{$phpbb_root_path}styles/" . rawurlencode($theme['imageset_path']) . '/imageset/' . $user_image_lang,
 			'{T_STYLESHEET_NAME}'    => $theme['theme_name'],
 			'{S_USER_LANG}'          => $user['user_lang']
 		);
@@ -230,7 +219,7 @@
 					$img_data = & $img_array[$img];
 					$imgsrc = ($img_data['image_lang'] ? $img_data['image_lang'] . '/' : '') . $img_data['image_filename'];
 					$imgs[$img] = array(
-						'src'    => $phpbb_root_path . 'styles/' . $theme['imageset_path'] . '/imageset/' . $imgsrc,
+						'src'    => $phpbb_root_path . 'styles/' . rawurlencode($theme['imageset_path']) . '/imageset/' . $imgsrc,
 						'width'  => $img_data['image_width'],
 						'height' => $img_data['image_height'],
 					);

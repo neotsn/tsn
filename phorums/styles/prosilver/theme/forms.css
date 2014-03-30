@@ -1,4 +1,4 @@
-/* proSilver Form Styles
+/* Form Styles
 ---------------------------------------- */
 
 /* General form styles
@@ -26,6 +26,7 @@ select {
 	border: 1px solid #666666;
 	padding: 1px;
 	background-color: #FAFAFA;
+	font-size: 1em;
 }
 
 option {
@@ -65,7 +66,7 @@ fieldset dl {
 }
 
 fieldset dt {
-	float: left;	
+	float: left;
 	width: 40%;
 	text-align: left;
 	display: block;
@@ -262,7 +263,10 @@ fieldset.submit-buttons input {
 
 #message-box textarea {
 	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
-	width: 100%;
+	width: 450px;
+	height: 270px;
+	min-width: 100%;
+	max-width: 100%;
 	font-size: 1.2em;
 	color: #333333;
 }
@@ -296,10 +300,21 @@ fieldset.submit-buttons input {
 	color: #4b4b4b;
 }
 
-input.inputbox	{ width: 85%; }
-input.medium	{ width: 50%; }
-input.narrow	{ width: 25%; }
-input.tiny		{ width: 125px; }
+input.inputbox {
+	width: 85%;
+}
+
+input.medium {
+	width: 50%;
+}
+
+input.narrow {
+	width: 25%;
+}
+
+input.tiny {
+	width: 125px;
+}
 
 textarea.inputbox {
 	width: 85%;
@@ -382,8 +397,19 @@ input.search {
 	padding-left: 17px;
 }
 
-.full { width: 95%; }
-.medium { width: 50%;}
-.narrow { width: 25%;}
-.tiny { width: 10%;}
+.full {
+	width: 95%;
+}
+
+.medium {
+	width: 50%;
+}
+
+.narrow {
+	width: 25%;
+}
+
+.tiny {
+	width: 10%;
+}
 

@@ -21,7 +21,7 @@ body, div, p, th, td, li, dd {
 	font-size: small
 }
 
-html>body, html>div, html>p, html>th, html>td, html>li, html>dd {
+html > body, html > div, html > p, html > th, html > td, html > li, html > dd {
 	font-size: small
 }
 
@@ -38,7 +38,7 @@ body {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: #536482;
 	background: #DBD7D1;
-	font-size: 62.5%;	/* This sets the default font size to be equivalent to 10px */
+	font-size: 62.5%; /* This sets the default font size to be equivalent to 10px */
 	margin: 10px 15px;
 }
 
@@ -142,20 +142,20 @@ li {
 #page-header {
 	clear: both;
 	text-align: right;
-	background: url("../images/phpbb_logo.gif") top left no-repeat;
-	height: 49px;
+	background: url("../images/phpbb_logo.png") top left no-repeat;
+	height: 54px;
 	font-size: 0.85em;
 	margin-bottom: 10px;
 }
 
 .rtl #page-header {
 	text-align: left;
-	background: url("../images/phpbb_logo.gif") top right no-repeat;
+	background: url("../images/phpbb_logo.png") top right no-repeat;
 }
 
 #page-header h1 {
 	color: #767676;
-	font-family: "Trebuchet MS",Helvetica,sans-serif;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	font-size: 1.70em;
 	padding-top: 10px;
 }
@@ -226,7 +226,7 @@ li {
 }
 
 #tabs ul {
-	margin:0;
+	margin: 0;
 	padding: 0;
 	list-style: none;
 }
@@ -241,7 +241,7 @@ li {
 
 #tabs a {
 	float: left;
-	background:url("../images/bg_tabs1.gif") no-repeat 0% -34px;
+	background: url("../images/bg_tabs1.gif") no-repeat 0% -34px;
 	margin: 0 1px 0 0;
 	padding: 0 0 0 7px;
 	text-decoration: none;
@@ -269,7 +269,10 @@ li {
 }
 
 /* Commented Backslash Hack hides rule from IE5-Mac \*/
-#tabs a span, .rtl #tabs a span { float:none;}
+#tabs a span, .rtl #tabs a span {
+	float: none;
+}
+
 /* End hack */
 
 #tabs a:hover span {
@@ -298,7 +301,6 @@ li {
 #tabs #activetab a:hover span {
 	color: #115098;
 }
-
 
 /* Main Panel
 ---------------------------------------- */
@@ -348,8 +350,14 @@ span.corners-bottom span {
 }
 
 /* WinIE tweaks \*/
-* html span.corners-top, * html span.corners-bottom { background-image: url("../images/corners_left.gif"); }
-* html span.corners-top span, * html span.corners-bottom span { background-image: url("../images/corners_right.gif"); }
+* html span.corners-top, * html span.corners-bottom {
+	background-image: url("../images/corners_left.gif");
+}
+
+* html span.corners-top span, * html span.corners-bottom span {
+	background-image: url("../images/corners_right.gif");
+}
+
 /* End tweaks */
 
 /* Sub-navigation Menu
@@ -549,7 +557,7 @@ table.type2 td.name {
 	vertical-align: middle;
 }
 
-table.type3  {
+table.type3 {
 	float: right;
 	width: 300px;
 	border: none;
@@ -619,12 +627,29 @@ td.name {
 	text-align: right;
 }
 
-.row1 { background-color: #F9F9F9; }
-.row2 { background-color: #DCEBFE; }
-.row3 { background-color: #DBDFE2; }
-.row4 { background-color: #E4E8EB; }
-.col1 { background-color: #DCEBFE; }
-.col2 { background-color: #F9F9F9; }
+.row1 {
+	background-color: #F9F9F9;
+}
+
+.row2 {
+	background-color: #DCEBFE;
+}
+
+.row3 {
+	background-color: #DBDFE2;
+}
+
+.row4 {
+	background-color: #E4E8EB;
+}
+
+.col1 {
+	background-color: #DCEBFE;
+}
+
+.col2 {
+	background-color: #F9F9F9;
+}
 
 .spacer {
 	background-color: #DBDFE2;
@@ -662,7 +687,7 @@ fieldset p {
 
 legend {
 	padding: 1px 0;
-	font-family: Tahoma,arial,Verdana,Sans-serif;
+	font-family: Tahoma, arial, Verdana, Sans-serif;
 	font-size: .9em;
 	font-weight: bold;
 	color: #115098;
@@ -865,12 +890,25 @@ dt {
 	float: right;
 }
 
-dd { color: #666666;}
-dd + dd { padding-top: 5px;}
-dt span { padding: 0 5px 0 0;}
-.rtl dt span { padding: 0 0 0 5px;}
+dd {
+	color: #666666;
+}
 
-dt .explain { font-style: italic;}
+dd + dd {
+	padding-top: 5px;
+}
+
+dt span {
+	padding: 0 5px 0 0;
+}
+
+.rtl dt span {
+	padding: 0 0 0 5px;
+}
+
+dt .explain {
+	font-style: italic;
+}
 
 dt label {
 	font-size: 1.00em;
@@ -894,27 +932,29 @@ dd label {
 	margin: 0 0 0 10px;
 }
 
-html>body dd label input { vertical-align: text-bottom;}	/* Tweak for Moz to align checkboxes/radio buttons nicely */
+html > body dd label input {
+	vertical-align: text-bottom;
+}
+
+/* Tweak for Moz to align checkboxes/radio buttons nicely */
 
 dd input {
 	font-size: 1.00em;
 	max-width: 100%;
+	margin: 2px 0;
 }
 
 dd select {
 	font-size: 100%;
+	font-size: 1em;
 	width: auto;
 	max-width: 100%;
+	margin: 2px 0;
 }
 
 dd textarea {
 	font-size: 0.90em;
 	width: 90%;
-}
-
-dd select {
-	width: auto;
-	font-size: 1.00em;
 }
 
 fieldset dl {
@@ -1021,12 +1061,29 @@ textarea.full {
 	width: 99%;
 }
 
-* html input.full, * html textarea.full { width: 95%;}
-input.medium { width: 50%;}
-input.narrow { width: 25%;}
-input.tiny { width: 10%;}
-input.autowidth { width: auto !important;}
-.box2 .inputbox { background-color: #E9E9E9;}
+* html input.full, * html textarea.full {
+	width: 95%;
+}
+
+input.medium {
+	width: 50%;
+}
+
+input.narrow {
+	width: 25%;
+}
+
+input.tiny {
+	width: 10%;
+}
+
+input.autowidth {
+	width: auto !important;
+}
+
+.box2 .inputbox {
+	background-color: #E9E9E9;
+}
 
 /* Form button styles
 ---------------------------------------- */
@@ -1093,7 +1150,7 @@ input.disabled {
 }
 
 .pagination span.page-sep {
-	display:none;
+	display: none;
 }
 
 .pagination span strong {
@@ -1128,7 +1185,6 @@ input.disabled {
 	vertical-align: middle;
 }
 
-
 /* Action Highlighting
 ---------------------------------------- */
 .successbox, .errorbox {
@@ -1154,13 +1210,17 @@ input.disabled {
 	background-color: #BC2A4D;
 }
 
-* html .errorbox, * html .successbox { height: 1%; } /* Pixel shift fix for IE */
+* html .errorbox, * html .successbox {
+	height: 1%;
+}
+
+/* Pixel shift fix for IE */
 
 .successbox h3, .errorbox h3 {
 	color: #FFFFFF;
 	margin: 0 0 0.5em;
 	font-size: 1.10em;
-	font-family: "Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 }
 
 .successbox p, .errorbox p {
@@ -1308,7 +1368,7 @@ fieldset.permissions legend {
 	text-transform: none;
 }
 
-fieldset.permissions legend input{
+fieldset.permissions legend input {
 	height: 1.1em;
 }
 
@@ -1414,7 +1474,10 @@ fieldset.permissions .padding {
 }
 
 /* Commented Backslash Hack hides rule from IE5-Mac \*/
-.permissions-category a span.tabbg, .rtl .permissions-category a span.tabbg { float: none;}
+.permissions-category a span.tabbg, .rtl .permissions-category a span.tabbg {
+	float: none;
+}
+
 /* End hack */
 
 .permissions-category a:hover span.tabbg {

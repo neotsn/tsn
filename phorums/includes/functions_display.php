@@ -36,12 +36,29 @@
 		if (!$root_data) {
 			if ($mark_read == 'forums') {
 				$mark_read = 'all';
-			}
+		}
 
 			$root_data = array('forum_id' => 0);
 			$sql_where = '';
 		} else {
 			$sql_where = 'left_id > ' . $root_data['left_id'] . ' AND left_id < ' . $root_data['right_id'];
+		}
+
+		// Handle marking everything read
+		if ($mark_read == 'all') {
+			$redirect = build_url(array('mark', 'hash'));
+			meta_refresh(3, $redirect);
+
+			if (check_link_hash(request_var('hash', ''), 'global')) {
+				markread('all');
+
+				trigger_error(
+					$user->lang['FORUMS_MARKED'] . '<br /><br />' .
+					sprintf($user->lang['RETURN_INDEX'], '<a href="' . $redirect . '">', '</a>')
+				);
+		} else {
+				trigger_error(sprintf($user->lang['RETURN_PAGE'], '<a href="' . $redirect . '">', '</a>'));
+			}
 		}
 
 		// Display list of active topics for this category?
@@ -64,7 +81,7 @@
 
 			if (!$user->data['is_registered']) {
 				$user->data['user_lastmark'] = (isset($tracking_topics['l'])) ? (int)(base_convert($tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
-			}
+		}
 		}
 
 		if ($show_active) {
@@ -98,18 +115,19 @@
 
 			if (!empty($unread_ga_list)) {
 				$ga_unread = true;
-			}
+		}
 		}
 
 		while ($row = $db->sql_fetchrow($result)) {
 			$forum_id = $row['forum_id'];
 
 			// Mark forums read?
-			if ($mark_read == 'forums' || $mark_read == 'all') {
+			if ($mark_read == 'forums') {
 				if ($auth->acl_get('f_list', $forum_id)) {
 					$forum_ids[] = $forum_id;
-					continue;
-				}
+			}
+
+				continue;
 			}
 
 			// Category with no members
@@ -120,8 +138,8 @@
 			// Skip branch
 			if (isset($right_id)) {
 				if ($row['left_id'] < $right_id) {
-					continue;
-				}
+				continue;
+			}
 				unset($right_id);
 			}
 
@@ -131,14 +149,12 @@
 				continue;
 			}
 
-			$forum_ids[] = $forum_id;
-
 			if ($config['load_db_lastread'] && $user->data['is_registered']) {
 				$forum_tracking_info[$forum_id] = (!empty($row['mark_time'])) ? $row['mark_time'] : $user->data['user_lastmark'];
 			} else if ($config['load_anon_lastread'] || $user->data['is_registered']) {
 				if (!$user->data['is_registered']) {
 					$user->data['user_lastmark'] = (isset($tracking_topics['l'])) ? (int)(base_convert($tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
-				}
+			}
 				$forum_tracking_info[$forum_id] = (isset($tracking_topics['f'][$forum_id])) ? (int)(base_convert($tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
 			}
 
@@ -164,7 +180,7 @@
 				// If this is a passworded forum we do not show active topics from it if the user is not authorised to view it...
 				if ($row['forum_password'] && $row['user_id'] != $user->data['user_id']) {
 					$active_forum_ary['exclude_forum_id'][] = $forum_id;
-				}
+			}
 			}
 
 			//
@@ -211,28 +227,23 @@
 					$forum_rows[$parent_id]['forum_last_poster_name'] = $row['forum_last_poster_name'];
 					$forum_rows[$parent_id]['forum_last_poster_colour'] = $row['forum_last_poster_colour'];
 					$forum_rows[$parent_id]['forum_id_last_post'] = $forum_id;
-				}
 			}
+		}
 		}
 		$db->sql_freeresult($result);
 
 		// Handle marking posts
-		if ($mark_read == 'forums' || $mark_read == 'all') {
+		if ($mark_read == 'forums') {
 			$redirect = build_url(array('mark', 'hash'));
 			$token = request_var('hash', '');
 			if (check_link_hash($token, 'global')) {
-				if ($mark_read == 'all') {
-					markread('all');
-					$message = sprintf($user->lang['RETURN_INDEX'], '<a href="' . $redirect . '">', '</a>');
-				} else {
-					// Add 0 to forums array to mark global announcements correctly
-					$forum_ids[] = 0;
-					markread('topics', $forum_ids);
-					$message = sprintf($user->lang['RETURN_FORUM'], '<a href="' . $redirect . '">', '</a>');
-				}
+				// Add 0 to forums array to mark global announcements correctly
+				$forum_ids[] = 0;
+				markread('topics', $forum_ids);
+				$message = sprintf($user->lang['RETURN_FORUM'], '<a href="' . $redirect . '">', '</a>');
 				meta_refresh(3, $redirect);
 				trigger_error($user->lang['FORUMS_MARKED'] . '<br /><br />' . $message);
-			} else {
+		} else {
 				$message = sprintf($user->lang['RETURN_PAGE'], '<a href="' . $redirect . '">', '</a>');
 				meta_refresh(3, $redirect);
 				trigger_error($message);
@@ -243,7 +254,7 @@
 		if ($display_moderators) {
 			if ($return_moderators) {
 				$forum_ids_moderator[] = $root_data['forum_id'];
-			}
+		}
 			get_moderators($forum_moderators, $forum_ids_moderator);
 		}
 
@@ -291,8 +302,8 @@
 								// Once we found an unread child forum, we can drop out of this loop
 								$subforum_unread = true;
 								break;
-							}
 						}
+					}
 					}
 
 					if ($subforum_row['display'] && $subforum_row['name']) {
@@ -301,15 +312,15 @@
 							'name'   => $subforum_row['name'],
 							'unread' => $subforum_unread,
 						);
-					} else {
+				} else {
 						unset($subforums[$forum_id][$subforum_id]);
 					}
 
 					// If one subforum is unread the forum gets unread too...
 					if ($subforum_unread) {
 						$forum_unread = true;
-					}
 				}
+			}
 
 				$l_subforums = (sizeof($subforums[$forum_id]) == 1) ? $user->lang['SUBFORUM'] . ': ' : $user->lang['SUBFORUMS'] . ': ';
 				$folder_image = ($forum_unread) ? 'forum_unread_subforum' : 'forum_read_subforum';
@@ -322,7 +333,7 @@
 					case FORUM_LINK:
 						$folder_image = 'forum_link';
 						break;
-				}
+			}
 			}
 
 			// Which folder should we display?
@@ -365,8 +376,8 @@
 				// If the forum is a link and we count redirects we need to visit it
 				// If the forum is having a password or no read access we do not expose the link, but instead handle it in viewforum
 				if (($row['forum_flags'] & FORUM_FLAG_LINK_TRACK) || $row['forum_password'] || !$auth->acl_get('f_read', $forum_id)) {
-					$u_viewforum = append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $row['forum_id']);
-				} else {
+				$u_viewforum = append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $row['forum_id']);
+			} else {
 					$u_viewforum = $row['forum_link'];
 				}
 			}
@@ -376,10 +387,11 @@
 					'S_NO_CAT'             => $catless && !$last_catless,
 					'S_IS_LINK'            => ($row['forum_type'] == FORUM_LINK) ? true : false,
 					'S_UNREAD_FORUM'       => $forum_unread,
+					'S_AUTH_READ'          => $auth->acl_get('f_read', $row['forum_id']),
 					'S_LOCKED_FORUM'       => ($row['forum_status'] == ITEM_LOCKED) ? true : false,
 					'S_LIST_SUBFORUMS'     => ($row['display_subforum_list']) ? true : false,
 					'S_SUBFORUMS'          => (sizeof($subforums_list)) ? true : false,
-					'S_FEED_ENABLED'       => ($config['feed_forum'] && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $row['forum_options'])) ? true : false,
+					'S_FEED_ENABLED'       => ($config['feed_forum'] && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $row['forum_options']) && $row['forum_type'] == FORUM_POST) ? true : false,
 
 					'FORUM_ID'             => $row['forum_id'],
 					'FORUM_NAME'           => $row['forum_name'],
@@ -400,7 +412,6 @@
 					'SUBFORUMS'            => $s_subforums_list,
 
 					'L_SUBFORUM_STR'       => $l_subforums,
-					'L_FORUM_FOLDER_ALT'   => $folder_alt,
 					'L_MODERATOR_STR'      => $l_moderator,
 
 					'U_UNAPPROVED_TOPICS'  => ($row['forum_id_unapproved_topics']) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=unapproved_topics&amp;f=' . $row['forum_id_unapproved_topics']) : '',
@@ -416,7 +427,7 @@
 						'SUBFORUM_NAME' => $subforum['name'],
 						'S_UNREAD'      => $subforum['unread'])
 				);
-			}
+		}
 
 			$last_catless = $catless;
 		}
@@ -431,7 +442,7 @@
 
 		if ($return_moderators) {
 			return array($active_forum_ary, $forum_moderators);
-		}
+	}
 
 		return array($active_forum_ary, array());
 	}
@@ -448,7 +459,7 @@
 
 		if ($forum_data['forum_rules']) {
 			$forum_data['forum_rules'] = generate_text_for_display($forum_data['forum_rules'], $forum_data['forum_rules_uid'], $forum_data['forum_rules_bitfield'], $forum_data['forum_rules_options']);
-		}
+	}
 
 		$template->assign_vars(array(
 				'S_FORUM_RULES' => true,
@@ -480,7 +491,7 @@
 				// Skip this parent if the user does not have the permission to view it
 				if (!$auth->acl_get('f_list', $parent_forum_id)) {
 					continue;
-				}
+			}
 
 				$template->assign_block_vars('navlinks', array(
 						'S_IS_CAT'     => ($parent_type == FORUM_CAT) ? true : false,
@@ -490,7 +501,7 @@
 						'FORUM_ID'     => $parent_forum_id,
 						'U_VIEW_FORUM' => append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $parent_forum_id))
 				);
-			}
+		}
 		}
 
 		$template->assign_block_vars('navlinks', array(
@@ -541,10 +552,10 @@
 				SET forum_parents = '" . $db->sql_escape($forum_data['forum_parents']) . "'
 				WHERE parent_id = " . $forum_data['parent_id'];
 				$db->sql_query($sql);
-			} else {
+		} else {
 				$forum_parents = unserialize($forum_data['forum_parents']);
 			}
-		}
+	}
 
 		return $forum_parents;
 	}
@@ -566,17 +577,17 @@
 			for ($j = 0; $j < $replies + 1; $j += $per_page) {
 				$pagination .= '<a href="' . $url . ($j == 0 ? '' : '&amp;start=' . $j) . '">' . $times . '</a>';
 				if ($times == 1 && $total_pages > 5) {
-					$pagination .= ' ... ';
+					$pagination .= '<span class="page-dots"> ... </span>';
 
 					// Display the last three pages
 					$times = $total_pages - 3;
 					$j += ($total_pages - 4) * $per_page;
-				} else if ($times < $total_pages) {
+			} else if ($times < $total_pages) {
 					$pagination .= '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
 				}
 				$times++;
-			}
-		} else {
+		}
+	} else {
 			$pagination = '';
 		}
 
@@ -594,7 +605,7 @@
 		if ($forum_id !== false) {
 			if (!is_array($forum_id)) {
 				$forum_id = array($forum_id);
-			}
+		}
 
 			// Exchange key/value pair to be able to faster check for the forum id existence
 			$forum_id_ary = array_flip($forum_id);
@@ -611,7 +622,7 @@
 				array(
 					'FROM' => array(USERS_TABLE => 'u'),
 					'ON'   => 'm.user_id = u.user_id',
-				),
+			),
 				array(
 					'FROM' => array(GROUPS_TABLE => 'g'),
 					'ON'   => 'm.group_id = g.group_id',
@@ -639,11 +650,11 @@
 
 				if ($user->data['user_id'] != ANONYMOUS && !$auth->acl_get('u_viewprofile')) {
 					$forum_moderators[$f_id][] = '<span' . (($row['group_colour']) ? ' style="color:#' . $row['group_colour'] . ';"' : '') . '>' . $group_name . '</span>';
-				} else {
+			} else {
 					$forum_moderators[$f_id][] = '<a' . (($row['group_colour']) ? ' style="color:#' . $row['group_colour'] . ';"' : '') . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . $group_name . '</a>';
 				}
-			}
 		}
+	}
 		$db->sql_freeresult($result);
 
 		return;
@@ -674,7 +685,7 @@
 
 		foreach ($rules as $rule) {
 			$template->assign_block_vars('rules', array('RULE' => $rule));
-		}
+	}
 
 		return;
 	}
@@ -728,7 +739,7 @@
 				$topic_type = $user->lang['VIEW_TOPIC_LOCKED'];
 				$folder .= '_locked';
 				$folder_new .= '_locked';
-			}
+		}
 
 			$folder_img = ($unread_topic) ? $folder_new : $folder;
 			$folder_alt = ($unread_topic) ? 'UNREAD_POSTS' : (($topic_row['topic_status'] == ITEM_LOCKED) ? 'TOPIC_LOCKED' : 'NO_UNREAD_POSTS');
@@ -736,8 +747,8 @@
 			// Posted image?
 			if (!empty($topic_row['topic_posted']) && $topic_row['topic_posted']) {
 				$folder_img .= '_mine';
-			}
 		}
+	}
 
 		if ($topic_row['poll_start'] && $topic_row['topic_status'] != ITEM_MOVED) {
 			$topic_type = $user->lang['VIEW_TOPIC_POLL'];
@@ -776,7 +787,7 @@
 			));
 
 			$i++;
-		}
+	}
 		$db->sql_freeresult($result);
 	}
 
@@ -796,7 +807,7 @@
 			if (isset($user->lang['report_reasons']['TITLE'][strtoupper($row['reason_title'])]) && isset($user->lang['report_reasons']['DESCRIPTION'][strtoupper($row['reason_title'])])) {
 				$row['reason_description'] = $user->lang['report_reasons']['DESCRIPTION'][strtoupper($row['reason_title'])];
 				$row['reason_title'] = $user->lang['report_reasons']['TITLE'][strtoupper($row['reason_title'])];
-			}
+		}
 
 			$template->assign_block_vars('reason', array(
 					'ID'          => $row['reason_id'],
@@ -804,7 +815,7 @@
 					'DESCRIPTION' => $row['reason_description'],
 					'S_SELECTED'  => ($row['reason_id'] == $reason_id) ? true : false)
 			);
-		}
+	}
 		$db->sql_freeresult($result);
 	}
 
@@ -828,7 +839,7 @@
 		foreach ($forum_read_ary as $forum_id => $not_allowed) {
 			if ($not_allowed['f_read']) {
 				$forum_ary[] = (int)$forum_id;
-			}
+		}
 		}
 
 		$forum_ary = array_unique($forum_ary);
@@ -861,13 +872,17 @@
 		}
 
 		// Obtain active topic
+		// We need to exclude passworded forums here so we do not leak the topic title
+		$forum_ary_topic = array_unique(array_merge($forum_ary, $user->get_passworded_forums()));
+		$forum_sql_topic = (!empty($forum_ary_topic)) ? 'AND ' . $db->sql_in_set('forum_id', $forum_ary_topic, true) : '';
+
 		$sql = 'SELECT topic_id, COUNT(post_id) AS num_posts
 		FROM ' . POSTS_TABLE . '
 		WHERE poster_id = ' . $userdata['user_id'] . "
 			AND post_postcount = 1
 			AND (post_approved = 1
 				$sql_m_approve)
-			$forum_sql
+			$forum_sql_topic
 		GROUP BY topic_id
 		ORDER BY num_posts DESC";
 		$result = $db->sql_query_limit($sql, 1);
@@ -920,7 +935,7 @@
 	/**
 	 * Topic and forum watching common code
 	 */
-	function watch_topic_forum($mode, &$s_watching, $user_id, $forum_id, $topic_id, $notify_status = 'unset', $start = 0) {
+	function watch_topic_forum($mode, &$s_watching, $user_id, $forum_id, $topic_id, $notify_status = 'unset', $start = 0, $item_title = '') {
 		global $template, $db, $user, $phpEx, $start, $phpbb_root_path;
 
 		$table_sql = ($mode == 'forum') ? FORUMS_WATCH_TABLE : TOPICS_WATCH_TABLE;
@@ -928,6 +943,7 @@
 		$match_id = ($mode == 'forum') ? $forum_id : $topic_id;
 		$u_url = "uid={$user->data['user_id']}";
 		$u_url .= ($mode == 'forum') ? '&amp;f' : '&amp;f=' . $forum_id . '&amp;t';
+		$is_watching = 0;
 
 		// Is user watching this thread?
 		if ($user_id != ANONYMOUS) {
@@ -948,26 +964,43 @@
 
 				if (isset($_GET['unwatch'])) {
 					$uid = request_var('uid', 0);
-					if ($uid != $user_id) {
+					$token = request_var('hash', '');
+
+					if ($token && check_link_hash($token, "{$mode}_$match_id") || confirm_box(true)) {
+						if ($uid != $user_id || $_GET['unwatch'] != $mode) {
 						$redirect_url = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;start=$start");
 						$message = $user->lang['ERR_UNWATCHING'] . '<br /><br />' . sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
 						trigger_error($message);
 					}
-					if ($_GET['unwatch'] == $mode) {
-						$is_watching = 0;
 
 						$sql = 'DELETE FROM ' . $table_sql . "
 						WHERE $where_sql = $match_id
 							AND user_id = $user_id";
 						$db->sql_query($sql);
-					}
 
 					$redirect_url = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;start=$start");
-
+						$message = $user->lang['NOT_WATCHING_' . strtoupper($mode)] . '<br /><br />';
+						$message .= sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
 					meta_refresh(3, $redirect_url);
-
-					$message = $user->lang['NOT_WATCHING_' . strtoupper($mode)] . '<br /><br />' . sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
 					trigger_error($message);
+					} else {
+						$s_hidden_fields = array(
+							'uid'     => $user->data['user_id'],
+							'unwatch' => $mode,
+							'start'   => $start,
+							'f'       => $forum_id,
+						);
+						if ($mode != 'forum') {
+							$s_hidden_fields['t'] = $topic_id;
+						}
+
+						if ($item_title == '') {
+							$confirm_box_message = 'UNWATCH_' . strtoupper($mode);
+						} else {
+							$confirm_box_message = $user->lang('UNWATCH_' . strtoupper($mode) . '_DETAILED', $item_title);
+						}
+						confirm_box(false, $confirm_box_message, build_hidden_fields($s_hidden_fields));
+					}
 				} else {
 					$is_watching = true;
 
@@ -977,35 +1010,52 @@
 						WHERE $where_sql = $match_id
 							AND user_id = $user_id";
 						$db->sql_query($sql);
-					}
+				}
 				}
 			} else {
 				if (isset($_GET['watch'])) {
+					$uid = request_var('uid', 0);
 					$token = request_var('hash', '');
-					$redirect_url = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;start=$start");
 
-					if ($_GET['watch'] == $mode && check_link_hash($token, "{$mode}_$match_id")) {
+					if ($token && check_link_hash($token, "{$mode}_$match_id") || confirm_box(true)) {
+						if ($uid != $user_id || $_GET['watch'] != $mode) {
+							$redirect_url = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;start=$start");
+						$message = $user->lang['ERR_WATCHING'] . '<br /><br />' . sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
+							trigger_error($message);
+					}
+
 						$is_watching = true;
 
 						$sql = 'INSERT INTO ' . $table_sql . " (user_id, $where_sql, notify_status)
 						VALUES ($user_id, $match_id, " . NOTIFY_YES . ')';
 						$db->sql_query($sql);
+
+						$redirect_url = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;start=$start");
 						$message = $user->lang['ARE_WATCHING_' . strtoupper($mode)] . '<br /><br />' . sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
-					} else {
-						$message = $user->lang['ERR_WATCHING'] . '<br /><br />' . sprintf($user->lang['RETURN_' . strtoupper($mode)], '<a href="' . $redirect_url . '">', '</a>');
-					}
-
-					meta_refresh(3, $redirect_url);
-
+						meta_refresh(3, $redirect_url);
 					trigger_error($message);
 				} else {
-					$is_watching = 0;
-				}
-			}
-		} else {
-			if (isset($_GET['unwatch']) && $_GET['unwatch'] == $mode) {
-				login_box();
+						$s_hidden_fields = array(
+							'uid'   => $user->data['user_id'],
+							'watch' => $mode,
+							'start' => $start,
+							'f'     => $forum_id,
+						);
+						if ($mode != 'forum') {
+							$s_hidden_fields['t'] = $topic_id;
+						}
+
+						$confirm_box_message = (($item_title == '') ? 'WATCH_' . strtoupper($mode) : $user->lang('WATCH_' . strtoupper($mode) . '_DETAILED', $item_title));
+						confirm_box(false, $confirm_box_message, build_hidden_fields($s_hidden_fields));
+					}
 			} else {
+				$is_watching = 0;
+			}
+		}
+		} else {
+			if ((isset($_GET['unwatch']) && $_GET['unwatch'] == $mode) || (isset($_GET['watch']) && $_GET['watch'] == $mode)) {
+				login_box();
+		} else {
 				$can_watch = 0;
 				$is_watching = 0;
 			}
@@ -1015,7 +1065,7 @@
 			$s_watching['link'] = append_sid("{$phpbb_root_path}view$mode.$phpEx", "$u_url=$match_id&amp;" . (($is_watching) ? 'unwatch' : 'watch') . "=$mode&amp;start=$start&amp;hash=" . generate_link_hash("{$mode}_$match_id"));
 			$s_watching['title'] = $user->lang[(($is_watching) ? 'STOP' : 'START') . '_WATCHING_' . strtoupper($mode)];
 			$s_watching['is_watching'] = $is_watching;
-		}
+	}
 
 		return;
 	}
@@ -1051,10 +1101,10 @@
 						$rank_img = (!empty($rank['rank_image'])) ? '<img src="' . $phpbb_root_path . $config['ranks_path'] . '/' . $rank['rank_image'] . '" alt="' . $rank['rank_title'] . '" title="' . $rank['rank_title'] . '" />' : '';
 						$rank_img_src = (!empty($rank['rank_image'])) ? $phpbb_root_path . $config['ranks_path'] . '/' . $rank['rank_image'] : '';
 						break;
-					}
 				}
 			}
 		}
+	}
 	}
 
 	/**

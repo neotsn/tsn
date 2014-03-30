@@ -38,7 +38,7 @@
 			if ($bitfield) {
 				$this->bbcode_bitfield = $bitfield;
 				$this->bbcode_cache_init();
-			}
+		}
 		}
 
 		/**
@@ -60,7 +60,7 @@
 				// Remove the uid from tags that have not been transformed into HTML
 				if ($this->bbcode_uid) {
 					$message = str_replace(':' . $this->bbcode_uid, '', $message);
-				}
+			}
 
 				return;
 			}
@@ -91,14 +91,14 @@
 							if (!$undid_bbcode_specialchars) {
 								$message = str_replace(array('&#58;', '&#46;'), array(':', '.'), $message);
 								$undid_bbcode_specialchars = true;
-							}
+						}
 
 							$message = preg_replace($preg['search'], $preg['replace'], $message);
 							$preg = array('search' => array(), 'replace' => array());
-						}
 					}
 				}
 			}
+		}
 
 			// Remove the uid from tags that have not been transformed into HTML
 			$message = str_replace(':' . $this->bbcode_uid, '', $message);
@@ -121,12 +121,12 @@
 					if (isset($user->theme['template_inherits_id']) && $user->theme['template_inherits_id']) {
 						$this->template_filename = $phpbb_root_path . 'styles/' . $user->theme['template_inherit_path'] . '/template/bbcode.html';
 						if (!@file_exists($this->template_filename)) {
-							trigger_error('The file ' . $this->template_filename . ' is missing.', E_USER_ERROR);
-						}
-					} else {
 						trigger_error('The file ' . $this->template_filename . ' is missing.', E_USER_ERROR);
 					}
-				}
+				} else {
+						trigger_error('The file ' . $this->template_filename . ' is missing.', E_USER_ERROR);
+					}
+			}
 			}
 
 			$bbcode_ids = $rowset = $sql = array();
@@ -143,7 +143,7 @@
 
 				if ($bbcode_id > NUM_CORE_BBCODES) {
 					$sql[] = $bbcode_id;
-				}
+			}
 			}
 
 			if (sizeof($sql)) {
@@ -161,7 +161,7 @@
 					$row['second_pass_replace'] = str_replace("\n", "\r", $row['second_pass_replace']);
 
 					$rowset[$row['bbcode_id']] = $row;
-				}
+			}
 				$db->sql_freeresult($result);
 			}
 
@@ -207,17 +207,17 @@
 
 					case 4:
 						if ($user->optionget('viewimg')) {
-							$this->bbcode_cache[$bbcode_id] = array(
-								'preg' => array(
-									'#\[img:$uid\](.*?)\[/img:$uid\]#s' => $this->bbcode_tpl('img', $bbcode_id),
-								)
-							);
+						$this->bbcode_cache[$bbcode_id] = array(
+							'preg' => array(
+								'#\[img:$uid\](.*?)\[/img:$uid\]#s' => $this->bbcode_tpl('img', $bbcode_id),
+							)
+						);
 						} else {
-							$this->bbcode_cache[$bbcode_id] = array(
-								'preg' => array(
-									'#\[img:$uid\](.*?)\[/img:$uid\]#s' => str_replace('$2', '[ img ]', $this->bbcode_tpl('url', $bbcode_id, true)),
-								)
-							);
+						$this->bbcode_cache[$bbcode_id] = array(
+							'preg' => array(
+								'#\[img:$uid\](.*?)\[/img:$uid\]#s' => str_replace('$2', '[ img ]', $this->bbcode_tpl('url', $bbcode_id, true)),
+							)
+						);
 						}
 						break;
 
@@ -283,17 +283,17 @@
 
 					case 11:
 						if ($user->optionget('viewflash')) {
-							$this->bbcode_cache[$bbcode_id] = array(
-								'preg' => array(
-									'#\[flash=([0-9]+),([0-9]+):$uid\](.*?)\[/flash:$uid\]#' => $this->bbcode_tpl('flash', $bbcode_id),
-								)
-							);
+						$this->bbcode_cache[$bbcode_id] = array(
+							'preg' => array(
+								'#\[flash=([0-9]+),([0-9]+):$uid\](.*?)\[/flash:$uid\]#' => $this->bbcode_tpl('flash', $bbcode_id),
+							)
+						);
 						} else {
-							$this->bbcode_cache[$bbcode_id] = array(
-								'preg' => array(
-									'#\[flash=([0-9]+),([0-9]+):$uid\](.*?)\[/flash:$uid\]#' => str_replace('$1', '$3', str_replace('$2', '[ flash ]', $this->bbcode_tpl('url', $bbcode_id, true)))
-								)
-							);
+						$this->bbcode_cache[$bbcode_id] = array(
+							'preg' => array(
+								'#\[flash=([0-9]+),([0-9]+):$uid\](.*?)\[/flash:$uid\]#' => str_replace('$1', '$3', str_replace('$2', '[ flash ]', $this->bbcode_tpl('url', $bbcode_id, true)))
+							)
+						);
 						}
 						break;
 
@@ -322,9 +322,9 @@
 									if (preg_match_all('/\{(URL|LOCAL_URL|EMAIL|TEXT|SIMPLETEXT|INTTEXT|IDENTIFIER|COLOR|NUMBER)[0-9]*\}/', $rowset[$bbcode_id]['bbcode_match'], $m)) {
 										foreach ($m[0] as $i => $tok) {
 											$bbcode_tpl = str_replace($tok, '$' . ($i + 1), $bbcode_tpl);
-										}
 									}
 								}
+							}
 							} else {
 								// Default template
 								$bbcode_tpl = (!empty($rowset[$bbcode_id]['second_pass_replace'])) ? $rowset[$bbcode_id]['second_pass_replace'] : $rowset[$bbcode_id]['bbcode_tpl'];
@@ -338,7 +338,7 @@
 								$this->bbcode_cache[$bbcode_id] = array(
 									'preg' => array($rowset[$bbcode_id]['second_pass_match'] => $bbcode_tpl)
 								);
-							} else {
+						} else {
 								$this->bbcode_cache[$bbcode_id] = array(
 									'str' => array($rowset[$bbcode_id]['second_pass_match'] => $bbcode_tpl)
 								);
@@ -347,8 +347,8 @@
 							$this->bbcode_cache[$bbcode_id] = false;
 						}
 						break;
-				}
 			}
+		}
 		}
 
 		/**
@@ -380,7 +380,7 @@
 			if (empty($this->bbcode_template)) {
 				if (($tpl = file_get_contents($this->template_filename)) === false) {
 					trigger_error('Could not load bbcode template', E_USER_ERROR);
-				}
+			}
 
 				// replace \ with \\ and then ' with \'.
 				$tpl = str_replace('\\', '\\\\', $tpl);
@@ -397,11 +397,11 @@
 				for ($i = 0; $i < $matches; $i++) {
 					if (empty($match[1][$i])) {
 						continue;
-					}
+				}
 
 					$this->bbcode_template[$match[1][$i]] = $this->bbcode_tpl_replace($match[1][$i], $match[2][$i]);
 				}
-			}
+		}
 
 			return (isset($this->bbcode_template[$tpl_name])) ? $this->bbcode_template[$tpl_name] : ((isset($bbcode_hardtpl[$tpl_name])) ? $bbcode_hardtpl[$tpl_name] : false);
 		}
@@ -426,7 +426,7 @@
 
 			if (!empty($replacements[$tpl_name])) {
 				$tpl = strtr($tpl, $replacements[$tpl_name]);
-			}
+		}
 
 			return trim($tpl);
 		}
@@ -438,7 +438,7 @@
 			if ($type == '') {
 				$tpl = 'ulist_open_default';
 				$type = 'default';
-			} else if ($type == 'i') {
+		} else if ($type == 'i') {
 				$tpl = 'olist_open';
 				$type = 'lower-roman';
 			} else if ($type == 'I') {
@@ -476,7 +476,7 @@
 			// remove newline at the beginning
 			if ($quote == "\n") {
 				$quote = '';
-			}
+		}
 
 			$quote = (($username) ? str_replace('$1', $username, $this->bbcode_tpl('quote_username_open')) : $this->bbcode_tpl('quote_open')) . $quote;
 
@@ -504,18 +504,24 @@
 					$code = str_replace("\t", '&nbsp; &nbsp;', $code);
 					$code = str_replace('  ', '&nbsp; ', $code);
 					$code = str_replace('  ', ' &nbsp;', $code);
+					$code = str_replace("\n ", "\n&nbsp;", $code);
+
+					// keep space at the beginning
+					if (!empty($code) && $code[0] == ' ') {
+						$code = '&nbsp;' . substr($code, 1);
+					}
 
 					// remove newline at the beginning
 					if (!empty($code) && $code[0] == "\n") {
 						$code = substr($code, 1);
 					}
 					break;
-			}
+		}
 
 			$code = $this->bbcode_tpl('code_open') . $code . $this->bbcode_tpl('code_close');
 
 			return $code;
-		}
+	}
 	}
 
 ?>

@@ -1,4 +1,4 @@
-/* proSilver Content Styles
+/* Content Styles
 ---------------------------------------- */
 
 ul.topiclist {
@@ -115,14 +115,14 @@ li.header dl.icon dt {
 /* Forum list column styles */
 dl.icon {
 	min-height: 35px;
-	background-position: 10px 50%;		/* Position of folder icon */
+	background-position: 10px 50%; /* Position of folder icon */
 	background-repeat: no-repeat;
 }
 
 dl.icon dt {
-	padding-left: 45px;					/* Space for folder icon */
+	padding-left: 45px; /* Space for folder icon */
 	background-repeat: no-repeat;
-	background-position: 5px 95%;		/* Position of topic icon */
+	background-position: 5px 95%; /* Position of topic icon */
 }
 
 dd.posts, dd.topics, dd.views {
@@ -219,6 +219,7 @@ ul.topiclist dd.searchextra {
 	height: 28px;
 	min-height: 28px;
 }
+
 div[class].topic-actions {
 	height: auto;
 }
@@ -300,15 +301,13 @@ div[class].topic-actions {
 
 /* MCP Post details
 ----------------------------------------*/
-#post_details
-{
+#post_details {
 	/* This will only work in IE7+, plus the others */
 	overflow: auto;
 	max-height: 300px;
 }
 
-#expand
-{
+#expand {
 	clear: both;
 }
 
@@ -462,7 +461,7 @@ blockquote blockquote {
 	/* Nested quotes */
 	background-color: #bababa;
 	font-size: 1em;
-	margin: 0.5em 1px 0 15px;	
+	margin: 0.5em 1px 0 15px;
 }
 
 blockquote blockquote blockquote {
@@ -516,24 +515,41 @@ dl.codebox code {
 	max-height: 200px;
 	white-space: normal;
 	padding-top: 5px;
-	font: 0.9em Monaco, "Andale Mono","Courier New", Courier, mono;
+	font: 0.9em Monaco, "Andale Mono", "Courier New", Courier, mono;
 	line-height: 1.3em;
 	color: #8b8b8b;
 	margin: 2px 0;
 }
 
-.syntaxbg		{ color: #FFFFFF; }
-.syntaxcomment	{ color: #000000; }
-.syntaxdefault	{ color: #bcbcbc; }
-.syntaxhtml		{ color: #000000; }
-.syntaxkeyword	{ color: #585858; }
-.syntaxstring	{ color: #a7a7a7; }
+.syntaxbg {
+	color: #FFFFFF;
+}
+
+.syntaxcomment {
+	color: #000000;
+}
+
+.syntaxdefault {
+	color: #bcbcbc;
+}
+
+.syntaxhtml {
+	color: #000000;
+}
+
+.syntaxkeyword {
+	color: #585858;
+}
+
+.syntaxstring {
+	color: #a7a7a7;
+}
 
 /* Attachments
 ----------------------------------------*/
 .attachbox {
 	float: left;
-	width: auto; 
+	width: auto;
 	margin: 5px 5px 5px 0;
 	padding: 6px;
 	background-color: #FFFFFF;
@@ -568,8 +584,7 @@ dl.codebox code {
 	clear: left;
 }
 
-.attachbox p.stats
-{
+.attachbox p.stats {
 	line-height: 110%;
 	color: #666666;
 	font-weight: normal;
@@ -585,7 +600,7 @@ dl.codebox code {
 
 .attach-image img {
 	border: 1px solid #999999;
-/*	cursor: move; */
+	/*	cursor: move; */
 	cursor: default;
 }
 
@@ -615,7 +630,7 @@ dl.file dt {
 dl.file dd {
 	color: #666666;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 }
 
 dl.thumbnail img {
@@ -741,6 +756,7 @@ fieldset.polls dd div {
 	float: right;
 	display: inline;
 }
+
 .pm .postprofile {
 	border-left: 1px solid #DDDDDD;
 }

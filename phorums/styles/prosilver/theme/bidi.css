@@ -1,4 +1,4 @@
-/* proSilver RTL definitions
+/* RTL definitions
 ---------------------------------------- */
 
 /**
@@ -106,11 +106,26 @@
 }
 
 /* Specific column styles */
-.rtl table.table1 .name		{ text-align: right; }
-.rtl table.table1 .joined	{ text-align: right; }
-.rtl table.table1 .active	{ text-align: right; }
-.rtl table.table1 .info		{ text-align: right; }
-.rtl table.table1 thead .autocol { padding-left: 0; padding-right: 1em; }
+.rtl table.table1 .name {
+	text-align: right;
+}
+
+.rtl table.table1 .joined {
+	text-align: right;
+}
+
+.rtl table.table1 .active {
+	text-align: right;
+}
+
+.rtl table.table1 .info {
+	text-align: right;
+}
+
+.rtl table.table1 thead .autocol {
+	padding-left: 0;
+	padding-right: 1em;
+}
 
 .rtl table.table1 span.rank-img {
 	float: left;
@@ -163,7 +178,7 @@
 	float: right;
 }
 
-*:first-child+html dl.details dd {
+*:first-child + html dl.details dd {
 	margin-right: 30%;
 	float: none;
 }
@@ -209,11 +224,11 @@
 }
 
 .rtl .forabg {
-	width: 99%;	/* fix for IE6 */
+	width: 99%; /* fix for IE6 */
 }
 
 .rtl .forumbg {
-	width: 99%;	/* fix for IE6 */
+	width: 99%; /* fix for IE6 */
 }
 
 /**
@@ -273,7 +288,7 @@
 }
 
 .rtl ul.topiclist dl {
-	position: static;	/* fix for IE6 */
+	position: static; /* fix for IE6 */
 }
 
 .rtl ul.topiclist dd {
@@ -316,8 +331,8 @@
 
 .rtl dl.icon dt {
 	padding-left: 0;
-	padding-right: 45px;					/* Space for folder icon */
-	background-position: 99.5% 95%;			/* Position of topic icon */
+	padding-right: 45px; /* Space for folder icon */
+	background-position: 99.5% 95%; /* Position of topic icon */
 }
 
 .rtl dd.lastpost span, .rtl ul.topiclist dd.searchby span, .rtl ul.topiclist dd.info span, .rtl ul.topiclist dd.time span, .rtl dd.redirect span, .rtl dd.moderation span {
@@ -451,7 +466,7 @@
 	border-right-width: 1px;
 	border-right-style: solid;
 	float: left;
-/*	text-align: right; */
+	/*	text-align: right; */
 }
 
 .rtl .pm .postprofile {
@@ -519,9 +534,8 @@
 /**
 * cp.css
 */
-/* proSilver Control Panel Styles
+/* Control Panel Styles
 ---------------------------------------- */
-
 
 /* Main CP box
 ----------------------------------------*/
@@ -590,6 +604,19 @@
 
 /* PM Styles
 ----------------------------------------*/
+
+/* PM panel adjustments */
+.rtl .reply-all a.right {
+	background-position: 5% 60%;
+}
+
+.rtl .reply-all a.right:hover {
+	background-position: 3% 60%;
+}
+
+.rtl .reply-all {
+	padding-left: 5px;
+}
 
 /* Defined rules list for PM options */
 .rtl ol.def-rules {

@@ -18,7 +18,7 @@ $(document).on('ready', function () {
 	ajax_fetch_html('module_mini_index.php?', 'divMiniForumIndex', false);
 
 	// Get new posts
-	ajax_fetch_html('module_update_posts.php?', 'divNewPosts', false);
+	ajax_fetch_html('module_update_posts.php?', 'divNewPosts', true);
 
 });
 

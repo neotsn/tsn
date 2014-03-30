@@ -1,4 +1,4 @@
-/* proSilver Link Styles
+/* Link Styles
 ---------------------------------------- */
 
 /* Links adjustment to correctly display an order of rtl/ltr mixed content */
@@ -7,10 +7,25 @@ a {
 	unicode-bidi: embed;
 }
 
-a:link	{ color: #898989; text-decoration: none; }
-a:visited	{ color: #898989; text-decoration: none; }
-a:hover	{ color: #d3d3d3; text-decoration: underline; }
-a:active	{ color: #d2d2d2; text-decoration: none; }
+a:link {
+	color: #898989;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #898989;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #d3d3d3;
+	text-decoration: underline;
+}
+
+a:active {
+	color: #d2d2d2;
+	text-decoration: none;
+}
 
 /* Coloured usernames */
 .username-coloured {
@@ -87,11 +102,7 @@ a.topictitle:active {
 	padding-bottom: 0;
 }
 
-.postlink:visited {
-	color: #bdbdbd;
-	border-bottom-style: dotted;
-	border-bottom-color: #666666;
-}
+/* .postlink:visited { color: #bdbdbd; } */
 
 .postlink:active {
 	color: #d2d2d2;
@@ -103,14 +114,14 @@ a.topictitle:active {
 	color: #404040;
 }
 
-.signature a, .signature a:visited, .signature a:active, .signature a:hover {
+.signature a, .signature a:visited, .signature a:hover, .signature a:active {
 	border: none;
 	text-decoration: underline;
 	background-color: transparent;
 }
 
 /* Profile links */
-.postprofile a:link, .postprofile a:active, .postprofile a:visited, .postprofile dt.author a {
+.postprofile a:link, .postprofile a:visited, .postprofile dt.author a {
 	font-weight: bold;
 	color: #898989;
 	text-decoration: none;
@@ -121,17 +132,24 @@ a.topictitle:active {
 	color: #d3d3d3;
 }
 
+/* CSS spec requires a:link, a:visited, a:hover and a:active rules to be specified in this order. */
+/* See http://www.phpbb.com/bugs/phpbb3/59685 */
+.postprofile a:active {
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
 
-/* Profile searchresults */	
+/* Profile searchresults */
 .search .postprofile a {
 	color: #898989;
-	text-decoration: none; 
+	text-decoration: none;
 	font-weight: normal;
 }
 
 .search .postprofile a:hover {
 	color: #d3d3d3;
-	text-decoration: underline; 
+	text-decoration: underline;
 }
 
 /* Back to top of page */
@@ -144,13 +162,42 @@ a.topictitle:active {
 a.top {
 	background: none no-repeat top left;
 	text-decoration: none;
-	width: {IMG_ICON_BACK_TOP_WIDTH}px;
-	height: {IMG_ICON_BACK_TOP_HEIGHT}px;
-	display: block;
-	float: right;
-	overflow: hidden;
-	letter-spacing: 1000px;
-	text-indent: 11px;
+
+width: {
+	IMG_ICON_BACK_TOP_WIDTH
+}
+
+px
+
+;
+height: {
+	IMG_ICON_BACK_TOP_HEIGHT
+}
+
+px
+
+;
+display: block
+
+;
+float: right
+
+;
+overflow: hidden
+
+;
+letter-spacing:
+
+1000
+px
+
+;
+text-indent:
+
+11
+px
+
+;
 }
 
 a.top2 {
@@ -160,10 +207,21 @@ a.top2 {
 }
 
 /* Arrow links  */
-a.up		{ background: none no-repeat left center; }
-a.down		{ background: none no-repeat right center; }
-a.left		{ background: none no-repeat 3px 60%; }
-a.right		{ background: none no-repeat 95% 60%; }
+a.up {
+	background: none no-repeat left center;
+}
+
+a.down {
+	background: none no-repeat right center;
+}
+
+a.left {
+	background: none no-repeat 3px 60%;
+}
+
+a.right {
+	background: none no-repeat 95% 60%;
+}
 
 a.up, a.up:link, a.up:active, a.up:visited {
 	padding-left: 10px;

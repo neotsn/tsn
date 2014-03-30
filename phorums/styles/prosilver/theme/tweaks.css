@@ -1,28 +1,53 @@
-/* proSilver Style Sheet Tweaks
+/* Style Sheet Tweaks
 
 These style definitions are mainly IE specific 
 tweaks required due to its poor CSS support.
 -------------------------------------------------*/
 
-* html table, * html select, * html input { font-size: 100%; }
-* html hr { margin: 0; }
-* html span.corners-top, * html span.corners-bottom { background-image: url("{T_THEME_PATH}/images/corners_left.gif"); }
-* html span.corners-top span, * html span.corners-bottom span { background-image: url("{T_THEME_PATH}/images/corners_right.gif"); }
+* html table, * html select, * html input {
+	font-size: 100%;
+}
+
+* html hr {
+	margin: 0;
+}
+
+* html span.corners-top, * html span.corners-bottom {
+	background-image: url("{T_THEME_PATH}/images/corners_left.gif");
+}
+
+* html span.corners-top span, * html span.corners-bottom span {
+	background-image: url("{T_THEME_PATH}/images/corners_right.gif");
+}
 
 table.table1 {
-	width: 99%;		/* IE < 6 browsers */
+	width: 99%; /* IE < 6 browsers */
 	/* Tantek hack */
 	voice-family: "\"}\"";
 	voice-family: inherit;
 	width: 100%;
 }
-html>body table.table1 { width: 100%; }	/* Reset 100% for opera */
 
-* html ul.topiclist li { position: relative; }
-* html .postbody h3 img { vertical-align: middle; }
+html > body table.table1 {
+	width: 100%;
+}
+
+/* Reset 100% for opera */
+
+* html ul.topiclist li {
+	position: relative;
+}
+
+* html .postbody h3 img {
+	vertical-align: middle;
+}
 
 /* Form styles */
-html>body dd label input { vertical-align: text-bottom; }	/* Align checkboxes/radio buttons nicely */
+html > body dd label input {
+	vertical-align: text-bottom;
+}
+
+/* Align checkboxes/radio buttons nicely */
 
 * html input.button1, * html input.button2 {
 	padding-bottom: 0;
@@ -30,7 +55,9 @@ html>body dd label input { vertical-align: text-bottom; }	/* Align checkboxes/ra
 }
 
 /* Misc layout styles */
-* html .column1, * html .column2 { width: 45%; }
+* html .column1, * html .column2 {
+	width: 45%;
+}
 
 /* Nice method for clearing floated blocks without having to insert any extra markup (like spacer above)
    From http://www.positioniseverything.net/easyclearing.html 
@@ -77,7 +104,7 @@ dl.icon {
 }
 
 /* Correctly clear floating for details on profile view */
-*:first-child+html dl.details dd {
+*:first-child + html dl.details dd {
 	margin-left: 30%;
 	float: none;
 }
@@ -87,6 +114,21 @@ dl.icon {
 	float: none;
 }
 
-* html .forumbg table.table1 {
-	margin: 0 -2px 0px -1px;
+/* Headerbar height fix for IE7 and below */
+* html #site-description p {
+	margin-bottom: 1.0em;
+}
+
+*:first-child + html #site-description p {
+	margin-bottom: 1.0em;
+}
+
+/* #minitabs fix for IE */
+.tabs-container {
+	zoom: 1;
+}
+
+#minitabs {
+	white-space: nowrap;
+	*min-width: 50%;
 }
