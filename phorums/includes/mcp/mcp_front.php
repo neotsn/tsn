@@ -34,7 +34,7 @@ function mcp_front_view($id, $mode, $action)
 		$forum_id = request_var('f', 0);
 
 		$template->assign_var('S_SHOW_UNAPPROVED', (!empty($forum_list)) ? true : false);
-		
+
 		if (!empty($forum_list))
 		{
 			$sql = 'SELECT COUNT(post_id) AS total
@@ -350,7 +350,7 @@ function mcp_front_view($id, $mode, $action)
 			// Add forum_id 0 for global announcements
 			$forum_list[] = 0;
 
-			$log_count = 0;
+			$log_count = false;
 			$log = array();
 			view_log('mod', $log, $log_count, 5, 0, $forum_list);
 

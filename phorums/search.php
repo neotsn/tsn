@@ -47,32 +47,44 @@ $sort_dir		= request_var('sd', 'd');
 $return_chars	= request_var('ch', ($topic_id) ? -1 : 300);
 $search_forum	= request_var('fid', array(0));
 
-// We put login boxes for the case if search_id is egosearch or unreadposts
+// We put login boxes for the case if search_id is newposts, egosearch or unreadposts
 // because a guest should be able to log in even if guests search is not permitted
 
-// Egosearch is an author search
-if ($search_id == 'egosearch')
+switch ($search_id)
 {
-	$author_id = $user->data['user_id'];
+	// Egosearch is an author search
+	case 'egosearch':
+		$author_id = $user->data['user_id'];
+		if ($user->data['user_id'] == ANONYMOUS)
+		{
+			login_box('', $user->lang['LOGIN_EXPLAIN_EGOSEARCH']);
+		}
+	break;
 
-	if ($user->data['user_id'] == ANONYMOUS)
-	{
-		login_box('', $user->lang['LOGIN_EXPLAIN_EGOSEARCH']);
-	}
-}
-
-// Search for unread posts needs to be allowed and user to be logged in if topics tracking for guests is disabled
-if ($search_id == 'unreadposts')
-{
-	if (!$config['load_unreads_search'])
-	{
-		$template->assign_var('S_NO_SEARCH', true);
-		trigger_error('NO_SEARCH_UNREADS');
-	}
-	else if (!$config['load_anon_lastread'] && !$user->data['is_registered'])
-	{
-		login_box('', $user->lang['LOGIN_EXPLAIN_UNREADSEARCH']);
-	}
+	// Search for unread posts needs to be allowed and user to be logged in if topics tracking for guests is disabled
+	case 'unreadposts':
+		if (!$config['load_unreads_search'])
+		{
+			$template->assign_var('S_NO_SEARCH', true);
+			trigger_error('NO_SEARCH_UNREADS');
+		}
+		else if (!$config['load_anon_lastread'] && !$user->data['is_registered'])
+		{
+			login_box('', $user->lang['LOGIN_EXPLAIN_UNREADSEARCH']);
+		}
+	break;
+	
+	// The "new posts" search uses user_lastvisit which is user based, so it should require user to log in.
+	case 'newposts':
+		if ($user->data['user_id'] == ANONYMOUS)
+		{
+			login_box('', $user->lang['LOGIN_EXPLAIN_NEWPOSTS']);
+		}
+	break;
+	
+	default:
+		// There's nothing to do here for now ;)
+	break;
 }
 
 // Is user able to search? Has search been disabled?
@@ -457,32 +469,59 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$per_page = ($show_results == 'posts') ? $config['posts_per_page'] : $config['topics_per_page'];
 	$total_match_count = 0;
 
+	// Set limit for the $total_match_count to reduce server load
+	$total_matches_limit = 1000;
+	$found_more_search_matches = false;
+
 	if ($search_id)
 	{
 		if ($sql)
 		{
-			// only return up to 1000 ids (the last one will be removed later)
-			$result = $db->sql_query_limit($sql, 1001 - $start, $start);
+			// Only return up to $total_matches_limit+1 ids (the last one will be removed later)
+			$result = $db->sql_query_limit($sql, $total_matches_limit + 1);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$id_ary[] = (int) $row[$field];
 			}
 			$db->sql_freeresult($result);
-
-			$total_match_count = sizeof($id_ary) + $start;
-			$id_ary = array_slice($id_ary, 0, $per_page);
 		}
 		else if ($search_id == 'unreadposts')
 		{
-			$id_ary = array_keys(get_unread_topics($user->data['user_id'], $sql_where, $sql_sort, 1001 - $start, $start));
-
-			$total_match_count = sizeof($id_ary) + $start;
-			$id_ary = array_slice($id_ary, 0, $per_page);
+			// Only return up to $total_matches_limit+1 ids (the last one will be removed later)
+			$id_ary = array_keys(get_unread_topics($user->data['user_id'], $sql_where, $sql_sort, $total_matches_limit + 1));
 		}
 		else
 		{
 			$search_id = '';
+		}
+
+		$total_match_count = sizeof($id_ary);
+		if ($total_match_count)
+		{
+			// Limit the number to $total_matches_limit for pre-made searches
+			if ($total_match_count > $total_matches_limit)
+			{
+				$found_more_search_matches = true;
+				$total_match_count = $total_matches_limit;
+			}
+
+			// Make sure $start is set to the last page if it exceeds the amount
+			if ($start < 0)
+			{
+				$start = 0;
+			}
+			else if ($start >= $total_match_count)
+			{
+				$start = floor(($total_match_count - 1) / $per_page) * $per_page;
+			}
+
+			$id_ary = array_slice($id_ary, $start, $per_page);
+		}
+		else
+		{
+			// Set $start to 0 if no matches were found
+			$start = 0;
 		}
 	}
 
@@ -531,10 +570,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$icons = $cache->obtain_icons();
 
 	// Output header
-	if ($search_id && ($total_match_count > 1000))
+	if ($found_more_search_matches)
 	{
-		// limit the number to 1000 for pre-made searches
-		$total_match_count--;
 		$l_search_matches = sprintf($user->lang['FOUND_MORE_SEARCH_MATCHES'], $total_match_count);
 	}
 	else
@@ -566,7 +603,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$template->assign_vars(array(
 		'SEARCH_TITLE'		=> $l_search_title,
 		'SEARCH_MATCHES'	=> $l_search_matches,
-		'SEARCH_WORDS'		=> $search->search_query,
+		'SEARCH_WORDS'		=> $keywords,
+		'SEARCHED_QUERY'	=> $search->search_query,
 		'IGNORED_WORDS'		=> (sizeof($search->common_words)) ? implode(' ', $search->common_words) : '',
 		'PAGINATION'		=> generate_pagination($u_search, $total_match_count, $per_page, $start),
 		'PAGE_NUMBER'		=> on_page($total_match_count, $per_page, $start),

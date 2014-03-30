@@ -80,7 +80,7 @@ class acp_inactive
 						FROM ' . USERS_TABLE . '
 						WHERE ' . $db->sql_in_set('user_id', $mark);
 					$result = $db->sql_query($sql);
-				
+
 					$user_affected = array();
 					while ($row = $db->sql_fetchrow($result))
 					{
@@ -89,20 +89,20 @@ class acp_inactive
 					$db->sql_freeresult($result);
 
 					if ($action == 'activate')
-						{
-							// Get those 'being activated'...
+					{
+						// Get those 'being activated'...
 						$sql = 'SELECT user_id, username' . (($config['require_activation'] == USER_ACTIVATION_ADMIN) ? ', user_email, user_lang' : '') . '
-								FROM ' . USERS_TABLE . '
-								WHERE ' . $db->sql_in_set('user_id', $mark) . '
-									AND user_type = ' . USER_INACTIVE;
-							$result = $db->sql_query($sql);
+							FROM ' . USERS_TABLE . '
+							WHERE ' . $db->sql_in_set('user_id', $mark) . '
+								AND user_type = ' . USER_INACTIVE;
+						$result = $db->sql_query($sql);
 
-							$inactive_users = array();
-							while ($row = $db->sql_fetchrow($result))
-							{
-								$inactive_users[] = $row;
-							}
-							$db->sql_freeresult($result);
+						$inactive_users = array();
+						while ($row = $db->sql_fetchrow($result))
+						{
+							$inactive_users[] = $row;
+						}
+						$db->sql_freeresult($result);
 
 						user_active_flip('activate', $mark);
 
@@ -118,10 +118,7 @@ class acp_inactive
 
 								$messenger->to($row['user_email'], $row['username']);
 
-								$messenger->headers('X-AntiAbuse: Board servername - ' . $config['server_name']);
-								$messenger->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
-								$messenger->headers('X-AntiAbuse: Username - ' . $user->data['username']);
-								$messenger->headers('X-AntiAbuse: User IP - ' . $user->ip);
+								$messenger->anti_abuse_headers($config, $user);
 
 								$messenger->assign_vars(array(
 									'USERNAME'	=> htmlspecialchars_decode($row['username']))
@@ -209,10 +206,7 @@ class acp_inactive
 							$messenger->to($row['user_email'], $row['username']);
 							$messenger->im($row['user_jabber'], $row['username']);
 
-							$messenger->headers('X-AntiAbuse: Board servername - ' . $config['server_name']);
-							$messenger->headers('X-AntiAbuse: User_id - ' . $user->data['user_id']);
-							$messenger->headers('X-AntiAbuse: Username - ' . $user->data['username']);
-							$messenger->headers('X-AntiAbuse: User IP - ' . $user->ip);
+							$messenger->anti_abuse_headers($config, $user);
 
 							$messenger->assign_vars(array(
 								'USERNAME'		=> htmlspecialchars_decode($row['username']),
@@ -246,7 +240,7 @@ class acp_inactive
 					$u_action .= ($per_page != $config['topics_per_page']) ? "&amp;users_per_page=$per_page" : '';
 
 					redirect($u_action);
-		
+
 				break;
 			}
 		}
@@ -267,6 +261,7 @@ class acp_inactive
 				'REMINDED_DATE'	=> $user->format_date($row['user_reminded_time']),
 				'JOINED'		=> $user->format_date($row['user_regdate']),
 				'LAST_VISIT'	=> (!$row['user_lastvisit']) ? ' - ' : $user->format_date($row['user_lastvisit']),
+
 				'REASON'		=> $row['inactive_reason'],
 				'USER_ID'		=> $row['user_id'],
 				'POSTS'			=> ($row['user_posts']) ? $row['user_posts'] : 0,
@@ -299,8 +294,8 @@ class acp_inactive
 			'S_ON_PAGE'		=> on_page($inactive_count, $per_page, $start),
 			'PAGINATION'	=> generate_pagination($this->u_action . "&amp;$u_sort_param&amp;users_per_page=$per_page", $inactive_count, $per_page, $start, true),
 			'USERS_PER_PAGE'	=> $per_page,
-			
-			'U_ACTION'		=> $this->u_action . '&amp;start=' . $start,
+
+			'U_ACTION'		=> $this->u_action . "&amp;$u_sort_param&amp;users_per_page=$per_page&amp;start=$start",
 		));
 
 		$this->tpl_name = 'acp_inactive';

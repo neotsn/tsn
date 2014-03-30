@@ -183,19 +183,19 @@ class acp_icons
 						}
 					}
 				}
-				
+
 				$sql = "SELECT *
 					FROM $table
 					ORDER BY {$fields}_order " . (($icon_id || $action == 'add') ? 'DESC' : 'ASC');
 				$result = $db->sql_query($sql);
-				
+
 				$data = array();
 				$after = false;
 				$display = 0;
 				$order_lists = array('', '');
 				$add_order_lists = array('', '');
 				$display_count = 0;
-				
+
 				while ($row = $db->sql_fetchrow($result))
 				{
 					if ($action == 'add')
@@ -249,12 +249,12 @@ class acp_icons
 				$colspan = (($mode == 'smilies') ? 7 : 5);
 				$colspan += ($icon_id) ? 1 : 0;
 				$colspan += ($action == 'add') ? 2 : 0;
-				
+
 				$template->assign_vars(array(
 					'S_EDIT'		=> true,
 					'S_SMILIES'		=> ($mode == 'smilies') ? true : false,
 					'S_ADD'			=> ($action == 'add') ? true : false,
-					
+
 					'S_ORDER_LIST_DISPLAY'		=> $order_list . $order_lists[1],
 					'S_ORDER_LIST_UNDISPLAY'	=> $order_list . $order_lists[0],
 					'S_ORDER_LIST_DISPLAY_COUNT'	=> $display_count + 1,
@@ -301,10 +301,10 @@ class acp_icons
 						'S_ADD_CODE'		=> true,
 
 						'S_IMG_OPTIONS'		=> $smiley_options,
-						
+
 						'S_ADD_ORDER_LIST_DISPLAY'		=> $add_order_list . $add_order_lists[1],
 						'S_ADD_ORDER_LIST_UNDISPLAY'	=> $add_order_list . $add_order_lists[0],
-						
+
 						'IMG_SRC'			=> $phpbb_root_path . $img_path . '/' . $default_row['smiley_url'],
 						'IMG_PATH'			=> $img_path,
 						'PHPBB_ROOT_PATH'	=> $phpbb_root_path,
@@ -318,7 +318,7 @@ class acp_icons
 				}
 
 				return;
-	
+
 			break;
 
 			case 'create':
@@ -326,7 +326,7 @@ class acp_icons
 
 				// Get items to create/modify
 				$images = (isset($_POST['image'])) ? array_keys(request_var('image', array('' => 0))) : array();
-				
+
 				// Now really get the items
 				$image_id		= (isset($_POST['id'])) ? request_var('id', array('' => 0)) : array();
 				$image_order	= (isset($_POST['order'])) ? request_var('order', array('' => 0)) : array();
@@ -393,6 +393,10 @@ class acp_icons
 					else if ($action == 'create' && !isset($image_add[$image]))
 					{
 						// skip images where add wasn't checked
+					}
+					else if (!file_exists($phpbb_root_path . $img_path . '/' . $image))
+					{
+						$errors[$image] = 'SMILIE_NO_FILE';
 					}
 					else
 					{
@@ -475,13 +479,13 @@ class acp_icons
 							$db->sql_query($sql);
 							$icons_updated++;
 						}
-						
+
  					}
 				}
-				
+
 				$cache->destroy('_icons');
 				$cache->destroy('sql', $table);
-				
+
 				$level = E_USER_NOTICE;
 				switch ($icons_updated)
 				{
@@ -489,11 +493,11 @@ class acp_icons
 						$suc_lang = "{$lang}_NONE";
 						$level = E_USER_WARNING;
 						break;
-						
+
 					case 1:
 						$suc_lang = "{$lang}_ONE";
 						break;
-						
+
 					default:
 						$suc_lang = $lang;
 				}

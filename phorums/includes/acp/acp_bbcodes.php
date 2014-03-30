@@ -113,8 +113,8 @@ class acp_bbcodes
 				{
 					$template->assign_block_vars('token', array(
 						'TOKEN'		=> '{' . $token . '}',
-						'EXPLAIN'	=> $token_explain)
-					);
+						'EXPLAIN'	=> ($token === 'LOCAL_URL') ? sprintf($token_explain, generate_board_url() . '/') : $token_explain,
+					));
 				}
 
 				return;
@@ -127,120 +127,120 @@ class acp_bbcodes
 				$warn_text = preg_match('%<[^>]*\{text[\d]*\}[^>]*>%i', $bbcode_tpl);
 				if (!$warn_text || confirm_box(true))
 				{
-				$data = $this->build_regexp($bbcode_match, $bbcode_tpl);
+					$data = $this->build_regexp($bbcode_match, $bbcode_tpl);
 
-				// Make sure the user didn't pick a "bad" name for the BBCode tag.
-				$hard_coded = array('code', 'quote', 'quote=', 'attachment', 'attachment=', 'b', 'i', 'url', 'url=', 'img', 'size', 'size=', 'color', 'color=', 'u', 'list', 'list=', 'email', 'email=', 'flash', 'flash=');
+					// Make sure the user didn't pick a "bad" name for the BBCode tag.
+					$hard_coded = array('code', 'quote', 'quote=', 'attachment', 'attachment=', 'b', 'i', 'url', 'url=', 'img', 'size', 'size=', 'color', 'color=', 'u', 'list', 'list=', 'email', 'email=', 'flash', 'flash=');
 
-				if (($action == 'modify' && strtolower($data['bbcode_tag']) !== strtolower($row['bbcode_tag'])) || ($action == 'create'))
-				{
-					$sql = 'SELECT 1 as test
-						FROM ' . BBCODES_TABLE . "
-						WHERE LOWER(bbcode_tag) = '" . $db->sql_escape(strtolower($data['bbcode_tag'])) . "'";
-					$result = $db->sql_query($sql);
-					$info = $db->sql_fetchrow($result);
-					$db->sql_freeresult($result);
-
-					// Grab the end, interrogate the last closing tag
-					if ($info['test'] === '1' || in_array(strtolower($data['bbcode_tag']), $hard_coded) || (preg_match('#\[/([^[]*)]$#', $bbcode_match, $regs) && in_array(strtolower($regs[1]), $hard_coded)))
+					if (($action == 'modify' && strtolower($data['bbcode_tag']) !== strtolower($row['bbcode_tag'])) || ($action == 'create'))
 					{
-						trigger_error($user->lang['BBCODE_INVALID_TAG_NAME'] . adm_back_link($this->u_action), E_USER_WARNING);
-					}
-				}
+						$sql = 'SELECT 1 as test
+							FROM ' . BBCODES_TABLE . "
+							WHERE LOWER(bbcode_tag) = '" . $db->sql_escape(strtolower($data['bbcode_tag'])) . "'";
+						$result = $db->sql_query($sql);
+						$info = $db->sql_fetchrow($result);
+						$db->sql_freeresult($result);
 
-				if (substr($data['bbcode_tag'], -1) === '=')
-				{
-					$test = substr($data['bbcode_tag'], 0, -1);
-				}
-				else
-				{
-					$test = $data['bbcode_tag'];
-				}
-
-				if (!preg_match('%\\[' . $test . '[^]]*].*?\\[/' . $test . ']%s', $bbcode_match))
-				{
-					trigger_error($user->lang['BBCODE_OPEN_ENDED_TAG'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-
-				if (strlen($data['bbcode_tag']) > 16)
-				{
-					trigger_error($user->lang['BBCODE_TAG_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-
-				if (strlen($bbcode_match) > 4000)
-				{
-					trigger_error($user->lang['BBCODE_TAG_DEF_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-				
-				
-				if (strlen($bbcode_helpline) > 255)
-				{
-					trigger_error($user->lang['BBCODE_HELPLINE_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-
-				$sql_ary = array(
-					'bbcode_tag'				=> $data['bbcode_tag'],
-					'bbcode_match'				=> $bbcode_match,
-					'bbcode_tpl'				=> $bbcode_tpl,
-					'display_on_posting'		=> $display_on_posting,
-					'bbcode_helpline'			=> $bbcode_helpline,
-					'first_pass_match'			=> $data['first_pass_match'],
-					'first_pass_replace'		=> $data['first_pass_replace'],
-					'second_pass_match'			=> $data['second_pass_match'],
-					'second_pass_replace'		=> $data['second_pass_replace']
-				);
-
-				if ($action == 'create')
-				{
-					$sql = 'SELECT MAX(bbcode_id) as max_bbcode_id
-						FROM ' . BBCODES_TABLE;
-					$result = $db->sql_query($sql);
-					$row = $db->sql_fetchrow($result);
-					$db->sql_freeresult($result);
-
-					if ($row)
-					{
-						$bbcode_id = $row['max_bbcode_id'] + 1;
-
-						// Make sure it is greater than the core bbcode ids...
-						if ($bbcode_id <= NUM_CORE_BBCODES)
+						// Grab the end, interrogate the last closing tag
+						if ($info['test'] === '1' || in_array(strtolower($data['bbcode_tag']), $hard_coded) || (preg_match('#\[/([^[]*)]$#', $bbcode_match, $regs) && in_array(strtolower($regs[1]), $hard_coded)))
 						{
-							$bbcode_id = NUM_CORE_BBCODES + 1;
+							trigger_error($user->lang['BBCODE_INVALID_TAG_NAME'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
+					}
+
+					if (substr($data['bbcode_tag'], -1) === '=')
+					{
+						$test = substr($data['bbcode_tag'], 0, -1);
 					}
 					else
 					{
-						$bbcode_id = NUM_CORE_BBCODES + 1;
+						$test = $data['bbcode_tag'];
 					}
 
-					if ($bbcode_id > 1511)
+					if (!preg_match('%\\[' . $test . '[^]]*].*?\\[/' . $test . ']%s', $bbcode_match))
 					{
-						trigger_error($user->lang['TOO_MANY_BBCODES'] . adm_back_link($this->u_action), E_USER_WARNING);
+						trigger_error($user->lang['BBCODE_OPEN_ENDED_TAG'] . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 
-					$sql_ary['bbcode_id'] = (int) $bbcode_id;
+					if (strlen($data['bbcode_tag']) > 16)
+					{
+						trigger_error($user->lang['BBCODE_TAG_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 
-					$db->sql_query('INSERT INTO ' . BBCODES_TABLE . $db->sql_build_array('INSERT', $sql_ary));
-					$cache->destroy('sql', BBCODES_TABLE);
+					if (strlen($bbcode_match) > 4000)
+					{
+						trigger_error($user->lang['BBCODE_TAG_DEF_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 
-					$lang = 'BBCODE_ADDED';
-					$log_action = 'LOG_BBCODE_ADD';
-				}
-				else
-				{
-					$sql = 'UPDATE ' . BBCODES_TABLE . '
-						SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
-						WHERE bbcode_id = ' . $bbcode_id;
-					$db->sql_query($sql);
-					$cache->destroy('sql', BBCODES_TABLE);
 
-					$lang = 'BBCODE_EDITED';
-					$log_action = 'LOG_BBCODE_EDIT';
-				}
+					if (strlen($bbcode_helpline) > 255)
+					{
+						trigger_error($user->lang['BBCODE_HELPLINE_TOO_LONG'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 
-				add_log('admin', $log_action, $data['bbcode_tag']);
+					$sql_ary = array(
+						'bbcode_tag'				=> $data['bbcode_tag'],
+						'bbcode_match'				=> $bbcode_match,
+						'bbcode_tpl'				=> $bbcode_tpl,
+						'display_on_posting'		=> $display_on_posting,
+						'bbcode_helpline'			=> $bbcode_helpline,
+						'first_pass_match'			=> $data['first_pass_match'],
+						'first_pass_replace'		=> $data['first_pass_replace'],
+						'second_pass_match'			=> $data['second_pass_match'],
+						'second_pass_replace'		=> $data['second_pass_replace']
+					);
 
-				trigger_error($user->lang[$lang] . adm_back_link($this->u_action));
+					if ($action == 'create')
+					{
+						$sql = 'SELECT MAX(bbcode_id) as max_bbcode_id
+							FROM ' . BBCODES_TABLE;
+						$result = $db->sql_query($sql);
+						$row = $db->sql_fetchrow($result);
+						$db->sql_freeresult($result);
+
+						if ($row)
+						{
+							$bbcode_id = $row['max_bbcode_id'] + 1;
+
+							// Make sure it is greater than the core bbcode ids...
+							if ($bbcode_id <= NUM_CORE_BBCODES)
+							{
+								$bbcode_id = NUM_CORE_BBCODES + 1;
+							}
+						}
+						else
+						{
+							$bbcode_id = NUM_CORE_BBCODES + 1;
+						}
+
+						if ($bbcode_id > BBCODE_LIMIT)
+						{
+							trigger_error($user->lang['TOO_MANY_BBCODES'] . adm_back_link($this->u_action), E_USER_WARNING);
+						}
+
+						$sql_ary['bbcode_id'] = (int) $bbcode_id;
+
+						$db->sql_query('INSERT INTO ' . BBCODES_TABLE . $db->sql_build_array('INSERT', $sql_ary));
+						$cache->destroy('sql', BBCODES_TABLE);
+
+						$lang = 'BBCODE_ADDED';
+						$log_action = 'LOG_BBCODE_ADD';
+					}
+					else
+					{
+						$sql = 'UPDATE ' . BBCODES_TABLE . '
+							SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
+							WHERE bbcode_id = ' . $bbcode_id;
+						$db->sql_query($sql);
+						$cache->destroy('sql', BBCODES_TABLE);
+
+						$lang = 'BBCODE_EDITED';
+						$log_action = 'LOG_BBCODE_EDIT';
+					}
+
+					add_log('admin', $log_action, $data['bbcode_tag']);
+
+					trigger_error($user->lang[$lang] . adm_back_link($this->u_action));
 				}
 				else
 				{
@@ -345,6 +345,9 @@ class acp_bbcodes
 			'LOCAL_URL'	 => array(
 				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')"
 			),
+			'RELATIVE_URL'	=> array(
+				'!(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')!e'	=>	"\$this->bbcode_specialchars('$1')"
+			),
 			'EMAIL' => array(
 				'!(' . get_preg_expression('email') . ')!ie'	=>	"\$this->bbcode_specialchars('$1')"
 			),
@@ -371,6 +374,7 @@ class acp_bbcodes
 		$sp_tokens = array(
 			'URL'	 => '(?i)((?:' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('url')) . ')|(?:' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('www_url')) . '))(?-i)',
 			'LOCAL_URL'	 => '(?i)(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')(?-i)',
+			'RELATIVE_URL'	 => '(?i)(' . str_replace(array('!', '\#'), array('\!', '#'), get_preg_expression('relative_url')) . ')(?-i)',
 			'EMAIL' => '(' . get_preg_expression('email') . ')',
 			'TEXT' => '(.*?)',
 			'SIMPLETEXT' => '([a-zA-Z0-9-+.,_ ]+)',
@@ -427,7 +431,11 @@ class acp_bbcodes
 				$fp_replace = str_replace($token, $replace, $fp_replace);
 
 				$sp_match = str_replace(preg_quote($token, '!'), $sp_tokens[$token_type], $sp_match);
-				$sp_replace = str_replace($token, '${' . ($n + 1) . '}', $sp_replace);
+
+				// Prepend the board url to local relative links
+				$replace_prepend = ($token_type === 'LOCAL_URL') ? generate_board_url() . '/' : '';
+
+				$sp_replace = str_replace($token, $replace_prepend . '${' . ($n + 1) . '}', $sp_replace);
 			}
 
 			$fp_match = '!' . $fp_match . '!' . $modifiers;
