@@ -1,45 +1,36 @@
-	<table class="newposts" cellspacing="1">
-	<tr>
-		<th nowrap="nowrap">&nbsp;New {L_TOPICS}&nbsp;</th>
-		<th nowrap="nowrap">&nbsp;{L_LAST_POST}&nbsp;</th>
-	</tr>
-	<!-- IF S_SHOW_TOPICS -->
+<div class="tsn8_myspot_mini_newposts_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">Since you were last here...</span>
+
+	<div class="tsn8_myspot_newest_posts_cards_wrapper">
+		<!-- IF S_SHOW_TOPICS -->
 		<!-- BEGIN searchresults -->
-		<tr valign="middle">
-			<td class="row1 left">
-				<!-- IF searchresults.S_UNREAD_TOPIC --><a href="{searchresults.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
-				{topicrow.ATTACH_ICON_IMG} <a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a>
-				<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED -->
-					<a href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a>&nbsp;
-				<!-- ENDIF -->
-				<!-- IF searchresults.S_TOPIC_REPORTED -->
-					<a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;
-				<!-- ENDIF -->
-				<!-- IF searchresults.S_TOPIC_GLOBAL -->
-					<p class="gensmall">{L_GLOBAL}
-				<!-- ELSE -->
-					<p class="gensmall">{L_IN} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a>
-				<!-- ENDIF -->
-				<!-- IF searchresults.PAGINATION -->
-					[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {searchresults.PAGINATION} ] </p>
-				<!-- ELSE -->
-					</p>
-				<!-- ENDIF -->
-			</td>
-			<td class="row1" width="120" align="center">
-				<p class="topicdetails">{searchresults.LAST_POST_TIME}</p>
-				<p class="topicdetails">{searchresults.LAST_POST_AUTHOR_FULL}
-					<a href="{searchresults.U_LAST_POST}">{LAST_POST_IMG}</a>
-				</p>
-			</td>
-		</tr>
+			<span class="tsn8_myspot_newest_post">
+				<span class="tsn8_myspot_module_avatar" style="float: right; margin-right: 5px;">{searchresults.LAST_POST_AUTHOR_AVATAR}</span>
+				<span class="tsn8_myspot_newest_post_title">
+					<!-- IF searchresults.S_UNREAD_TOPIC --><a
+						href="{searchresults.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
+					{topicrow.ATTACH_ICON_IMG}  <a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a>
+				</span>
+				<span class="tsn8_myspot_newest_post_subtitle">
+
+					<!-- IF searchresults.S_TOPIC_GLOBAL -->{L_GLOBAL}<!-- ELSE -->{L_IN} <a
+						href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a><!-- ENDIF -->
+					<!-- IF searchresults.PAGINATION -->[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {searchresults.PAGINATION} ] <!-- ENDIF -->
+				</span>
+				<span class="tsn8_myspot_newest_post_message">
+					<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED --><a
+						href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a>&nbsp;<!-- ENDIF -->
+					<!-- IF searchresults.S_TOPIC_REPORTED --><a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;<!-- ENDIF -->
+					{searchresults.LAST_POST_TEXT}<br/><a href="{searchresults.U_VIEW_TOPIC}">Continue reading...</a>
+				</span>
+				<span class="tsn8_myspot_module_footer">By: {searchresults.LAST_POST_AUTHOR_FULL} on {searchresults.LAST_POST_TIME} <a
+						href="{searchresults.U_LAST_POST}">{LAST_POST_IMG}</a><br/></span>
+			</span>
 		<!-- BEGINELSE -->
-		<tr valign="middle">
-			<td colspan="2" class="row3" align="center">{L_NO_SEARCH_RESULTS}</td>
-		</tr>
+		<span class="tsn8_myspot_no_posts_message">Nothing has been posted since you last visited.<br><a
+				href="./index.php">Why not get the conversation going over in our forums...</a></span>
 		<!-- END searchresults -->
-	<!-- ENDIF -->
-	<tr>
-		<td class="cat" colspan="2" valign="middle" align="center"><span class="nav">{PAGE_NUMBER}</span> [ {SEARCH_MATCHES} ] <!-- INCLUDE modules/pagination.html --></td>
-	</tr>
-	</table>
+		<!-- ENDIF -->
+		<span class="stretch"></span>
+	</div>
+</div>

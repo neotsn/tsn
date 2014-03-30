@@ -1,3 +1,52 @@
-<form method="post" action="{S_SEARCH_ACTION}">
-	<div id="divNewPosts"></div>
-</form>
+<!--<form method="post" action="{S_SEARCH_ACTION}">-->
+<!--<div id="divNewPosts"></div>-->
+<!--</form>-->
+
+<table class="newposts" cellspacing="1">
+	<tr>
+		<th nowrap="nowrap">&nbsp;New {L_TOPICS}&nbsp;</th>
+		<th nowrap="nowrap">&nbsp;{L_LAST_POST}&nbsp;</th>
+	</tr>
+	<!-- IF S_SHOW_TOPICS -->
+	<!-- BEGIN searchresults -->
+	<tr valign="middle">
+		<td class="row1 left">
+			<!-- IF searchresults.S_UNREAD_TOPIC --><a href="{searchresults.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
+			{topicrow.ATTACH_ICON_IMG} <a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a>
+			<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED -->
+			<a href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a>&nbsp;
+			<!-- ENDIF -->
+			<!-- IF searchresults.S_TOPIC_REPORTED -->
+			<a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;
+			<!-- ENDIF -->
+			<!-- IF searchresults.S_TOPIC_GLOBAL -->
+			<p class="gensmall">{L_GLOBAL}
+				<!-- ELSE -->
+
+			<p class="gensmall">{L_IN} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a>
+				<!-- ENDIF -->
+				<!-- IF searchresults.PAGINATION -->
+				[ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {searchresults.PAGINATION} ] </p>
+			<!-- ELSE -->
+			</p>
+			<!-- ENDIF -->
+		</td>
+		<td class="row1" width="120" align="center">
+			<p class="topicdetails">{searchresults.LAST_POST_TIME}</p>
+
+			<p class="topicdetails">{searchresults.LAST_POST_AUTHOR_FULL}
+				<a href="{searchresults.U_LAST_POST}">{LAST_POST_IMG}</a>
+			</p>
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+	<tr valign="middle">
+		<td colspan="2" class="row3" align="center">{L_NO_SEARCH_RESULTS}</td>
+	</tr>
+	<!-- END searchresults -->
+	<!-- ENDIF -->
+	<tr>
+		<td class="cat" colspan="2" valign="middle" align="center"><span class="nav">{PAGE_NUMBER}</span> [
+			{SEARCH_MATCHES} ] <!-- INCLUDE modules/pagination.html --></td>
+	</tr>
+</table>

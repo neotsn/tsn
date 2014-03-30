@@ -30,7 +30,7 @@ body {
 	color: #323D4F;
 	background-color: #FFFFFF;
 	font-size: 1em; /* This sets the default font size to be equivalent to 10px */
-	margin: 0px;
+	margin: 0;
 }
 
 div.tsn8_page_wrapper {
@@ -134,8 +134,8 @@ div.tsn8_myspot_module_wrapper {
 
 div.tsn8_myspot_wrapper {
 	border-radius: 3px;
-	box-shadow: 0 2px 3px #aaa;
-	/*border: 1px solid #ccc;*/
+	box-shadow: 0 1px 2px #ccc;
+	border: 1px solid #d7e3f6;
 	background-color: #fff;
 	padding: 5px;
 	margin: 5px 5px 10px;
@@ -174,7 +174,7 @@ span.tsn8_myspot_profile_info {
 	vertical-align: middle;
 }
 
-div.tsn8_myspot_stat_wrapper {
+div.tsn8_myspot_stat_wrapper, div.tsn8_myspot_newest_posts_cards_wrapper {
 	text-align: justify;
 	-ms-text-justify: distribute-all-lines;
 	text-justify: distribute-all-lines;
@@ -185,6 +185,7 @@ span.tsn8_myspot_stat {
 	display: inline-block;
 	*display: inline;
 	zoom: 1;
+
 	width: 65px;
 	border: 1px solid #d7e3f6;
 	height: 50px;
@@ -217,9 +218,10 @@ span.stretch {
 }
 
 span.tsn8_myspot_module_footer {
+	position: relative;
 	border-top: 1px solid #d7e3f6;
 	display: block;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: #666;
 	text-align: center;
 	padding-top: 3px;
@@ -252,7 +254,7 @@ div.tsn8_myspot_mini_profile_wrapper, div.tsn8_myspot_mini_forums_wrapper {
 	max-width: 25%;
 }
 
-div.tsn8_myspot_tsn_news_wrapper {
+div.tsn8_myspot_tsn_news_wrapper, div.tsn8_myspot_newposts_wrapper {
 	min-width: 500px;
 	max-width: 100%;
 }
@@ -293,6 +295,65 @@ li.tsn8_mini_forum_listing,
 li.tsn8_mini_forum_link {
 	padding-left: 40px;
 	margin-left: 15px;
+}
+
+div.tsn8_myspot_newest_posts_cards_wrapper {
+	width: 100%;
+	display: block;
+	max-height: 700px;
+	overflow-y: auto;
+}
+
+span.tsn8_myspot_newest_post {
+	vertical-align: top;
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+
+	width: 45%;
+	/*max-width: 45%;*/
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px #ddd;
+	padding: 5px;
+	min-height: 170px;
+	margin: 3px 5px;
+}
+
+span.tsn8_myspot_newest_post_title {
+	display: block;
+	padding: 3px; /* 125px 3px 3px;*/
+	font-size: 1em;
+	text-align: left;
+}
+
+span.tsn8_myspot_newest_post_subtitle {
+	border-bottom: 1px dotted #d7e3f6;
+	font-size: 0.75em;
+	color: #587eaa;
+	font-style: italic;
+	display: block;
+	margin-bottom: 5px;
+}
+
+span.tsn8_myspot_newest_post_subtitle a {
+	color: #587eaa;
+	font-style: italic;
+}
+
+span.tsn8_myspot_newest_post_message {
+	display: block;
+	padding: 3px;
+	font-size: 0.9em;
+	vertical-align: top;
+	text-align: left;
+	height: 100px;
+}
+
+span.tsn8_myspot_no_posts_message {
+	display: block;
+	text-align: center;
+	font-size: 1em;
 }
 
 /******************** Old Styles **************************/

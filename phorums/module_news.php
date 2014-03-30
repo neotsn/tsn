@@ -80,23 +80,7 @@
 	/** Return Characters **/
 	$return_chars = 500;
 	if (isset($return_chars)) {
-		$bbcode_bitfield = base64_decode($news_info['bbcode_bitfield']);
-
-		if ($bbcode_bitfield !== '') {
-			$bbcode = new bbcode(base64_encode($bbcode_bitfield));
-		}
-
-		// Parse the message and subject
-		$message = censor_text($news_info['post_text']);
-
-		// Second parse bbcode here
-		if ($news_info['bbcode_bitfield']) {
-			$bbcode->bbcode_second_pass($message, $news_info['bbcode_uid'], $news_info['bbcode_bitfield']);
-		}
-
-		$message = bbcode_nl2br($message);
-		$message = smiley_text($message);
-
+		$message = generate_text_for_display($news_info['post_text'], $news_info['bbcode_uid'], $news_info['bbcode_bitfield'], 1);
 		$news_info['post_subject'] = censor_text($news_info['post_subject']);
 
 		//
@@ -132,11 +116,10 @@
 		<div class="tsn8_myspot_tsn_news_wrapper tsn8_myspot_wrapper">
 			<div style="display: block;">
 				<span class="tsn8_myspot_module_avatar" style="position: absolute; right: 5px;">' . $avatar_image . '</span>
-				<span class="tsn8_myspot_module_header">TSN Special Report</span>
+				<span class="tsn8_myspot_module_header">#tsnSpecialReport</span>
 			</div>
 			<div class="tsn8_myspot_module_content" style="padding-right: 120px;">
 				<p class="tsn8_myspot_special_report_header">"' . $news_info["topic_title"] . '"</p>
-
 				' . $message . $read_more . '
 			</div>
 			<span class="tsn8_myspot_module_footer">Posted by: ' . $news_info['username'] . ' on ' . $user->format_date($news_info['topic_time']) . '.<br />This post has been viewed ' . $news_info['topic_views'] . ' times with ' . $news_info['topic_replies'] . ' comments.</span>
