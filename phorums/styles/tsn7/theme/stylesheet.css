@@ -795,6 +795,7 @@ a.bluebar {
 .module-mainbox {
 	/*background-color: #FFFFFF;*/
 	vertical-align: top;
+	height: 250px;
 }
 .module-inset-tl {
 	background-image: url('images/tsn7/inset/top-left.png');
