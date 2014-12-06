@@ -11,10 +11,11 @@
 		</span>
 		<!-- ENDIF -->
 		<span class="tsn8_myspot_profile_info">
-			<p><b>{L_JOINED}</b><br/>{JOINED}</p><br/>
-			<p><b>{L_VISITED}</b><br/>{VISITED}</p>
+			<span class="tsn8_myspot_profile_label">{L_JOINED}</span><br/>
+			<span class="tsn8_myspot_profile_date">{JOINED}</span><br/><br/>
+			<span class="tsn8_myspot_profile_label">{L_VISITED}</span><br/>
+			<span class="tsn8_myspot_profile_date">{VISITED}</span><br/><br/>
 		</span>
-
 		<div class="tsn8_myspot_stat_wrapper">
 			<span class="tsn8_myspot_stat">
 				<span class="tsn8_myspot_stat_value">{POSTS}</span>
@@ -36,9 +37,10 @@
 	<span class="tsn8_myspot_module_footer">
 		<!-- IF U_NOTES or U_WARN -->
 		{L_WARNINGS}: <b>{WARNINGS}</b> :: [ <a href="{U_NOTES}">{L_VIEW_NOTES}</a> ]
+		<!-- IF U_USER_ADMIN --><br/><!-- ENDIF -->
 		<!-- ENDIF -->
 		<!-- IF U_USER_ADMIN -->
-		<br/>[ <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a> ]
+		[ <a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a> ]
 		<!-- ENDIF -->
 	</span>
 </div>

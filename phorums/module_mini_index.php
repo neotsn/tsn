@@ -69,27 +69,27 @@
 	}
 	$db->sql_freeresult($result);
 
-	// Generate birthday list if required ...
-	$birthday_list = '';
-	if ($config['load_birthdays'] && $config['allow_birthdays']) {
-		$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
-		$sql = 'SELECT user_id, username, user_colour, user_birthday
-		FROM ' . USERS_TABLE . "
-		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
-			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
-		$result = $db->sql_query($sql);
-
-//$phpbb_root_path = '../phorums/'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-
-		while ($row = $db->sql_fetchrow($result)) {
-			$birthday_list .= (($birthday_list != '') ? ', ' : '') . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
-
-			if ($age = (int)substr($row['user_birthday'], -4)) {
-				$birthday_list .= ' (' . ($now['year'] - $age) . ')';
-			}
-		}
-		$db->sql_freeresult($result);
-	}
+//	// Generate birthday list if required ...
+//	$birthday_list = '';
+//	if ($config['load_birthdays'] && $config['allow_birthdays']) {
+//		$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+//		$sql = 'SELECT user_id, username, user_colour, user_birthday
+//		FROM ' . USERS_TABLE . "
+//		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
+//			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
+//		$result = $db->sql_query($sql);
+//
+////$phpbb_root_path = '../phorums/'; //(defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+//
+//		while ($row = $db->sql_fetchrow($result)) {
+//			$birthday_list .= (($birthday_list != '') ? ', ' : '') . get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']);
+//
+//			if ($age = (int)substr($row['user_birthday'], -4)) {
+//				$birthday_list .= ' (' . ($now['year'] - $age) . ')';
+//			}
+//		}
+//		$db->sql_freeresult($result);
+//	}
 
 	// Assign index specific vars
 	$template->assign_vars(array(
@@ -99,7 +99,7 @@
 			'NEWEST_USER'             => sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
 
 			'LEGEND'                  => $legend,
-			'BIRTHDAY_LIST'           => $birthday_list,
+			//			'BIRTHDAY_LIST'           => $birthday_list,
 
 			'FORUM_IMG'               => $user->img('forum_read', 'NO_NEW_POSTS'),
 			'FORUM_NEW_IMG'           => $user->img('forum_unread', 'NEW_POSTS'),

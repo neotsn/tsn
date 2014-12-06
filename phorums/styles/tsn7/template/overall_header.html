@@ -131,7 +131,6 @@
 			<a href="./myspot.php" class="bluebar">My Spot</a>
 			<!-- IF not S_IS_BOT --><!-- IF not S_USER_LOGGED_IN --> :: <a href="{U_REGISTER}" class="bluebar">{L_REGISTER}</a><!-- ENDIF --><!-- ENDIF -->
 			:: <a href="./index.php" class="bluebar">Forums</a>
-			:: <a href="chat.html" class="bluebar" target="_search">Chat</a>
 			<!-- IF U_ACP --> :: <a href="{U_ACP}" class="bluebar">{L_ACP}</a><!-- ENDIF -->
 		</span>
 		<span class="tsn8_right_menu_items">
@@ -141,10 +140,10 @@
 				<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}"
 																class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
 				<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
+				<!-- IF U_MCP -->&nbsp;|&nbsp;<a class="userlinks" href="{U_MCP}">{L_MCP}</a><!-- ENDIF -->
 			<!-- ENDIF -->
 		</span>
 	</div>
 	<!--<div id="divQuickQuips"></div>-->
 	<div class="tsn8_wrapper tsn8_content_wrapper">
-		<!-- INCLUDE search-line.html -->
 		<!-- INCLUDE breadcrumbs.html -->

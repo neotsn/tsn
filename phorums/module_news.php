@@ -97,7 +97,10 @@
 		*/
 		$message = (strlen($message) > $return_chars) ? substr($message, 0, $return_chars) . ' ...' : $message;
 	}
-	$read_more = ' <b><a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", "p=" . $news_info['post_id'] . '">Continue Reading...</a></b>');
+$read_more = ' <b><a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx",
+		"p=" . $news_info['post_id']) . '">Continue Reading...</a></b>';
+$headline_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx",
+		"p=" . $news_info['post_id']) . '">' . $news_info["topic_title"] . '</a>';
 
 	/*$template->assign_block_vars('neonews', array(
 			'TITLE' => $news['topic_title'],
@@ -119,8 +122,8 @@
 				<span class="tsn8_myspot_module_header">#tsnSpecialReport</span>
 			</div>
 			<div class="tsn8_myspot_module_content" style="padding-right: 120px;">
-				<p class="tsn8_myspot_special_report_header">"' . $news_info["topic_title"] . '"</p>
-				' . $message . $read_more . '
+				<p class="tsn8_myspot_special_report_header">"' . $headline_link . '"</p>
+				<p class="tsn8_myspot_special_report_body">' . $message . $read_more . '</p>
 			</div>
 			<span class="tsn8_myspot_module_footer">Posted by: ' . $news_info['username'] . ' on ' . $user->format_date($news_info['topic_time']) . '.<br />This post has been viewed ' . $news_info['topic_views'] . ' times with ' . $news_info['topic_replies'] . ' comments.</span>
 		</div>';

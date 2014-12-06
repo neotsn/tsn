@@ -81,7 +81,7 @@
 
 			if (!$user->data['is_registered']) {
 				$user->data['user_lastmark'] = (isset($tracking_topics['l'])) ? (int)(base_convert($tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
-		}
+            }
 		}
 
 		if ($show_active) {
@@ -115,7 +115,7 @@
 
 			if (!empty($unread_ga_list)) {
 				$ga_unread = true;
-		}
+            }
 		}
 
 		while ($row = $db->sql_fetchrow($result)) {
@@ -226,6 +226,7 @@
 					$forum_rows[$parent_id]['forum_last_poster_id'] = $row['forum_last_poster_id'];
 					$forum_rows[$parent_id]['forum_last_poster_name'] = $row['forum_last_poster_name'];
 					$forum_rows[$parent_id]['forum_last_poster_colour'] = $row['forum_last_poster_colour'];
+                    $forum_rows[$parent_id]['forum_last_poster_avatar'] = $row['forum_last_poster_avatar'];
 					$forum_rows[$parent_id]['forum_id_last_post'] = $forum_id;
 			}
 		}
@@ -382,6 +383,10 @@
 				}
 			}
 
+            $subAvatar = array(
+                'user_avatar_max_dim' => 35
+            );
+
 			$template->assign_block_vars('forumrow', array(
 					'S_IS_CAT'             => false,
 					'S_NO_CAT'             => $catless && !$last_catless,
@@ -408,6 +413,8 @@
 					'LAST_POSTER'          => get_username_string('username', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
 					'LAST_POSTER_COLOUR'   => get_username_string('colour', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
 					'LAST_POSTER_FULL'     => get_username_string('full', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
+                    'LAST_POSER_AVATAR' => get_username_string('avatar', $row['forum_last_poster_id'],
+                        $row['forum_last_poster_name'], $row['forum_last_poster_colour'], false, false, $subAvatar),
 					'MODERATORS'           => $moderators_list,
 					'SUBFORUMS'            => $s_subforums_list,
 
@@ -1116,10 +1123,19 @@
 	 * @param string $avatar_height Height of users avatar
 	 * @param string $alt           Optional language string for alt tag within image, can be a language key or text
 	 * @param bool   $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+     * @param int $maxDim Maximum size of either dimension
 	 *
 	 * @return string Avatar image
 	 */
-	function get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR', $ignore_config = false) {
+function get_user_avatar(
+    $avatar,
+    $avatar_type,
+    $avatar_width,
+    $avatar_height,
+    $alt = 'USER_AVATAR',
+    $ignore_config = false,
+    $maxDim = 100
+) {
 		global $user, $config, $phpbb_root_path, $phpEx;
 
 		if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config)) {
@@ -1148,6 +1164,21 @@
 					return '';
 				}
 				break;
+        }
+
+    if ($avatar_width > $maxDim || $avatar_height > $maxDim) {
+        if ($avatar_width > $avatar_height) {
+            // width is bigger than height
+            $avatar_height = $avatar_height * $maxDim / $avatar_width;
+            $avatar_width = $maxDim;
+        } else if ($avatar_height > $avatar_width) {
+            // height is bigger
+            $avatar_width = $avatar_width * $maxDim / $avatar_height;
+            $avatar_height = $maxDim;
+        } else {
+            // Both are the same
+            $avatar_height = $avatar_width = $avatar_width * $maxDim / $avatar_height;
+        }
 		}
 
 		$avatar_img .= $avatar;

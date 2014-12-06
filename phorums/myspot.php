@@ -23,16 +23,13 @@
 //module imports
 	include_once($phpbb_root_path . 'modules/newposts.php');
 	include_once($phpbb_root_path . 'modules/birthdays.php');
-//include_once($phpbb_root_path . 'modules/whatpulse.php');
-	include_once($phpbb_root_path . 'module_quickquips.php');
-//include_once($phpbb_root_path . 'modules/mini-index.php');
-//display_forums('', $config['load_moderators']);
+//	include_once($phpbb_root_path . 'module_quickquips.php');
+include_once($phpbb_root_path . 'modules/mini-index.php');
 
 //display the page
-	page_header(($l_search_title) ? $l_search_title : $user->lang['MYSPOT']);
+page_header($user->lang['MYSPOT']);
 
 	$template->set_filenames(array('body' => 'myspot.html'));
-
 	make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
 
 	page_footer();

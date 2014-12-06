@@ -1,10 +1,33 @@
-	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<th>Forum Stats</th>
-	</tr>
-	<tr>
-		<td class="row1" width="100%" align="center">
-			<span class="genmed">{TOTAL_USERS_ONLINE} <hr class="divider" align="center" /> {RECORD_USERS} <hr class="divider" align="center" /> {LOGGED_IN_USER_LIST}</span>
-		</td>
-	</tr>
-	</table>
+<!-- IF BIRTHDAY_LIST -->
+<div class="tsn8_myspot_mini_birthday_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">{L_BIRTHDAYS}!</span>
+
+	<div class="tsn8_myspot_module_content">
+		<span class="tsn8_myspot_userstatus_stats_record">{L_HAPPY_BIRTHDAY_TO}<br/><b>{BIRTHDAY_LIST}</b></span>
+	</div>
+</div>
+<!-- ENDIF -->
+<div class="tsn8_myspot_forum_stats_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">Online Now...</span>
+
+	<div class="tsn8_myspot_module_content">
+		<span class="tsn8_myspot_online_user_avatars">{LOGGED_IN_USER_LIST}</span>
+		<hr class="divider" align="center"/>
+		<ul class="tsn8_myspot_userstatus_stats_list">
+			<li class="tsn8_myspot_userstatus_stats_item"><span
+					class="tsn8_myspot_userstatus_stats_label">Users Online</span> {TOTAL_USERS_VALUE}
+			</li>
+			<li class="tsn8_myspot_userstatus_stats_item"><span
+					class="tsn8_myspot_userstatus_stats_label">Visible</span> {VISIBLE_USERS_VALUE}
+			</li>
+			<li class="tsn8_myspot_userstatus_stats_item"><span class="tsn8_myspot_userstatus_stats_label">Hidden</span>
+				{HIDDEN_USERS_VALUE}
+			</li>
+			<li class="tsn8_myspot_userstatus_stats_item"><span class="tsn8_myspot_userstatus_stats_label">Guests</span>
+				{GUEST_USERS_VALUE}
+			</li>
+		</ul>
+		<hr class="divider" align="center"/>
+		<span class="tsn8_myspot_userstatus_stats_record">{RECORD_USERS}</span>
+	</div>
+</div>

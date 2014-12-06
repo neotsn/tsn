@@ -3658,12 +3658,12 @@
 	function obtain_users_online_string($online_users, $item_id = 0, $item = 'forum') {
 		global $config, $db, $user, $auth;
 
-		$user_online_link = $online_userlist = '';
+		$online_userlist = '';
 		// Need caps version of $item for language-strings
 		$item_caps = strtoupper($item);
 
 		if (sizeof($online_users['online_users'])) {
-			$sql = 'SELECT username, username_clean, user_id, user_type, user_allow_viewonline, user_colour
+			$sql = 'SELECT username, username_clean, user_id, user_type, user_allow_viewonline, user_colour, user_avatar, user_avatar_type, user_avatar_width, user_avatar_height
 				FROM ' . USERS_TABLE . '
 				WHERE ' . $db->sql_in_set('user_id', $online_users['online_users']) . '
 				ORDER BY username_clean ASC';
@@ -3677,8 +3677,23 @@
 					}
 
 					if (!isset($online_users['hidden_users'][$row['user_id']]) || $auth->acl_get('u_viewonline')) {
-						$user_online_link = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);
-						$online_userlist .= ($online_userlist != '') ? ', ' . $user_online_link : $user_online_link;
+
+//						if($isMySpot) {
+						$subAvatar = array(
+							'user_avatar'         => $row['user_avatar'],
+							'user_avatar_type'    => $row['user_avatar_type'],
+							'user_avatar_width'   => $row['user_avatar_width'],
+							'user_avatar_height'  => $row['user_avatar_height'],
+							'user_avatar_max_dim' => 25
+						);
+						// Ignore the ignores, and display the ones with avatars for MySpot
+						$user_online_link = ($row['user_type'] <> USER_IGNORE) ? get_username_string('avatar',
+							$row['user_id'], $row['username'], $row['user_colour'], false, false, $subAvatar) : '';
+//						} else {
+//							// Process the registered user list as usual
+//							$user_online_link = get_username_string(($row['user_type'] <> USER_IGNORE) ? 'full' : 'no_profile', $row['user_id'], $row['username'], $row['user_colour']);
+//						}
+						$online_userlist .= ($online_userlist != '' && $user_online_link) ? ' ' . $user_online_link : $user_online_link;
 					}
 				}
 			}
@@ -3690,7 +3705,9 @@
 		}
 
 		if ($item_id === 0) {
-			$online_userlist = $user->lang['REGISTERED_USERS'] . ' ' . $online_userlist;
+//			if (!$isMySpot) {
+//				$online_userlist = $user->lang['REGISTERED_USERS'] . ' ' . $online_userlist;
+//			}
 		} else if ($config['load_online_guests']) {
 			$l_online = ($online_users['guests_online'] === 1) ? $user->lang['BROWSING_' . $item_caps . '_GUEST'] : $user->lang['BROWSING_' . $item_caps . '_GUESTS'];
 			$online_userlist = sprintf($l_online, $online_userlist, $online_users['guests_online']);
@@ -3736,8 +3753,12 @@
 		}
 
 		return array(
-			'online_userlist' => $online_userlist,
-			'l_online_users'  => $l_online_users,
+			'online_userlist'  => $online_userlist,
+			'l_online_users'   => $l_online_users,
+			'l_total_online'   => $online_users['total_online'],
+			'l_visible_online' => $online_users['visible_online'],
+			'l_hidden_online'  => $online_users['hidden_online'],
+			'l_guests_online'  => $online_users['guests_online'],
 		);
 	}
 
@@ -3911,6 +3932,7 @@
 
 		// Get users online list ... if required
 		$l_online_users = $online_userlist = $l_online_record = $l_online_time = '';
+		$total_online = $hidden_online = $guest_online = $visible_online = "0";
 
 		if ($config['load_online'] && $config['load_online_time'] && $display_online_list) {
 			/**
@@ -3923,6 +3945,11 @@
 			$user_online_strings = obtain_users_online_string($online_users, $item_id, $item);
 
 			$l_online_users = $user_online_strings['l_online_users'];
+			$total_online = $online_users['total_online'];
+			$hidden_online = $online_users['hidden_online'];
+			$guest_online = $online_users['guests_online'];
+			$visible_online = $online_users['visible_online'];
+
 			$online_userlist = $user_online_strings['online_userlist'];
 			$total_online_users = $online_users['total_online'];
 
@@ -4009,6 +4036,27 @@
 			}
 		}
 
+		// Generate birthday list if required ...
+		$birthday_list = '';
+		if ($config['load_birthdays'] && $config['allow_birthdays']) {
+			$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+			$sql = 'SELECT user_id, username, user_colour, user_birthday
+		FROM ' . USERS_TABLE . "
+		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
+			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result)) {
+				$birthday_list .= (($birthday_list != '') ? ', ' : '') . get_username_string('full', $row['user_id'],
+						$row['username'], $row['user_colour']);
+
+				if ($age = (int)substr($row['user_birthday'], -4)) {
+					$birthday_list .= ' (' . ($now['year'] - $age) . ')';
+				}
+			}
+			$db->sql_freeresult($result);
+		}
+
 		// The following assigns all _common_ variables that may be used at any point in a template.
 		$template->assign_vars(array(
 			'SITENAME'                     => $config['sitename'],
@@ -4019,6 +4067,10 @@
 			'LAST_VISIT_YOU'               => $s_last_visit,
 			'CURRENT_TIME'                 => sprintf($user->lang['CURRENT_TIME'], $user->format_date(time(), false, true)),
 			'TOTAL_USERS_ONLINE'           => $l_online_users,
+			'TOTAL_USERS_VALUE'   => $total_online,
+			'VISIBLE_USERS_VALUE' => $visible_online,
+			'HIDDEN_USERS_VALUE'  => $hidden_online,
+			'GUEST_USERS_VALUE'   => $guest_online,
 			'LOGGED_IN_USER_LIST'          => $online_userlist,
 			'RECORD_USERS'                 => $l_online_record,
 			'PRIVATE_MESSAGE_INFO'         => $l_privmsgs_text,
@@ -4027,6 +4079,7 @@
 			'S_USER_NEW_PRIVMSG'           => $user->data['user_new_privmsg'],
 			'S_USER_UNREAD_PRIVMSG'        => $user->data['user_unread_privmsg'],
 			'S_USER_NEW'                   => $user->data['user_new'],
+			'BIRTHDAY_LIST'       => $birthday_list,
 
 			'SID'                          => $SID,
 			'_SID'                         => $_SID,

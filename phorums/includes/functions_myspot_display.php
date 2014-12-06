@@ -1129,8 +1129,10 @@
 		}
 
 		$avatar_img .= $avatar;
+		$title_alt = ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt);
 		//return '<img src="' . $avatar_img . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
-		return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" style="width:' . $avatar_width . '; height: ' . $avatar_height . '; margin: 0 auto;" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
+		return '<img src="' . (str_replace(' ', '%20',
+			$avatar_img)) . '" style="width:' . $avatar_width . '; height: ' . $avatar_height . '; margin: 0 auto;" title="' . $title_alt . '" alt="' . $title_alt . '" />';
 	}
 
 ?>

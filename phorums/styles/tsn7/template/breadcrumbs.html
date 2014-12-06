@@ -1,8 +1,7 @@
-	<table class="tablebg" width="100%" cellspacing="1" cellpadding="0" style="margin-top: 5px;">
-	<tr>
-		<td class="row1">
-			<p class="breadcrumbs"><a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks --> &#187; <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></p>
-			<p class="datetime">{S_TIMEZONE}</p>
-		</td>
-	</tr>
-	</table>
+<div class="tsn8_breadcrumb_wrapper">
+	<p class="tsn8_breadcrumbs"><a href="./myspot.php">{L_MYSPOT}</a> &#187; <a href="{U_INDEX}">{L_INDEX}</a><!-- BEGIN navlinks -->
+		&#187; <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></p>
+	<!-- IF S_DISPLAY_SEARCH -->
+	<!--<p class="tsn8_searchbar"><span>{L_VIEW}: <a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED_SHORT}</a>&nbsp;|&nbsp;<a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS_SHORT}</a>&lt;!&ndash; IF S_USER_LOGGED_IN &ndash;&gt;&nbsp;|&nbsp;<a href="{U_SEARCH_NEW}">{L_SEARCH_NEW_SHORT}</a>&nbsp;|&nbsp;<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF_SHORT}</a>&lt;!&ndash; ENDIF &ndash;&gt;</span></p>-->
+	<!-- ENDIF -->
+</div>
