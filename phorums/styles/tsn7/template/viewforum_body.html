@@ -48,14 +48,11 @@
 		<div class="tsn8_topic_folder_icon">{topicrow.TOPIC_FOLDER_IMG}</div>
 		<div class="tsn8_topic_list_info">
 			<p class="tsn8_topic_list_header">
-				<!-- IF S_TOPIC_ICONS and topicrow.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}"
-																		  width="{topicrow.TOPIC_ICON_IMG_WIDTH}"
-																		  height="{topicrow.TOPIC_ICON_IMG_HEIGHT}"
-																		  alt="" title=""/><!-- ENDIF -->
+				<!-- IF S_TOPIC_ICONS and topicrow.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}" width="{topicrow.TOPIC_ICON_IMG_WIDTH}" height="{topicrow.TOPIC_ICON_IMG_HEIGHT}" alt="" title=""/><!-- ENDIF -->
 				<!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
-				{topicrow.ATTACH_ICON_IMG}<!-- IF topicrow.S_HAS_POLL or topicrow.S_TOPIC_MOVED --> <b>{topicrow.TOPIC_TYPE}</b><!-- ENDIF -->
-				<a class="tsn8_forum_link" title="{L_POSTED}: {topicrow.FIRST_POST_TIME}"
-				   href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a>
+				{topicrow.ATTACH_ICON_IMG}<!-- IF topicrow.S_HAS_POLL or topicrow.S_TOPIC_MOVED -->
+				<b>{topicrow.TOPIC_TYPE}</b><!-- ENDIF -->
+				<a class="tsn8_forum_link" title="{L_POSTED}: {topicrow.FIRST_POST_TIME}" href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a>
 				<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED --><a href="{topicrow.U_MCP_QUEUE}">{UNAPPROVED_IMG}</a>&nbsp;
 				<!-- ENDIF -->
 				<!-- IF topicrow.S_TOPIC_REPORTED --><a href="{topicrow.U_MCP_REPORT}">{REPORTED_IMG}</a>&nbsp;
@@ -100,26 +97,34 @@
 <div id="pagecontent">
 
 	<!-- IF S_DISPLAY_POST_INFO or TOTAL_TOPICS or (not S_DISPLAY_ACTIVE and (S_IS_POSTABLE or .topicrow)) -->
-	<div class="tsn8_viewforum_info_wrapper">
-		<div class="tsn8_viewforum_info_wrapper_left">
-			<!-- IF TOTAL_TOPICS --><span class="tsn8_viewforum_info">&nbsp;{PAGE_NUMBER}&nbsp;[ {TOTAL_TOPICS} ]&nbsp; <!-- INCLUDE pagination.html --></span><!-- ENDIF -->
+	<div class="tsn8_viewtopic_pageheader">
+		<div class="tsn8_viewtopic_pageheader_header_wrapper">
+			<span class="tsn8_viewtopic_pageheader_header"><a href="{U_VIEW_TOPIC}">{FORUM_NAME}</a></span>
+			<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+			<span class="tsn8_viewtopic_pageheader_buttons"><a href="{U_POST_NEW_TOPIC}" title="{L_NEW_TOPIC}"><span class="tsn8_icon_nohover tsn8_icon_newtopic"></span></a></span>
+			<!-- ENDIF -->
 		</div>
-		<!-- IF not S_IS_BOT and (S_WATCH_FORUM_LINK or U_MARK_TOPICS) -->
-		<div class="tsn8_viewforum_info_wrapper_right">
-			<!-- IF S_WATCH_FORUM_LINK --><a href="{S_WATCH_FORUM_LINK}">{S_WATCH_FORUM_TITLE}</a><!-- IF U_MARK_TOPICS-->
-			&nbsp;|&nbsp;<!-- ENDIF --><!-- ENDIF -->
-			<!-- IF U_MARK_TOPICS --><a href="{U_MARK_TOPICS}">{L_MARK_TOPICS_READ}</a><!-- ENDIF -->
+		<div class="tsn8_viewtopic_pageheader_control_wrapper">
+			<!-- IF not S_IS_BOT and S_WATCH_FORUM_LINK -->
+			<span class="tsn8_viewtopic_pageheader_topicbuttons"><a href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><span class="tsn8_icon_mini tsn8_icon_subscribe"></span></a></span>
+			<!-- ENDIF -->
+			<!-- IF TOTAL_POSTS -->
+			<span class="tsn8_viewtopic_pageheader_pagination">{PAGE_NUMBER}&nbsp;[ {TOTAL_TOPICS} ]&nbsp;<!-- INCLUDE pagination.html --></span>
+			<!-- ENDIF -->
 		</div>
+		<!-- IF MODERATORS -->
+		<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
 		<!-- ENDIF -->
 	</div>
 	<!-- ENDIF -->
 
 	<!-- IF not S_DISPLAY_ACTIVE and (S_IS_POSTABLE or .topicrow or S_DISPLAY_POST_INFO) -->
 	<div class="tsn8_myspot_wrapper">
-		<span class="tsn8_myspot_module_header">{FORUM_NAME}<!-- IF S_DISPLAY_POST_INFO and not S_IS_BOT --><a
-				class="tsn8_new_topic_image" href="{U_POST_NEW_TOPIC}">{POST_IMG}</a><!-- ENDIF --></span>
-		<!-- IF (S_IS_POSTABLE or S_NO_READ_ACCESS) and MODERATORS --><p class="moderators">
-		<!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
+		<span class="tsn8_myspot_module_header">{L_TOPICS}
+			<!-- IF U_MARK_TOPICS --><span style="float: right;"><a title="{L_MARK_TOPICS_READ}" href="{U_MARK_TOPICS}"><span class="tsn8_icon tsn8_icon_markall"></span></a></span><!-- ENDIF -->
+		</span>
+		<!-- IF (S_IS_POSTABLE or S_NO_READ_ACCESS) and MODERATORS -->
+		<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
 		<!-- ENDIF -->
 		<!-- BEGIN topicrow -->
 		<!-- IF topicrow.S_TOPIC_TYPE_SWITCH eq 1 -->
@@ -139,7 +144,8 @@
 						src="{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}" width="{topicrow.TOPIC_ICON_IMG_WIDTH}"
 						height="{topicrow.TOPIC_ICON_IMG_HEIGHT}" alt="" title=""/><!-- ENDIF -->
 					<!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
-					{topicrow.ATTACH_ICON_IMG}<!-- IF topicrow.S_HAS_POLL or topicrow.S_TOPIC_MOVED --> <b>{topicrow.TOPIC_TYPE}</b><!-- ENDIF -->
+					{topicrow.ATTACH_ICON_IMG}<!-- IF topicrow.S_HAS_POLL or topicrow.S_TOPIC_MOVED -->
+					<b>{topicrow.TOPIC_TYPE}</b><!-- ENDIF -->
 					<a class="tsn8_forum_link" title="{L_POSTED}: {topicrow.FIRST_POST_TIME}"
 					   href="{topicrow.U_VIEW_TOPIC}">{topicrow.TOPIC_TITLE}</a>
 					<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED --><a
@@ -176,8 +182,8 @@
 		</div>
 
 		<!-- BEGINELSE -->
-		<!-- IF S_IS_POSTABLE --><p><!-- IF not S_SORT_DAYS -->{L_NO_TOPICS}<!-- ELSE -->{L_NO_TOPICS_TIME_FRAME}
-		<!-- ENDIF --></p><!-- ENDIF -->
+		<!-- IF S_IS_POSTABLE -->
+		<p><!-- IF not S_SORT_DAYS -->{L_NO_TOPICS}<!-- ELSE -->{L_NO_TOPICS_TIME_FRAME}<!-- ENDIF --></p><!-- ENDIF -->
 		<!-- END topicrow -->
 
 		<form class="tsn8_forum_footer_filters" method="post" action="{S_FORUM_ACTION}">
@@ -187,17 +193,29 @@
 		</form>
 	</div>
 	<!-- ENDIF -->
-	<!-- IF S_DISPLAY_POST_INFO and not S_IS_BOT --><a class="tsn8_new_topic_image"
-													   href="{U_POST_NEW_TOPIC}">{POST_IMG}</a><!-- ENDIF -->
+
 	<!-- IF S_DISPLAY_POST_INFO or TOTAL_TOPICS or (not S_DISPLAY_ACTIVE and (S_IS_POSTABLE or .topicrow)) -->
-	<div class="tsn8_viewforum_info_wrapper">
-		<div class="tsn8_viewforum_info_wrapper_left">
-			<!-- IF TOTAL_TOPICS --><span class="tsn8_viewforum_info">&nbsp;{PAGE_NUMBER}&nbsp;[ {TOTAL_TOPICS} ]&nbsp; <!-- INCLUDE pagination.html --></span><!-- ENDIF -->
+	<div class="tsn8_viewtopic_pageheader">
+		<div class="tsn8_viewtopic_pageheader_header_wrapper">
+			<span class="tsn8_viewtopic_pageheader_header"><a href="{U_VIEW_TOPIC}">{FORUM_NAME}</a></span>
+			<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+			<span class="tsn8_viewtopic_pageheader_buttons"><a href="{U_POST_NEW_TOPIC}" title="{L_NEW_TOPIC}"><span class="tsn8_icon_nohover tsn8_icon_newtopic"></span></a></span>
+			<!-- ENDIF -->
 		</div>
+		<div class="tsn8_viewtopic_pageheader_control_wrapper">
+			<!-- IF not S_IS_BOT and S_WATCH_FORUM_LINK -->
+			<span class="tsn8_viewtopic_pageheader_topicbuttons"><a href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><span class="tsn8_icon_mini tsn8_icon_subscribe"></span></a></span>
+			<!-- ENDIF -->
+			<!-- IF TOTAL_POSTS -->
+			<span class="tsn8_viewtopic_pageheader_pagination">{PAGE_NUMBER}&nbsp;[ {TOTAL_TOPICS} ]&nbsp;<!-- INCLUDE pagination.html --></span>
+			<!-- ENDIF -->
+		</div>
+		<!-- IF MODERATORS -->
+		<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
+		<!-- ENDIF -->
 	</div>
 	<!-- ENDIF -->
 </div>
-
 <!-- INCLUDE breadcrumbs.html -->
 
 <!-- IF S_DISPLAY_ONLINE_LIST -->

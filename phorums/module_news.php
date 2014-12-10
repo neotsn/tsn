@@ -118,7 +118,7 @@ $headline_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx",
 	$html = '
 		<div class="tsn8_myspot_tsn_news_wrapper tsn8_myspot_wrapper">
 			<div style="display: block;">
-				<span class="tsn8_myspot_module_avatar" style="position: absolute; right: 5px;">' . $avatar_image . '</span>
+				<span class="tsn8_myspot_module_avatar tsn8_avatar_right">' . $avatar_image . '</span>
 				<span class="tsn8_myspot_module_header">#tsnSpecialReport</span>
 			</div>
 			<div class="tsn8_myspot_module_content" style="padding-right: 120px;">

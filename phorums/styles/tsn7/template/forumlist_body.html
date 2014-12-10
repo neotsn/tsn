@@ -1,14 +1,12 @@
-<!-- IF not S_IS_BOT and U_MARK_FORUMS --><p align="{S_CONTENT_FLOW_END}"><a class="nav" href="{U_MARK_FORUMS}">{L_MARK_FORUMS_READ}</a>
-</p><!-- ENDIF -->
+
 <div class="tsn8_myspot_wrapper">
-	<span class="tsn8_myspot_module_header">{L_FORUMS}</span>
+
+	<span class="tsn8_myspot_module_header">{L_FORUMS}<!-- IF not S_IS_BOT and U_MARK_FORUMS --><span style="float: right;"><a title="{L_MARK_FORUMS_READ}" href="{U_MARK_FORUMS}"><span class="tsn8_icon tsn8_icon_markall"></span></a></span><!-- ENDIF --></span>
 	<!-- BEGIN forumrow -->
 	<!-- IF forumrow.S_IS_CAT -->
 	<div class="tsn8_forum_row_wrapper tsn8_forum_category_wrapper">
 		<p class="tsn8_forum_category_header"><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></p>
-
-		<p class="tsn8_forum_mark_all_read_icon">{L_MARK_FORUMS_READ}</p>
-	</div>
+		</div>
 	<!-- ELSEIF forumrow.S_IS_LINK -->
 	<div class="tsn8_forum_row_wrapper tsn8_forum_link_wrapper">
 		<div class="tsn8_forum_folder_icon">{forumrow.FORUM_FOLDER_IMG}</div>
@@ -22,21 +20,21 @@
 				<a class="forumlink" href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a>
 				<!-- IF forumrow.FORUM_IMAGE -->
 			</div>
-			<!-- ENDIF -->
+				<!-- ENDIF -->
 			</p>
 			<p class="tsn8_forum_description">{forumrow.FORUM_DESC}</p>
-		</div>
-			<!-- IF forumrow.CLICKS -->
+			</div>
+		<!-- IF forumrow.CLICKS -->
 		<div class="tsn8_forum_link_stats">
 			<p class="tsn8_forum_link_stats">{L_REDIRECTS}: {forumrow.CLICKS}</p>
 		</div>
-			<!-- ENDIF -->
-	</div>
+				<!-- ENDIF -->
+		</div>
 	<!-- ELSE -->
 	<!-- IF forumrow.S_NO_CAT -->
 	<div class="tsn8_forum_row_wrapper tsn8_forum_category_wrapper">
 		<p class="tsn8_forum_category_header">{L_FORUM}</p>
-	</div>
+		</div>
 	<!-- ENDIF -->
 	<div class="tsn8_forum_row_wrapper">
 		<div class="tsn8_forum_folder_icon">{forumrow.FORUM_FOLDER_IMG}</div>
@@ -50,7 +48,7 @@
 				<a class="tsn8_forum_link" href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a>
 				<!-- IF forumrow.FORUM_IMAGE -->
 			</div>
-				<!-- ENDIF -->
+			<!-- ENDIF -->
 			</p>
 			<p class="tsn8_forum_description">{forumrow.FORUM_DESC}</p>
 			<!-- IF forumrow.MODERATORS --><p class="tsn8_forum_description">
@@ -59,27 +57,28 @@
 			{forumrow.SUBFORUMS}</p><!-- ENDIF -->
 		</div>
 		<div class="tsn8_forum_topics_count">
-				<span class="tsn8_myspot_stat">
-					<span class="tsn8_myspot_stat_value">{forumrow.TOPICS}</span>
-					<span class="tsn8_myspot_stat_header">{L_TOPICS}</span>
-				</span>
+					<span class="tsn8_myspot_stat">
+						<span class="tsn8_myspot_stat_value">{forumrow.TOPICS}</span>
+						<span class="tsn8_myspot_stat_header">{L_TOPICS}</span>
+					</span>
 		</div>
 		<div class="tsn8_forum_topics_count">
-				<span class="tsn8_myspot_stat">
-					<span class="tsn8_myspot_stat_value">{forumrow.POSTS}</span>
-					<span class="tsn8_myspot_stat_header">{L_POSTS}</span>
-				</span>
+					<span class="tsn8_myspot_stat">
+						<span class="tsn8_myspot_stat_value">{forumrow.POSTS}</span>
+						<span class="tsn8_myspot_stat_header">{L_POSTS}</span>
+					</span>
 		</div>
 		<div class="tsn8_forum_last_post_wrapper">
-				<!-- IF forumrow.LAST_POST_TIME -->
-			<p class="topicdetails">{forumrow.LAST_POSER_AVATAR}</p>
+			<!-- IF forumrow.LAST_POST_TIME -->
+			<p class="tsn8_topicdetails">{forumrow.LAST_POSER_AVATAR}</p>
 
-			<p class="topicdetails">{forumrow.LAST_POST_TIME} <a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a></p>
+			<p class="tsn8_topicdetails">{forumrow.LAST_POST_TIME}&nbsp;<a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a>
+			</p>
 				<!-- ELSE -->
-			<p class="topicdetails">{L_NO_POSTS}</p>
+			<p class="tsn8_topicdetails">{L_NO_POSTS}</p>
 				<!-- ENDIF -->
 		</div>
-	</div>
+		</div>
 	<!-- ENDIF -->
 	<!-- BEGINELSE -->
 	<p class="gensmall">{L_NO_FORUMS}</p>

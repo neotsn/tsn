@@ -1,1 +1,11 @@
-<!-- IF PAGINATION --><b><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{L_GOTO_PAGE}</a> <!-- IF PREVIOUS_PAGE --><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a>&nbsp;&nbsp;<!-- ENDIF -->{PAGINATION}<!-- IF NEXT_PAGE --> &nbsp;<a href="{NEXT_PAGE}">{L_NEXT}</a><!-- ENDIF --></b><!-- ENDIF -->
+<!-- IF PAGINATION -->
+<span class="tsn8_pagination_wrapper">&nbsp;::&nbsp;<a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{L_GOTO_PAGE}</a><!-- IF PREVIOUS_PAGE or NEXT_PAGE -->&nbsp;::&nbsp;<!-- ENDIF -->
+	<!-- IF PREVIOUS_PAGE -->
+	<a href="{PREVIOUS_PAGE}" title="{L_PREVIOUS}"><span class="tsn8_icon_mini tsn8_icon_previous"></span></a>
+	<!-- ENDIF -->
+	<span class="tsn8_pagination">{PAGINATION}</span>
+	<!-- IF NEXT_PAGE -->
+	<a href="{NEXT_PAGE}" title="{L_NEXT}"><span class="tsn8_icon_mini tsn8_icon_next"></span></a>
+	<!-- ENDIF -->
+</span>
+<!-- ENDIF -->
