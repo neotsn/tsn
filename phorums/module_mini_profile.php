@@ -251,7 +251,7 @@
 
 			// Now generate page title
 			$page_title = sprintf($user->lang['VIEWING_PROFILE'], $member['username']);
-			$template_html = 'modules/mini-profile.html';
+			$template_html = 'modules/mini_profile.html';
 
 			break;
 	}

@@ -76,7 +76,9 @@
 		<!-- ELSE -->
 		<div class="tsn8_viewtopic_post_author_wrapper">
 			<div class="tsn8_viewtopic_post_author_maininfo">
-				<!-- IF postrow.POSTER_AVATAR --><span class="tsn8_viewtopic_post_avatar">{postrow.POSTER_AVATAR}</span><!-- ENDIF -->
+				<span class="tsn8_viewtopic_post_avatar">
+					<!-- IF postrow.POSTER_AVATAR -->{postrow.POSTER_AVATAR}<!-- ELSE --><span class="tsn8_viewtopic_post_avatar tsn8_default_avatar"></span><!-- ENDIF -->
+				</span>
 				<span class="tsn8_viewtopic_post_author tsn8_viewtopic_meta_block" <!-- IF postrow.POST_AUTHOR_COLOUR --> style="color: {postrow.POST_AUTHOR_COLOUR}"<!-- ENDIF -->>{postrow.POST_AUTHOR}</span>
 				<!-- IF postrow.RANK_TITLE --><span class="tsn8_viewtopic_authorcard_rank tsn8_viewtopic_meta_block">"{postrow.RANK_TITLE}"</span><br/><!-- ENDIF -->
 				<!--&lt;!&ndash; IF postrow.RANK_IMG &ndash;&gt;-->
@@ -138,10 +140,10 @@
 		<span class="tsn8_viewtopic_post_footer">
 			<span class="tsn8_viewtopic_post_footer_controls_left">
 				<!-- IF not S_IS_BOT -->
-					<!-- IF postrow.U_WARN --><a href="{postrow.U_WARN}"><span class="tsn8_icon_mini tsn8_icon_warn"></span></a>&nbsp;<!-- ENDIF -->
-					<!-- IF postrow.U_REPORT --><a href="{postrow.U_REPORT}"><span class="tsn8_icon_mini tsn8_icon_report"></span></a>&nbsp;<!-- ENDIF -->
-					<!-- IF postrow.U_DELETE --><a href="{postrow.U_DELETE}"><span class="tsn8_icon_mini tsn8_icon_trash"></span></a>&nbsp;<!-- ENDIF -->
-					<!-- IF postrow.U_INFO --><a href="{postrow.U_INFO}"><span class="tsn8_icon_mini tsn8_icon_info"></span></a>&nbsp;<!-- ENDIF -->
+					<!-- IF postrow.U_WARN --><a href="{postrow.U_WARN}"><span class="tsn8_icon_mini tsn8_icon_warn"></span></a><!-- ENDIF -->
+					<!-- IF postrow.U_REPORT --><a href="{postrow.U_REPORT}"><span class="tsn8_icon_mini tsn8_icon_report"></span></a><!-- ENDIF -->
+					<!-- IF postrow.U_DELETE --><a href="{postrow.U_DELETE}"><span class="tsn8_icon_mini tsn8_icon_trash"></span></a><!-- ENDIF -->
+					<!-- IF postrow.U_INFO --><a href="{postrow.U_INFO}"><span class="tsn8_icon_mini tsn8_icon_info"></span></a><!-- ENDIF -->
 				<!-- ENDIF -->
 			</span>
 			<span class="tsn8_viewtopic_post_footer_controls_right">
@@ -190,6 +192,8 @@
 	<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
 	<!-- ENDIF -->
 </div>
+
+<!-- INCLUDE breadcrumbs.html -->
 
 <!-- IF S_DISPLAY_ONLINE_LIST -->
 <br clear="all"/>

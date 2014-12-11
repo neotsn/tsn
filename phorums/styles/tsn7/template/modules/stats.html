@@ -7,27 +7,53 @@
 	</div>
 </div>
 <!-- ENDIF -->
+
 <div class="tsn8_myspot_forum_stats_wrapper tsn8_myspot_wrapper">
-	<span class="tsn8_myspot_module_header">Online Now...</span>
+	<span class="tsn8_myspot_module_header">{L_ONLINE_NOW}</span>
 
 	<div class="tsn8_myspot_module_content">
 		<span class="tsn8_myspot_online_user_avatars">{LOGGED_IN_USER_LIST}</span>
 		<hr class="divider" align="center"/>
 		<ul class="tsn8_myspot_userstatus_stats_list">
 			<li class="tsn8_myspot_userstatus_stats_item"><span
-					class="tsn8_myspot_userstatus_stats_label">Users Online</span> {TOTAL_USERS_VALUE}
+					class="tsn8_myspot_userstatus_stats_label">{L_USERS_ONLINE}</span> {TOTAL_USERS_VALUE}
 			</li>
 			<li class="tsn8_myspot_userstatus_stats_item"><span
-					class="tsn8_myspot_userstatus_stats_label">Visible</span> {VISIBLE_USERS_VALUE}
+					class="tsn8_myspot_userstatus_stats_label">{L_VISIBLE}</span> {VISIBLE_USERS_VALUE}
 			</li>
-			<li class="tsn8_myspot_userstatus_stats_item"><span class="tsn8_myspot_userstatus_stats_label">Hidden</span>
+			<li class="tsn8_myspot_userstatus_stats_item">
+				<span class="tsn8_myspot_userstatus_stats_label">{L_HIDDEN}</span>
 				{HIDDEN_USERS_VALUE}
 			</li>
-			<li class="tsn8_myspot_userstatus_stats_item"><span class="tsn8_myspot_userstatus_stats_label">Guests</span>
+			<li class="tsn8_myspot_userstatus_stats_item">
+				<span class="tsn8_myspot_userstatus_stats_label">{L_GUESTS}</span>
 				{GUEST_USERS_VALUE}
 			</li>
 		</ul>
 		<hr class="divider" align="center"/>
 		<span class="tsn8_myspot_userstatus_stats_record">{RECORD_USERS}</span>
+	</div>
+</div>
+
+<div class="tsn8_myspot_forum_stats_wrapper tsn8_myspot_wrapper">
+	<span class="tsn8_myspot_module_header">{L_STATISTICS}</span>
+
+	<div class="tsn8_myspot_module_stats">
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_POSTS}</span>
+			<span class="tsn8_myspot_stat_header">{L_POSTS}</span>
+		</span>
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_TOPICS}</span>
+			<span class="tsn8_myspot_stat_header">{L_TOPICS}</span>
+		</span>
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_USERS}</span>
+			<span class="tsn8_myspot_stat_header">{L_USERS}</span>
+		</span>
+		<hr class="divider" align="center"/>
+		<span class="tsn8_myspot_userstatus_stats_record">{NEWEST_USER}</span>
+		<hr class="divider" align="center"/>
+		<span class="tsn8_myspot_userstatus_stats_record">{L_LEGEND} :: {LEGEND}</span>
 	</div>
 </div>

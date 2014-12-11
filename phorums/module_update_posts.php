@@ -558,7 +558,8 @@
 		page_header(($l_search_title) ? $l_search_title : $user->lang['MYSPOT']);
 
 		$template->set_filenames(array(
-				'body' => 'modules/update-posts.html')
+				'body' => 'modules/new_posts.html'
+			)
 		);
 		make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
 
@@ -606,7 +607,7 @@
 	page_header($user->lang['MYSPOT']);
 
 	/*$template->set_filenames(array(
-		'body' => 'modules/update-posts.html')
+		'body' => 'modules/new_posts.html')
 	);*/
 	//make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"));
 

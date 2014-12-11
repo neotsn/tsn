@@ -6,7 +6,7 @@
 	<!-- IF forumrow.S_IS_CAT -->
 	<div class="tsn8_forum_row_wrapper tsn8_forum_category_wrapper">
 		<p class="tsn8_forum_category_header"><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></p>
-		</div>
+	</div>
 	<!-- ELSEIF forumrow.S_IS_LINK -->
 	<div class="tsn8_forum_row_wrapper tsn8_forum_link_wrapper">
 		<div class="tsn8_forum_folder_icon">{forumrow.FORUM_FOLDER_IMG}</div>
@@ -23,7 +23,7 @@
 				<!-- ENDIF -->
 			</p>
 			<p class="tsn8_forum_description">{forumrow.FORUM_DESC}</p>
-			</div>
+		</div>
 		<!-- IF forumrow.CLICKS -->
 		<div class="tsn8_forum_link_stats">
 			<p class="tsn8_forum_link_stats">{L_REDIRECTS}: {forumrow.CLICKS}</p>
@@ -32,9 +32,8 @@
 		</div>
 	<!-- ELSE -->
 	<!-- IF forumrow.S_NO_CAT -->
-	<div class="tsn8_forum_row_wrapper tsn8_forum_category_wrapper">
-		<p class="tsn8_forum_category_header">{L_FORUM}</p>
-		</div>
+	<div class="tsn8_forum_row_wrapper tsn8_forum_category_wrapper"><p class="tsn8_forum_category_header">{L_FORUM}</p>
+	</div>
 	<!-- ENDIF -->
 	<div class="tsn8_forum_row_wrapper">
 		<div class="tsn8_forum_folder_icon">{forumrow.FORUM_FOLDER_IMG}</div>

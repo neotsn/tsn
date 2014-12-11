@@ -2,93 +2,111 @@
 
 <!-- INCLUDE forumlist_body.html -->
 
-<span class="gensmall"><!-- IF not S_IS_BOT --><a href="{U_DELETE_COOKIES}">{L_DELETE_COOKIES}</a> | <!-- ENDIF --><a
-		href="{U_TEAM}">{L_THE_TEAM}</a></span><br/>
-
-<br clear="all" />
+<div class="tsn8_viewforum_links_wrapper">
+	<!-- IF not S_IS_BOT --><a href="{U_DELETE_COOKIES}">{L_DELETE_COOKIES}</a>&nbsp;|&nbsp;<!-- ENDIF --><a href="{U_TEAM}">{L_THE_TEAM}</a>
+</div>
 
 <!-- INCLUDE breadcrumbs.html -->
 
-<!-- IF S_DISPLAY_ONLINE_LIST -->
-	<br clear="all" />
+<div class="tsn8_viewforum_stats_wrapper">
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_BIRTHDAYS}!</span>
 
-	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<td class="cat" colspan="2"><!-- IF U_VIEWONLINE --><h4><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h4><!-- ELSE --><h4>{L_WHO_IS_ONLINE}</h4><!-- ENDIF --></td>
-	</tr>
-	<tr>
-	<!-- IF LEGEND -->
-		<td class="row1" rowspan="2" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-	<!-- ELSE -->
-		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+		<div class="tsn8_myspot_module_content">
+			<span class="tsn8_myspot_userstatus_stats_record">{L_HAPPY_BIRTHDAY_TO}<br/><b>{BIRTHDAY_LIST}</b></span>
+		</div>
+	</div>
 	<!-- ENDIF -->
-		<td class="row1" width="100%"><span class="genmed">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}</span></td>
-	</tr>
-	<!-- IF LEGEND -->
-		<tr>
-			<td class="row1"><b class="gensmall">{L_LEGEND} :: {LEGEND}</b></td>
-		</tr>
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_ONLINE_NOW}</span>
+
+		<div class="tsn8_myspot_module_content">
+			<span class="tsn8_myspot_online_user_avatars">{LOGGED_IN_USER_LIST}</span>
+			<hr class="divider" align="center"/>
+			<ul class="tsn8_myspot_userstatus_stats_list">
+				<li class="tsn8_myspot_userstatus_stats_item"><span
+						class="tsn8_myspot_userstatus_stats_label">{L_USERS_ONLINE}</span> {TOTAL_USERS_VALUE}
+				</li>
+				<li class="tsn8_myspot_userstatus_stats_item"><span
+						class="tsn8_myspot_userstatus_stats_label">{L_VISIBLE}</span> {VISIBLE_USERS_VALUE}
+				</li>
+				<li class="tsn8_myspot_userstatus_stats_item">
+					<span class="tsn8_myspot_userstatus_stats_label">{L_HIDDEN}</span>
+					{HIDDEN_USERS_VALUE}
+				</li>
+				<li class="tsn8_myspot_userstatus_stats_item">
+					<span class="tsn8_myspot_userstatus_stats_label">{L_GUESTS}</span>
+					{GUEST_USERS_VALUE}
+				</li>
+			</ul>
+			<hr class="divider" align="center"/>
+			<span class="tsn8_myspot_userstatus_stats_record">{RECORD_USERS}</span>
+		</div>
+	</div>
 	<!-- ENDIF -->
-	</table>
-<!-- ENDIF -->
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_STATISTICS}</span>
 
-<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
-	<br clear="all" />
-
-	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<td class="cat" colspan="2"><h4>{L_BIRTHDAYS}</h4></td>
-	</tr>
-	<tr>
-		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_BIRTHDAYS}" /></td>
-		<td class="row1" width="100%"><p class="genmed"><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <b>{BIRTHDAY_LIST}</b><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p></td>
-	</tr>
-	</table>
-<!-- ENDIF -->
-
-<br clear="all" />
-
-<table class="tablebg" width="100%" cellspacing="1">
-<tr>
-	<td class="cat" colspan="2"><h4>{L_STATISTICS}</h4></td>
-</tr>
-<tr>
-	<td class="row1"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_STATISTICS}" /></td>
-	<td class="row1" width="100%" valign="middle"><p class="genmed">{TOTAL_POSTS} | {TOTAL_TOPICS} | {TOTAL_USERS} | {NEWEST_USER}</p></td>
-</tr>
-</table>
+		<div class="tsn8_myspot_module_stats">
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_POSTS}</span>
+			<span class="tsn8_myspot_stat_header">{L_POSTS}</span>
+		</span>
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_TOPICS}</span>
+			<span class="tsn8_myspot_stat_header">{L_TOPICS}</span>
+		</span>
+		<span class="tsn8_myspot_stat">
+			<span class="tsn8_myspot_stat_value">{TOTAL_FORUM_USERS}</span>
+			<span class="tsn8_myspot_stat_header">{L_USERS}</span>
+		</span>
+			<hr class="divider" align="center"/>
+			<span class="tsn8_myspot_userstatus_stats_record">{NEWEST_USER}</span>
+			<hr class="divider" align="center"/>
+			<span class="tsn8_myspot_userstatus_stats_record">{L_LEGEND} :: {LEGEND}</span>
+		</div>
+	</div>
+</div>
 
 <!-- IF not S_USER_LOGGED_IN -->
-	<br clear="all" />
+<br clear="all"/>
 
-	<form method="post" action="{S_LOGIN_ACTION}">
-	
+<form method="post" action="{S_LOGIN_ACTION}">
+
 	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<td class="cat"><h4><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></h4></td>
-	</tr>
-	<tr>
-		<td class="row1" align="center"><span class="genmed">{L_USERNAME}:</span> <input class="post" type="text" name="username" size="10" />&nbsp; <span class="genmed">{L_PASSWORD}:</span> <input class="post" type="password" name="password" size="10" />&nbsp; <!-- IF S_AUTOLOGIN_ENABLED --> <span class="gensmall">{L_LOG_ME_IN}</span> <input type="checkbox" class="radio" name="autologin" /><!-- ENDIF -->&nbsp; <input type="submit" class="btnmain" name="login" value="{L_LOGIN}" /></td>
-	</tr>
+		<tr>
+			<td class="cat"><h4><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></h4></td>
+		</tr>
+		<tr>
+			<td class="row1" align="center"><span class="genmed">{L_USERNAME}:</span>
+				<input class="post" type="text" name="username" size="10"/>&nbsp;
+				<span class="genmed">{L_PASSWORD}:</span>
+				<input class="post" type="password" name="password" size="10"/>&nbsp; <!-- IF S_AUTOLOGIN_ENABLED -->
+				<span class="gensmall">{L_LOG_ME_IN}</span>
+				<input type="checkbox" class="radio" name="autologin"/><!-- ENDIF -->&nbsp;
+				<input type="submit" class="btnmain" name="login" value="{L_LOGIN}"/></td>
+		</tr>
 	</table>
 	{S_LOGIN_REDIRECT}
 	{S_FORM_TOKEN}
-	</form>
+</form>
 <!-- ENDIF -->
 
-<br clear="all" />
+<br clear="all"/>
 
 <table class="legend">
-<tr>
-	<td width="20" align="center">{FORUM_NEW_IMG}</td>
-	<td><span class="gensmall">{L_NEW_POSTS}</span></td>
-	<td>&nbsp;&nbsp;</td>
-	<td width="20" align="center">{FORUM_IMG}</td>
-	<td><span class="gensmall">{L_NO_NEW_POSTS}</span></td>
-	<td>&nbsp;&nbsp;</td>
-	<td width="20" align="center">{FORUM_LOCKED_IMG}</td>
-	<td><span class="gensmall">{L_FORUM_LOCKED}</span></td>
-</tr>
+	<tr>
+		<td width="20" align="center">{FORUM_NEW_IMG}</td>
+		<td><span class="gensmall">{L_NEW_POSTS}</span></td>
+		<td>&nbsp;&nbsp;</td>
+		<td width="20" align="center">{FORUM_IMG}</td>
+		<td><span class="gensmall">{L_NO_NEW_POSTS}</span></td>
+		<td>&nbsp;&nbsp;</td>
+		<td width="20" align="center">{FORUM_LOCKED_IMG}</td>
+		<td><span class="gensmall">{L_FORUM_LOCKED}</span></td>
+	</tr>
 </table>
 
 <!-- INCLUDE overall_footer.html -->
