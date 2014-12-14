@@ -192,41 +192,53 @@
 	<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
 	<!-- ENDIF -->
 </div>
+<div class="tsn8_forum_thread_control_wrapper">
+	<!-- IF S_TOPIC_MOD -->
+	<div class="tsn8_forum_mod_wrapper">
+		<form method="post" action="{S_MOD_ACTION}"><span class="gensmall">{L_QUICK_MOD}:</span> {S_TOPIC_MOD}
+			<input class="tsn8_icon_mini tsn8_icon_send" type="submit" value=""/></form>
+	</div>
+	<!-- ENDIF -->
+	<div class="tsn8_forum_jumpbox_wrapper"><!-- INCLUDE jumpbox.html --></div>
+</div>
 
 <!-- INCLUDE breadcrumbs.html -->
 
-<!-- IF S_DISPLAY_ONLINE_LIST -->
-<br clear="all"/>
+<div class="tsn8_viewforum_stats_wrapper">
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_ONLINE_NOW}</span>
 
-<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<td class="cat"><h4>{L_WHO_IS_ONLINE}</h4></td>
-	</tr>
-	<tr>
-		<td class="row1"><p class="gensmall">{LOGGED_IN_USER_LIST}</p></td>
-	</tr>
-</table>
-<!-- ENDIF -->
+		<div class="tsn8_myspot_module_stats">
+			<span class="tsn8_forum_online_user_avatars">{LOGGED_IN_USER_LIST}</span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_PERMISSIONS}</span>
+
+		<div class="tsn8_myspot_module_stats">
+			<!-- BEGIN permissions -->
+			<span class="tsn8_myspot_stat">
+				<!-- IF permissions.PERMISSION -->
+				<span class="tsn8_icon_mini_nohover tsn8_icon_check"></span>
+				<!-- ELSE -->
+				<span class="tsn8_icon_mini_nohover tsn8_icon_x"></span>
+				<!-- ENDIF -->
+				<span class="tsn8_topic_stat_header">{permissions.ABILITY}</span>
+			</span>
+			<!-- END permissions -->
+		</div>
+	</div>
+</div>
 
 <br clear="all"/>
 
 <table width="100%" cellspacing="1">
 	<tr>
-		<td width="40%" valign="top" nowrap="nowrap" align="{S_CONTENT_FLOW_BEGIN}"><!-- IF S_TOPIC_MOD -->
-			<form method="post" action="{S_MOD_ACTION}"><span class="gensmall">{L_QUICK_MOD}:</span> {S_TOPIC_MOD}
-				<input class="btnlite" type="submit" value="{L_GO}"/></form>
-			<!-- ENDIF --></td>
-		<td align="{S_CONTENT_FLOW_END}" valign="top" nowrap="nowrap"><span class="gensmall"><!-- BEGIN rules -->{rules.RULE}<br/><!-- END rules --></span>
+		<td align="{S_CONTENT_FLOW_END}" valign="top" nowrap="nowrap">
+			<span class="gensmall"></span>
 		</td>
-	</tr>
-</table>
-
-<br clear="all"/>
-
-<table width="100%" cellspacing="0">
-	<tr>
-		<td><!-- IF S_DISPLAY_SEARCHBOX --><!-- INCLUDE searchbox.html --><!-- ENDIF --></td>
-		<td align="{S_CONTENT_FLOW_END}"><!-- INCLUDE jumpbox.html --></td>
 	</tr>
 </table>
 

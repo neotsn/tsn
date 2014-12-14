@@ -583,6 +583,20 @@ div.tsn8_myspot_viewforum_stats_wrapper {
 	zoom: 1;
 	vertical-align: top;
 	text-align: left;
+	width: 35%;
+}
+
+span.tsn8_forum_online_user_avatars {
+	vertical-align: top;
+	display: block;
+	color: #003366;
+}
+
+span.tsn8_forum_online_user_avatars a {
+	vertical-align: top;
+	display: inline-block;
+	height: 25px;
+	width: 25px;
 }
 
 /******************** Forum Body **************************/
@@ -721,6 +735,31 @@ span.tsn8_viewtopic_pagefooter_form {
 	display: inline-block;
 	padding: 5px 0;
 	line-height: 1.6em;
+}
+
+div.tsn8_forum_thread_control_wrapper {
+	display: block;
+	min-height: 35px;
+	vertical-align: top;
+}
+
+div.tsn8_forum_mod_wrapper {
+	text-align: left;
+	margin: 5px;
+	color: #587eaa;
+	display: inline-block;
+}
+
+div.tsn8_forum_jumpbox_wrapper {
+	display: inline-block;
+	text-align: right;
+	margin: 5px;
+	color: #587eaa;
+	float: right;
+}
+
+div.tsn8_forum_mod_wrapper span, div.tsn8_forum_jumpbox_wrapper span {
+	vertical-align: top;
 }
 
 /********************** Poll Styles ***********************/
@@ -1096,6 +1135,14 @@ span.tsn8_viewtopic_post_footer_controls_right {
 
 .tsn8_icon_search:hover {
 	background-color: #587eaa;
+}
+
+.tsn8_icon_check {
+	background: url('../imageset/tsn8/check_green.png') no-repeat center center;
+}
+
+.tsn8_icon_x {
+	background: #660000 url('../imageset/tsn8/close_white.png') no-repeat center center;
 }
 
 .tsn8_icon, .tsn8_icon_nohover {

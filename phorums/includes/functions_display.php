@@ -689,6 +689,16 @@ function gen_forum_auth_level($mode, $forum_id, $forum_status)
 
     $locked = ($forum_status == ITEM_LOCKED && !$auth->acl_get('m_edit', $forum_id)) ? true : false;
 
+    // New Style
+    $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_DELETE_SHORT'], 'PERMISSION' => ($user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id) && !$locked) ? true : false));
+    $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_EDIT_SHORT'], 'PERMISSION' => ($user->data['is_registered'] && $auth->acl_gets('f_edit', 'm_edit', $forum_id) && !$locked) ? true : false));
+    $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_POST_SHORT'], 'PERMISSION' => ($auth->acl_get('f_post', $forum_id) && !$locked) ? 1 : false));
+    $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_REPLY_SHORT'], 'PERMISSION' => ($auth->acl_get('f_reply', $forum_id) && !$locked) ? true : false));
+    if ($config['allow_attachments']) {
+        $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_ATTACH_SHORT'], 'PERMISSION' => ($auth->acl_get('f_attach', $forum_id) && $auth->acl_get('u_attach') && !$locked) ? true : false));
+    }
+
+    // Do this for old-style templates
     $rules = array(
         ($auth->acl_get('f_post', $forum_id) && !$locked) ? $user->lang['RULES_POST_CAN'] : $user->lang['RULES_POST_CANNOT'],
         ($auth->acl_get('f_reply', $forum_id) && !$locked) ? $user->lang['RULES_REPLY_CAN'] : $user->lang['RULES_REPLY_CANNOT'],
