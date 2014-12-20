@@ -1,9 +1,9 @@
 <!-- INCLUDE overall_header.html -->
 
 <!-- IF S_FORUM_RULES -->
-<div class="tsn8_forumrules tsn8_myspot_wrapper_med">
-	<span class="tsn8_forumrules_header">{L_FORUM_RULES}</span>
-		<span class="tsn8_forumrules_text">
+<div class="tsn8_information tsn8_myspot_wrapper_med">
+	<span class="tsn8_information_header">{L_FORUM_RULES}</span>
+		<span class="tsn8_information_text align_left">
 			<!-- IF U_FORUM_RULES -->
 			<a href="{U_FORUM_RULES}"><b>{L_FORUM_RULES_LINK}</b></a>
 			<!-- ELSE -->
@@ -14,9 +14,9 @@
 <!-- ENDIF -->
 
 <!-- IF S_NO_READ_ACCESS -->
-<div class="tsn8_forumrules tsn8_myspot_wrapper_med">
-	<span class="tsn8_forumrules_header">{L_OOPS_ACCESS}</span>
-	<span class="tsn8_forumrules_text">{L_NO_READ_ACCESS}</span>
+<div class="tsn8_information tsn8_myspot_wrapper_med">
+	<span class="tsn8_information_header">{L_OOPS_ACCESS}</span>
+	<span class="tsn8_information_text align_left">{L_NO_READ_ACCESS}</span>
 	<!-- IF not S_USER_LOGGED_IN -->
 	<form method="post" action="{S_LOGIN_ACTION}" class="tsn8_forum_login">
 		<span class="tsn8_forum_login_wrapper">
@@ -101,7 +101,9 @@
 		<div class="tsn8_viewtopic_pageheader_header_wrapper">
 			<span class="tsn8_viewtopic_pageheader_header"><a href="{U_VIEW_TOPIC}">{FORUM_NAME}</a></span>
 			<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
-			<span class="tsn8_viewtopic_pageheader_buttons"><a href="{U_POST_NEW_TOPIC}" title="{L_NEW_TOPIC}"><span class="tsn8_icon_nohover tsn8_icon_newtopic"></span></a></span>
+			<span class="tsn8_viewtopic_pageheader_buttons"><a href="{U_POST_NEW_TOPIC}" title="{L_NEW_TOPIC}"><span class="tsn8_icon_nohover tsn8_icon_newtopic"></span></a>
+			<!--<span class="tsn8_icon_nohover tsn8_icon_newtopic" data-id="{AJAX_DATA_ID}" data-url="{AJAX_DATA_URL_PATH}" data-mode="{AJAX_DATA_MODE}" data-param="{AJAX_DATA_ID_PARAM}"></span>-->
+			</span>
 			<!-- ENDIF -->
 		</div>
 		<div class="tsn8_viewtopic_pageheader_control_wrapper">
@@ -229,6 +231,7 @@
 		</div>
 	</div>
 	<!-- ENDIF -->
+	<!-- IF S_HAS_PERMISSIONS -->
 	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
 		<span class="tsn8_myspot_module_header">{L_PERMISSIONS}</span>
 
@@ -245,6 +248,7 @@
 			<!-- END permissions -->
 		</div>
 	</div>
+	<!-- ENDIF -->
 </div>
 
 <!-- IF S_DISPLAY_POST_INFO -->
@@ -288,5 +292,7 @@
 	</tr>
 </table>
 <!-- ENDIF -->
+
+<div id="tsn8_newtopic_modal" class="tsn8_modal_wrapper" style="display: none;"></div>
 
 <!-- INCLUDE overall_footer.html -->

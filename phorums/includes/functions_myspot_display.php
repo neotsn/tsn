@@ -1122,7 +1122,7 @@
 				$avatar_img = $phpbb_root_path . $config['avatar_gallery_path'] . '/';
 				break;
 			case AVATAR_REMOTE:
-				if (!$config['allow_avatar_remote'] && !$ignore_config) {
+				if ((!$config['allow_avatar_remote'] && !$ignore_config) || !file_exists($avatar)) {
 					return '';
 				}
 				break;

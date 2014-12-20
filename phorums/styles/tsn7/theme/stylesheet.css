@@ -469,9 +469,9 @@ span.tsn8_breadcrumb_header a.tsn8_breadcrumb {
 }
 
 span.tsn8_breadcrumb_header a.tsn8_breadcrumb:hover {
-	background-color: #587eaa;
-	color: #d7e3f6;
-	border: 1px solid #003366;
+	background-color: #d7e3f6;
+	color: #003366;
+	border: 1px solid #fff;
 }
 
 p.tsn8_searchbar {
@@ -600,20 +600,23 @@ span.tsn8_forum_online_user_avatars a {
 }
 
 /******************** Forum Body **************************/
-div.tsn8_forumrules {
-	margin: 10px 5px;
+div.tsn8_information {
+	margin: 10px auto;
+	width: 75%;
 }
 
-span.tsn8_forumrules_header {
+span.tsn8_information_header {
 	font-size: 1.3em;
 	display: block;
 	margin-bottom: 5px;
 	border-bottom: 1px solid #587eaa;
 	color: #587eaa;
+	text-align: center;
 }
 
-span.tsn8_forumrules_text {
-
+span.tsn8_information_text {
+	display: block;
+	text-align: center;
 }
 
 form.tsn8_forum_login {
@@ -690,6 +693,9 @@ form.tsn8_forum_footer_filters {
 	font-style: italic;
 	padding: 5px 0;
 	margin: 0 5px;
+}
+
+div.tsn8_modal_wrapper {
 }
 
 /******************** View Topic Page *********************/
@@ -1194,6 +1200,19 @@ span.tsn8_viewtopic_post_footer_controls_right {
 	border-radius: 24px;
 	background-color: #003366;
 	background-size: 40px 40px;
+}
+
+/******************** Generic Styles **************************/
+.align_left {
+	text-align: left;
+}
+
+.align_center {
+	text-align: center;
+}
+
+.align_right {
+	text-align: right;
 }
 
 /******************** Old Styles **************************/

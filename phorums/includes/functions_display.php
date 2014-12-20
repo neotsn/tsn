@@ -690,6 +690,7 @@ function gen_forum_auth_level($mode, $forum_id, $forum_status)
     $locked = ($forum_status == ITEM_LOCKED && !$auth->acl_get('m_edit', $forum_id)) ? true : false;
 
     // New Style
+    $template->assign_var('S_HAS_PERMISSIONS', in_array($mode, array('forum', 'topic')));
     $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_DELETE_SHORT'], 'PERMISSION' => ($user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id) && !$locked) ? true : false));
     $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_EDIT_SHORT'], 'PERMISSION' => ($user->data['is_registered'] && $auth->acl_gets('f_edit', 'm_edit', $forum_id) && !$locked) ? true : false));
     $template->assign_block_vars('permissions', array('ABILITY' => $user->lang['RULES_POST_SHORT'], 'PERMISSION' => ($auth->acl_get('f_post', $forum_id) && !$locked) ? 1 : false));
@@ -1188,7 +1189,7 @@ function get_user_avatar(
             break;
 
         case AVATAR_REMOTE:
-            if (!$config['allow_avatar_remote'] && !$ignore_config) {
+            if ((!$config['allow_avatar_remote'] && !$ignore_config) || !file_exists($avatar)) {
                 return '';
             }
             break;
