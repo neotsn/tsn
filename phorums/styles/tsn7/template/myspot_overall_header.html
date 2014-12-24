@@ -8,13 +8,19 @@
 	<meta name="distribution" content="global">
 	<meta name="keywords" content="social, community, network, hangout">
 	{META}
-	<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->
-		{PAGE_TITLE}</title>
-	<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css"/>
+	<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css"/>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<!-- jQuery UI CSS -->
+	<link rel="stylesheet" href="{T_STYLESHEET_DIR}jqueryui_custom/jquery-ui.css" type="text/css"/>
+	<link rel="stylesheet" href="{T_STYLESHEET_DIR}jqueryui_custom/jquery-ui.structure.css" type="text/css"/>
+	<link rel="stylesheet" href="{T_STYLESHEET_DIR}jqueryui_custom/jquery-ui.theme.css" type="text/css"/>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css"/>
+	<!-- jQuery JS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<!-- Custom JS -->
+	<script src="./js/tsn8.js"></script>
 	<script type="text/javascript">
 		// <![CDATA[
 		<!-- IF S_USER_PM_POPUP -->
@@ -113,8 +119,7 @@
 		<span class="tsn8_header_image">
 			<!-- IF not S_IS_BOT --><a href="{U_LOGIN_LOGOUT}" class="userlinks">{L_LOGIN_LOGOUT}</a>&nbsp;<!-- ENDIF -->
 			<!-- IF U_RESTORE_PERMISSIONS -->|&nbsp;<a href="{U_RESTORE_PERMISSIONS}" class="userlinks">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
-			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span
-				style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
+			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN -->|&nbsp;<span style="color: red;">{L_BOARD_DISABLED}</span><!-- ENDIF -->
 			<!-- IF not S_IS_BOT -->
 				<!-- IF S_USER_LOGGED_IN -->
 					<!-- IF S_DISPLAY_PM -->|&nbsp;<a href="{U_PRIVATEMSGS}" class="userlinks">{PRIVATE_MESSAGE_INFO}
@@ -137,8 +142,7 @@
 			<a href="{U_FAQ}" class="userlinks">{L_FAQ}</a>
 			<!-- IF S_DISPLAY_SEARCH -->&nbsp;|&nbsp;<a href="{U_SEARCH}" class="userlinks">{L_SEARCH}</a><!-- ENDIF -->
 			<!-- IF not S_IS_BOT -->
-				<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}"
-																class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
+				<!-- IF S_DISPLAY_MEMBERLIST -->&nbsp;|&nbsp;<a href="{U_MEMBERLIST}" class="userlinks">{L_MEMBERLIST}</a><!-- ENDIF -->
 				<!-- IF S_USER_LOGGED_IN -->&nbsp;|&nbsp;<a href="{U_PROFILE}" class="userlinks">{L_PROFILE}</a><!-- ENDIF -->
 			<!-- ENDIF -->
 		</span>

@@ -288,7 +288,7 @@ span.tsn8_error_message {
 	padding: 3px;
 	display: block;
 	max-width: 200px;
-	margin-bottom: 5px;
+	margin: 5px auto;
 }
 
 span.tsn8_warning_message {
@@ -1015,6 +1015,121 @@ span.tsn8_viewtopic_post_footer_controls_right {
 	vertical-align: top;
 }
 
+/********************** New Post **************************/
+
+div.tsn8_newpost_fieldset {
+	margin: 20px 25px 0;
+	font-size: 1em;
+}
+
+span.tsn8_newpost_field_header {
+	display: block;
+	font-size: 1.3em;
+	color: #587eaa;
+	/*border-bottom: 1px solid #d7e3f6;*/
+	margin-bottom: 10px;
+}
+
+span.tsn8_newpost_field_input {
+	margin: 10px;
+	display: block;
+	vertical-align: top;
+}
+
+span.tsn8_newpost_control_hint {
+	font-style: italic;
+	color: #587eaa;
+}
+
+ul.tsn8_newpost_icon_list, ul.tsn8_newpost_name_list {
+	list-style: none;
+	margin-left: -10px;
+	display: inline-block;
+}
+
+li.tsn8_newpost_icon_list_item {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 3px 5px;
+	font-size: 0.9em;
+}
+
+li.tsn8_newpost_name_list_item {
+	display: inline-block;
+	margin: 0 3px;
+	padding: 3px;
+	background-color: #d7e3f6;
+	border-radius: 3px;
+}
+
+span.tsn8_smiley_toolbar_container {
+	position: relative;
+}
+
+div.tsn8_newpost_smiley_wrapper {
+	position: absolute;
+	top: 1.7em;
+	right: 0;
+	z-index: 100;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 2px #ccc;
+	background-color: #fff;
+	width: 300px;
+	text-align: center;
+	font-size: 0.9em;
+	padding: 5px;
+}
+
+div.tsn8_toolbar, div.tsn8_subtoolbar {
+	padding: 4px 4px 4px 0;
+	display: inline-block;
+	/*background-color: #587eaa;*/
+	border-radius: 5px;
+	vertical-align: top;
+}
+
+/* support: IE7 */
+* + html div.toolbar {
+	display: inline;
+}
+
+.tsn8_helpline {
+	display: block;
+	width: 100%;
+	padding: 3px;
+	margin: 5px auto;
+	border-radius: 3px;
+	border: 1px solid #d7e3f6;
+	background-color: #d7e3f6;
+	color: #587eaa;
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+/********************* HTML Input Elements ****************/
+input.tsn8_input_text {
+	border-radius: 3px;
+	padding: 3px;
+	font-size: 1em;
+	border: 1px solid #d7e3f6;
+}
+
+textarea.tsn8_input_textarea {
+	display: inline-block;
+	width: 100%;
+	margin: 5px auto;
+	border-radius: 3px;
+	font-size: 1em;
+	border: 1px solid #d7e3f6;
+
+}
+
+input.tsn8_input_radio {
+	border: none;
+	background-color: transparent;
+}
+
 /********************* CSS Icons **************************/
 
 .tsn8_icon_joined {
@@ -1151,6 +1266,67 @@ span.tsn8_viewtopic_post_footer_controls_right {
 	background: #660000 url('../imageset/tsn8/close_white.png') no-repeat center center;
 }
 
+.tsn8_icon_format_toolbar {
+	background: url('../imageset/tsn8/html_editor.png') no-repeat;
+	background-position-y: 0;
+}
+
+.tsn8_icon_bold {
+	background-position-x: 0;
+}
+
+.tsn8_icon_italic {
+	background-position-x: -21px;
+}
+
+.tsn8_icon_underline {
+	background-position-x: -42px;
+}
+
+.tsn8_icon_quotepost {
+	background-position-x: -252px;
+}
+
+.tsn8_icon_code {
+	background-position-x: -399px;
+}
+
+.tsn8_icon_fontcolor {
+	background-position-x: -105px;
+}
+
+.tsn8_icon_ul {
+	background-position-x: -189px;
+}
+
+.tsn8_icon_ol {
+	background-position-x: -168px;
+}
+
+.tsn8_icon_li {
+	background-position-x: -420px;
+}
+
+.tsn8_icon_img {
+	background-position-x: -378px;
+}
+
+.tsn8_icon_link {
+	background-position-x: -147px;
+}
+
+.tsn8_icon_flash {
+	background-position-x: -441px;
+}
+
+.tsn8_icon_fontsize {
+	background-position-x: -84px;
+}
+
+.tsn8_icon_emoticon {
+	background-position-x: -357px;
+}
+
 .tsn8_icon, .tsn8_icon_nohover {
 	display: inline-block;
 	width: 30px;
@@ -1168,7 +1344,7 @@ span.tsn8_viewtopic_post_footer_controls_right {
 	box-shadow: 0 1px 2px #aaa;
 }
 
-.tsn8_icon_mini, .tsn8_icon_mini_nohover {
+.tsn8_icon_mini, .tsn8_icon_mini_nohover, .tsn8_icon_smiley {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -1202,7 +1378,35 @@ span.tsn8_viewtopic_post_footer_controls_right {
 	background-size: 40px 40px;
 }
 
-/******************** Generic Styles **************************/
+.tsn8_icon_sprite {
+	background-size: auto;
+}
+
+.tsn8_icon_smiley {
+	padding: 2px;
+	margin: 3px;
+	border-radius: 3px;
+	display: inline-block;
+	text-align: center;
+	width: auto;
+	height: auto;
+}
+
+.tsn8_icon_smiley img {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.tsn8_icon_smiley:hover {
+	background-color: #e9e9e9;
+	box-shadow: 0 1px 2px #999;
+}
+
+.tsn8_icon_toolbar {
+
+}
+
+/*************** Custom Override Styles *******************/
 .align_left {
 	text-align: left;
 }
@@ -1213,6 +1417,29 @@ span.tsn8_viewtopic_post_footer_controls_right {
 
 .align_right {
 	text-align: right;
+}
+
+.ui-widget {
+	font-size: small;
+}
+
+.ui-selectmenu-button {
+	vertical-align: bottom;
+}
+
+.ui-selectmenu-button span.ui-selectmenu-text {
+	line-height: 1.8em;
+}
+
+.colorpicker_submit {
+	background: url('../imageset/tsn8/check_green.png') no-repeat center center;
+	background-size: 20px 20px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.colorpicker_focus {
+	background-position: center center;
 }
 
 /******************** Old Styles **************************/
@@ -1693,12 +1920,13 @@ select {
 	color: #333333;
 	background-color: #FAFAFA;
 	font-family: "Lucida Grande", Verdana, Helvetica, sans-serif;
-	/*font-size: 1em;*/
+	font-size: 1em;
 	font-weight: normal;
 	border: 1px solid #d7e3f6;
 	border-radius: 3px;
-	padding: 1px;
-	vertical-align: top;
+	/*padding: 1px;*/
+	/*vertical-align: top;*/
+	display: inline-block;
 }
 
 option {

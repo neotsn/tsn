@@ -4254,6 +4254,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
         'T_RANKS_PATH'                 => "{$web_path}{$config['ranks_path']}/",
         'T_UPLOAD_PATH'                => "{$web_path}{$config['upload_path']}/",
         'T_STYLESHEET_LINK'            => (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->lang_name),
+        'T_STYLESHEET_DIR' => (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme/' : "{$phpbb_root_path}/stylestsn7/theme/",
         'T_STYLESHEET_NAME'            => $user->theme['theme_name'],
 
         'T_THEME_NAME'                 => rawurlencode($user->theme['theme_path']),
@@ -4291,6 +4292,8 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 
 /**
  * Generate page footer
+ *
+ * @param bool $run_cron
  */
 function page_footer($run_cron = true)
 {

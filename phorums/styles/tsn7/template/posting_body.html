@@ -28,7 +28,7 @@
 
 <!-- IF not S_SHOW_PM_BOX -->
 <form action="{S_POST_ACTION}" method="post" name="postform" {S_FORM_ENCTYPE}>
-<!-- ENDIF -->
+	<!-- ENDIF -->
 
 	<!-- IF S_DRAFT_LOADED -->
 	<div class="tsn8_information tsn8_myspot_wrapper_med">
@@ -96,140 +96,177 @@
 	<br clear="all"/>
 	<!-- ENDIF -->
 
-	<table class="tablebg" width="100%" cellspacing="1">
-		<tr>
-			<th colspan="2"><b>{L_POST_A}</b></th>
-		</tr>
+	<div class="tsn8_myspot_wrapper">
+		<span class="tsn8_myspot_module_header">{L_POST_A}</span>
 
 		<!-- IF ERROR -->
-		<tr>
-			<td class="row2" colspan="2" align="center"><span class="genmed error">{ERROR}</span></td>
-		</tr>
+		<span class="tsn8_error_message">{ERROR}</span>
 		<!-- ENDIF -->
 
 		<!-- IF S_DELETE_ALLOWED -->
-		<tr>
-			<td class="row1"><b class="genmed">{L_DELETE_POST}:</b></td>
-			<td class="row2"><input type="checkbox" class="radio" name="delete"/>
-				<span class="gensmall">[ {L_DELETE_POST_WARN} ]</span></td>
-		</tr>
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_DELETE_POST}</span>
+			<span class="tsn8_newpost_field_input">
+				<input type="checkbox" id="delete" class="radio" name="delete"/>&nbsp;<span class="tsn8_newpost_control_hint">[ <label for="delete">{L_DELETE_POST_WARN}</label> ]</span>
+			</span>
+		</div>
 		<!-- ENDIF -->
-
+		<!-- IF S_TYPE_TOGGLE -->
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header"><!-- IF S_EDIT_POST -->{L_CHANGE_TOPIC_TO}<!-- ELSE -->{L_POST_TOPIC_AS}<!-- ENDIF --></span>
+			<span class="tsn8_newpost_field_input">
+				<span class="buttonset">
+					<!-- BEGIN topic_type -->
+					<input type="radio" name="topic_type" value="{topic_type.VALUE}" id="topic_type_{topic_type.VALUE}" {topic_type.S_CHECKED}/><label for="topic_type_{topic_type.VALUE}">{topic_type.L_TOPIC_TYPE}</label>
+					<!-- END topic_type -->
+				</span>
+			</span>
+		</div>
+		<!-- ENDIF -->
 		<!-- IF S_SHOW_TOPIC_ICONS or S_SHOW_PM_ICONS -->
-		<tr>
-			<td class="row1"><b class="genmed">{L_ICON}:</b></td>
-			<td class="row2">
-				<table width="100%" cellspacing="0" cellpadding="0" border="0">
-					<tr>
-						<td>
-							<input type="radio" class="radio" name="icon" value="0" {S_NO_ICON_CHECKED}/><span class="genmed"><!-- IF S_SHOW_TOPIC_ICONS -->{L_NO_TOPIC_ICON}<!-- ELSE -->{L_NO_PM_ICON}<!-- ENDIF --></span> <!-- BEGIN topic_icon --><span style="white-space: nowrap;"><input type="radio" class="radio" name="icon" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED}/><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" hspace="2" vspace="2"/></span> <!-- END topic_icon -->
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_ICON}</span>
+			<span class="tsn8_newpost_field_input">
+				<span class="buttonset">
+					<input type="radio" name="icon" id="icon_none" data-mod="tsn8_button" value="0" {S_NO_ICON_CHECKED}/><label for="icon_none"><!-- IF S_SHOW_TOPIC_ICONS -->{L_NO_TOPIC_ICON}<!-- ELSE -->{L_NO_PM_ICON}<!-- ENDIF --></label>
+				</span>
+				<span class="buttonset">
+					<!-- BEGIN topic_icon --><input type="radio" name="icon" id="icon_{topic_icon.ICON_ID}" data-mod="tsn8_button" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED}/>&nbsp;<label for="icon_{topic_icon.ICON_ID}"><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" hspace="2" vspace="2"/></label><!-- END topic_icon -->
+				</span>
+			</span>
+		</div>
 		<!-- ENDIF -->
 
 		<!-- IF not S_PRIVMSGS and S_DISPLAY_USERNAME -->
-		<tr>
-			<td class="row1"><b class="genmed">{L_USERNAME}:</b></td>
-			<td class="row2"><input class="post" type="text" tabindex="1" name="username" size="25" value="{USERNAME}"/>
-			</td>
-		</tr>
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_USERNAME}</span>
+			<span class="tsn8_newpost_field_input"><input class="tsn8_input_text" type="text" tabindex="1" name="username" size="25" value="{USERNAME}"/></span>
+		</div>
 		<!-- ENDIF -->
 
 		<!-- IF S_PRIVMSGS -->
-		<tr>
-			<td class="row1"><b class="genmed">{L_TO}:</b></td>
-			<td class="row2">
-				{S_HIDDEN_ADDRESS_FIELD}
-				<!-- BEGIN to_recipient -->
-			<span style="display: block; float: {S_CONTENT_FLOW_BEGIN};" class="nowrap genmed"><strong>
-				<!-- IF to_recipient.IS_GROUP --><a href="{to_recipient.U_VIEW}"><span class="sep">{to_recipient.NAME}</span></a><!-- ELSE -->{to_recipient.NAME_FULL}<!-- ENDIF -->
-			</strong>&nbsp;<!-- IF not S_EDIT_POST --><input class="post" type="submit" name="remove_{to_recipient.TYPE}[{to_recipient.UG_ID}]" value="{L_REMOVE}"/>&nbsp;<!-- ENDIF -->
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_TO}</span>
+			<span class="tsn8_newpost_field_input">
+				<ul class="tsn8_newpost_name_list">
+					<!-- BEGIN to_recipient -->
+					<li class="tsn8_newpost_name_list_item">
+						<!-- IF to_recipient.IS_GROUP --><a href="{to_recipient.U_VIEW}">{to_recipient.NAME}</a><!-- ELSE -->{to_recipient.NAME_FULL}<!-- ENDIF -->&nbsp;
+						<!-- IF not S_EDIT_POST --><input class="tsn8_icon_mini tsn8_icon_trash" type="submit" name="remove_{to_recipient.TYPE}[{to_recipient.UG_ID}]" value=""/><!-- ENDIF -->
+					</li>
+					<!-- BEGINELSE -->
+					<li class="tsn8_newpost_name_list_item">{L_NO_TO_RECIPIENT}</li>
+					<!-- END to_recipient -->
+				</ul>
+
 			</span>
-				<!-- BEGINELSE -->
-				<span class="genmed">{L_NO_TO_RECIPIENT}</span>
-				<!-- END to_recipient -->
-			</td>
-		</tr>
+			{S_HIDDEN_ADDRESS_FIELD}
+		</div>
 		<!-- IF S_ALLOW_MASS_PM -->
-		<tr>
-			<td class="row1"><b class="genmed">{L_BCC}:</b></td>
-			<td class="row2">
-				<!-- BEGIN bcc_recipient -->
-			<span class="genmed nowrap"><strong>
-				<!-- IF bcc_recipient.IS_GROUP --><a href="{bcc_recipient.U_VIEW}"><span class="sep">{bcc_recipient.NAME}</span></a><!-- ELSE -->{bcc_recipient.NAME_FULL}<!-- ENDIF -->
-			</strong>&nbsp;<!-- IF not S_EDIT_POST --><input class="post" type="submit" name="remove_{bcc_recipient.TYPE}[{bcc_recipient.UG_ID}]" value="{L_REMOVE}"/>&nbsp;<!-- ENDIF -->
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_BCC}</span>
+			<span class="tsn8_newpost_field_input">
+				<ul class="tsn8_newpost_name_list">
+					<!-- BEGIN bcc_recipient -->
+					<li class="tsn8_newpost_name_list_item">
+						<!-- IF bcc_recipient.IS_GROUP --><a href="{bcc_recipient.U_VIEW}">{bcc_recipient.NAME}</a><!-- ELSE -->{bcc_recipient.NAME_FULL}<!-- ENDIF -->&nbsp;
+						<!-- IF not S_EDIT_POST --><input class="tsn8_icon_mini tsn8_icon_trash" type="submit" name="remove_{bcc_recipient.TYPE}[{bcc_recipient.UG_ID}]" value=""/><!-- ENDIF -->
+					</li>
+					<!-- BEGINELSE -->
+					<li class="tsn8_newpost_name_list_item">{L_NO_BCC_RECIPIENT}</li>
+					<!-- END bcc_recipient -->
+				</ul>
 			</span>
-				<!-- BEGINELSE -->
-				<span class="genmed">{L_NO_BCC_RECIPIENT}</span>
-				<!-- END bcc_recipient -->
-			</td>
-		</tr>
+		</div>
 		<!-- ENDIF -->
 		<!-- ENDIF -->
 
-		<tr>
-			<td class="row1" width="22%"><b class="genmed">{L_SUBJECT}:</b></td>
-			<td class="row2" width="78%">
-				<input class="post" style="width:450px" type="text" name="subject" size="45" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" tabindex="2" value="{SUBJECT}"/>
-			</td>
-		</tr>
-		<tr>
-			<td class="row1" valign="top">
-				<b class="genmed">{L_MESSAGE_BODY}:</b><br/><span class="gensmall">{L_MESSAGE_BODY_EXPLAIN}&nbsp;</span><br/><br/>
-				<!-- IF S_SMILIES_ALLOWED -->
-				<table width="100%" cellspacing="5" cellpadding="0" border="0" align="center">
-					<tr>
-						<td class="gensmall" align="center"><b>{L_SMILIES}</b></td>
-					</tr>
-					<tr>
-						<td align="center">
-							<!-- BEGIN smiley -->
-							<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;" style="line-height: 20px;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" hspace="2" vspace="2"/></a>
-							<!-- END smiley -->
-						</td>
-					</tr>
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_SUBJECT}</span>
+			<span class="tsn8_newpost_field_input"><input class="tsn8_input_text" style="width:73%;" type="text" name="subject" size="45" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" tabindex="2" value="{SUBJECT}"/></span>
+		</div>
 
-					<!-- IF S_SHOW_SMILEY_LINK -->
-					<tr>
-						<td align="center">
-							<a class="nav" href="{U_MORE_SMILIES}" onclick="popup(this.href, 300, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
-						</td>
-					</tr>
-					<!-- ENDIF -->
-
-				</table>
-				<!-- ENDIF -->
-			</td>
-			<td class="row2" valign="top">
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_MESSAGE_BODY}</span>
+			<span class="tsn8_newpost_field_input">
 				<script type="text/javascript">
 					// <![CDATA[
 					var form_name = 'postform';
 					var text_name = 'message';
 					// ]]>
 				</script>
+				<span class="tsn8_newpost_control_hint">{L_MESSAGE_BODY_EXPLAIN}</span><br/>
+				<!-- INCLUDE posting_buttons.html -->
+				<textarea class="tsn8_input_textarea" name="message" rows="15" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);">{MESSAGE}</textarea>
+			</span>
+		</div>
 
-				<table width="100%" cellspacing="0" cellpadding="0" border="0">
-					<!-- INCLUDE posting_buttons.html -->
-					<tr>
-						<td valign="top" style="width: 100%;">
-							<textarea name="message" rows="15" cols="76" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" style="width: 98%;">{MESSAGE}</textarea>
-						</td>
+		<script>
+			$(document).ready(function () {
+				$('input[data-mod*="tsn8_newpost_options"]').each(function (i) {
+					var icon = ($(this).is(':checked')) ? "ui-icon-check" : "ui-icon-blank";
+					$(this).button({icons: {primary: icon}});
+				}).on('click', function () {
+					var icon = ($(this).is(':checked')) ? "ui-icon-check" : "ui-icon-blank";
+					$(this).button({icons: {primary: icon}});
+				});
+			});
+		</script>
+		<div class="tsn8_newpost_fieldset">
+			<span class="tsn8_newpost_field_header">{L_OPTIONS}</span>
+			<span class="tsn8_newpost_field_input">
+				<div style="width: 15%; display: inline-block; margin: 0; white-space: nowrap;  vertical-align: top;">
+					<ul class="tsn8_myspot_userstatus_stats_list">
+						<li>{BBCODE_STATUS}</li>
 						<!-- IF S_BBCODE_ALLOWED -->
-						<td width="80" align="center" valign="top">
-							<script type="text/javascript">
-								// <![CDATA[
-								colorPalette('v', 7, 6)
-								// ]]>
-							</script>
-						</td>
+						<li>{IMG_STATUS}</li>
+						<li>{URL_STATUS}</li>
+						<li>{FLASH_STATUS}</li>
+						<li>{SMILIES_STATUS}</li>
 						<!-- ENDIF -->
-					</tr>
-				</table>
-			</td>
-		</tr>
+					</ul>
+				</div>
+				<div style="width: auto; display: inline-block; margin: 0; vertical-align: top;">
+					<!-- IF S_SIG_ALLOWED -->
+					<div class="tsn8_toolbar">
+						<input type="checkbox" data-mod="tsn8_newpost_options" id="attach_sig" name="attach_sig" {S_SIGNATURE_CHECKED}/><label for="attach_sig">{L_ATTACH_SIG}</label>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF S_BBCODE_ALLOWED or S_SMILIES_ALLOWED or S_LINKS_ALLOWED -->
+					<!-- IF S_SIG_ALLOWED --><br/><!-- ENDIF -->
+					<div class="tsn8_toolbar">
+					<span class="buttonset">
+					<!-- IF S_BBCODE_ALLOWED --><input type="checkbox" data-mod="tsn8_newpost_options" id="disable_bbcode" name="disable_bbcode" {S_BBCODE_CHECKED}/><label for="disable_bbcode">{L_DISABLE_BBCODE}</label>&nbsp;<!-- ENDIF -->
+					<!-- IF S_SMILIES_ALLOWED --><input type="checkbox" data-mod="tsn8_newpost_options" id="disable_smilies" name="disable_smilies" {S_SMILIES_CHECKED}/><label for="disable_smilies">{L_DISABLE_SMILIES}</label>&nbsp;<!-- ENDIF -->
+					<!-- IF S_LINKS_ALLOWED --><input type="checkbox" data-mod="tsn8_newpost_options" id="disable_magic_url" name="disable_magic_url" {S_MAGIC_URL_CHECKED}/><label for="disable_magic_url">{L_DISABLE_MAGIC_URL}</label>&nbsp;<!-- ENDIF -->
+					</span>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF S_NOTIFY_ALLOWED -->
+					<!-- IF S_BBCODE_ALLOWED or S_SMILIES_ALLOWED or S_LINKS_ALLOWED --><br/><!-- ENDIF -->
+					<div class="tsn8_toolbar">
+						<input type="checkbox" data-mod="tsn8_newpost_options" id="notify" name="notify" {S_NOTIFY_CHECKED}/><label for="notify">{L_NOTIFY_REPLY}</label>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF not S_PRIVMSGS and (S_LOCK_TOPIC_ALLOWED or S_LOCK_POST_ALLOWED) -->
+					<!-- IF S_NOTIFY_ALLOWED --><br/><!-- ENDIF -->
+					<div class="tsn8_toolbar">
+					<span class="buttonset">
+					<!-- IF not S_PRIVMSGS -->
+						<!-- IF S_LOCK_TOPIC_ALLOWED --><input type="checkbox" data-mod="tsn8_newpost_options" id="lock_topic" name="lock_topic" {S_LOCK_TOPIC_CHECKED}/><label for="lock_topic">{L_LOCK_TOPIC}</label>&nbsp;<!-- ENDIF -->
+						<!-- IF S_LOCK_POST_ALLOWED --><input type="checkbox" data-mod="tsn8_newpost_options" id="lock_post" name="lock_post" {S_LOCK_POST_CHECKED}/><label for="lock_post">{L_LOCK_POST} ({L_LOCK_POST_EXPLAIN})</label>&nbsp;<!-- ENDIF -->
+					<!-- ENDIF -->
+					</span>
+					</div>
+					<!-- ENDIF -->
+				</div>
+			</span>
+		</div>
+
+
+	</div>
+
+	<table class="tablebg" width="100%" cellspacing="1">
 
 		<!-- IF S_INLINE_ATTACHMENT_OPTIONS -->
 		<tr>
@@ -239,92 +276,6 @@
 			</td>
 		</tr>
 		<!-- ENDIF -->
-
-		<tr>
-			<td class="row1" valign="top"><b class="genmed">{L_OPTIONS}:</b><br/>
-				<table cellspacing="2" cellpadding="0" border="0">
-					<tr>
-						<td class="gensmall">{BBCODE_STATUS}</td>
-					</tr>
-					<!-- IF S_BBCODE_ALLOWED -->
-					<tr>
-						<td class="gensmall">{IMG_STATUS}</td>
-					</tr>
-					<tr>
-						<td class="gensmall">{FLASH_STATUS}</td>
-					</tr>
-					<tr>
-						<td class="gensmall">{URL_STATUS}</td>
-					</tr>
-					<tr>
-						<td class="gensmall">{SMILIES_STATUS}</td>
-					</tr>
-					<!-- ENDIF -->
-				</table>
-			</td>
-			<td class="row2">
-				<table cellpadding="1">
-					<!-- IF S_BBCODE_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="disable_bbcode" {S_BBCODE_CHECKED}/></td>
-						<td class="gen">{L_DISABLE_BBCODE}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_SMILIES_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="disable_smilies" {S_SMILIES_CHECKED}/></td>
-						<td class="gen">{L_DISABLE_SMILIES}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_LINKS_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="disable_magic_url" {S_MAGIC_URL_CHECKED}/></td>
-						<td class="gen">{L_DISABLE_MAGIC_URL}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_SIG_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="attach_sig" {S_SIGNATURE_CHECKED}/></td>
-						<td class="gen">{L_ATTACH_SIG}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_NOTIFY_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="notify" {S_NOTIFY_CHECKED}/></td>
-						<td class="gen">{L_NOTIFY_REPLY}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF not S_PRIVMSGS -->
-					<!-- IF S_LOCK_TOPIC_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="lock_topic" {S_LOCK_TOPIC_CHECKED}/></td>
-						<td class="gen">{L_LOCK_TOPIC}</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_LOCK_POST_ALLOWED -->
-					<tr>
-						<td><input type="checkbox" class="radio" name="lock_post" {S_LOCK_POST_CHECKED}/></td>
-						<td class="gen">{L_LOCK_POST} [{L_LOCK_POST_EXPLAIN}]</td>
-					</tr>
-					<!-- ENDIF -->
-
-					<!-- IF S_TYPE_TOGGLE -->
-					<tr>
-						<td>&nbsp;</td>
-						<td class="gen"><!-- IF S_EDIT_POST -->{L_CHANGE_TOPIC_TO}<!-- ELSE -->{L_POST_TOPIC_AS}<!-- ENDIF -->: <!-- BEGIN topic_type --><input type="radio" class="radio" name="topic_type" value="{topic_type.VALUE}" {topic_type.S_CHECKED}/>{topic_type.L_TOPIC_TYPE}&nbsp;&nbsp;<!-- END topic_type -->
-						</td>
-					</tr>
-					<!-- ENDIF -->
-					<!-- ENDIF -->
-				</table>
-			</td>
-		</tr>
 
 		<!-- IF S_TOPIC_TYPE_ANNOUNCE or S_TOPIC_TYPE_STICKY -->
 		<tr>
