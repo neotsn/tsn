@@ -1,5 +1,17 @@
 <!-- INCLUDE overall_header.html -->
-
+<script>
+	$(document).ready(function() {
+		$('#quick-mod-select').selectmenu({
+			change: function(event, ui) {
+				if($(this).val() == "") {
+					return false;
+				} else {
+					$('#quick-mod-form').submit();
+				}
+			}
+		}).selectmenu( "menuWidget" ).addClass( "overflow_200" );
+	});
+</script>
 <div class="tsn8_viewtopic_pageheader">
 	<div class="tsn8_viewtopic_pageheader_header_wrapper">
 		<span class="tsn8_viewtopic_pageheader_header"><a href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a></span>
@@ -86,18 +98,14 @@
 				<!--<span class="tsn8_viewtopic_authorcard_rank_image tsn8_viewtopic_meta_block">{postrow.RANK_IMG}</span>-->
 				<!--&lt;!&ndash; ENDIF &ndash;&gt;-->
 				<span class="tsn8_viewtopic_authorcard_icons tsn8_viewtopic_meta_block">
-					<!-- IF postrow.POSTER_JOINED --><span class="tsn8_icon tsn8_icon_joined" title="{L_JOINED}: {postrow.POSTER_JOINED}"></span>&nbsp;<!-- ENDIF -->
-					<!-- IF postrow.POSTER_FROM --><span class="tsn8_icon tsn8_icon_geo" title="{postrow.POSTER_FROM}"></span>&nbsp;<!-- ENDIF -->
-					<!-- IF postrow.ONLINE_IMG or postrow.U_PM -->
-						<!-- IF postrow.U_PM --><a href="{postrow.U_PM}" title="{L_SEND_PRIVATE_MESSAGE}"><!-- ENDIF --><span class="tsn8_icon_nohover tsn8_icon_<!-- IF postrow.ONLINE_IMG -->{postrow.ONLINE_IMG}<!-- ELSE -->offline<!-- ENDIF -->"></span><!-- IF postrow.U_PM -->
-				</a><!-- ENDIF -->
-					<!-- ENDIF -->
-				</span>
-				<span class="tsn8_viewtopic_authorcard_icons tsn8_viewtopic_meta_block">
-					<!-- IF postrow.U_PROFILE --><a href="{postrow.U_PROFILE}"><span class="tsn8_icon tsn8_icon_profile"></span></a> <!-- ENDIF -->
-					<!-- IF postrow.U_EMAIL --><a href="{postrow.U_EMAIL}"><span class="tsn8_icon tsn8_icon_email"></span></a> <!-- ENDIF -->
+					<span class="tsn8_icon tsn8_icon_joined" title="{L_JOINED}: {postrow.POSTER_JOINED}"></span>
+					<span class="tsn8_icon tsn8_icon_geo" title="{postrow.POSTER_FROM}"></span>
+					<!-- IF postrow.U_PM --><a href="{postrow.U_PM}" title="{L_SEND_PRIVATE_MESSAGE}"><!-- ENDIF --><span class="tsn8_icon_nohover tsn8_icon_<!-- IF postrow.ONLINE_IMG -->{postrow.ONLINE_IMG}<!-- ELSE -->offline<!-- ENDIF -->"></span><!-- IF postrow.U_PM --></a><!-- ENDIF -->
+					<a href="{postrow.U_PROFILE}"><span class="tsn8_icon tsn8_icon_profile"></span></a>
+					<a href="{postrow.U_EMAIL}"><span class="tsn8_icon tsn8_icon_email"></span></a>
 				</span>
 				<!-- IF postrow.POSTER_POSTS != '' -->
+				<br />
 				<span class="tsn8_viewtopic_authorcard_icons tsn8_viewtopic_meta_block"><b>{L_POSTS}: </b>{postrow.POSTER_POSTS}</span>
 				<!-- ENDIF -->
 			</div>
@@ -193,14 +201,13 @@
 	<p class="moderators"><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->: {MODERATORS}</p>
 	<!-- ENDIF -->
 </div>
-<div class="tsn8_forum_thread_control_wrapper">
+<div class="tsn8_forum_control_wrapper">
 	<!-- IF S_TOPIC_MOD -->
 	<div class="tsn8_forum_mod_wrapper">
-		<form method="post" action="{S_MOD_ACTION}"><span class="gensmall">{L_QUICK_MOD}:</span> {S_TOPIC_MOD}
-			<input class="tsn8_icon_mini tsn8_icon_send" type="submit" value=""/></form>
+		<form method="post" id="quick-mod-form" action="{S_MOD_ACTION}">{S_TOPIC_MOD}</form>
 	</div>
 	<!-- ENDIF -->
-	<div class="tsn8_forum_jumpbox_wrapper"><!-- INCLUDE jumpbox.html --></div>
+	<!-- INCLUDE jumpbox.html -->
 </div>
 
 <!-- INCLUDE breadcrumbs.html -->

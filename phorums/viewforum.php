@@ -593,9 +593,7 @@ if (sizeof($topic_list)) {
                 'LAST_POST_AUTHOR'        => get_username_string('username', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
                 'LAST_POST_AUTHOR_COLOUR' => get_username_string('colour', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
                 'LAST_POST_AUTHOR_FULL'   => get_username_string('full', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
-                'LAST_POST_AUTHOR_AVATAR' => get_username_string('avatar', $row['topic_last_poster_id'],
-                    $row['topic_last_poster_name'], $row['topic_last_poster_colour'], false, false,
-                    array('user_avatar_max_dim' => 30)),
+                'LAST_POST_AUTHOR_AVATAR' => get_username_string('avatar', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour'], false, false, array('user_avatar_max_dim' => 30)),
 
                 'PAGINATION'              => topic_generate_pagination($replies, $view_topic_url),
                 'REPLIES'                 => $replies,

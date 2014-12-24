@@ -173,11 +173,18 @@ span.tsn8_myspot_module_avatar {
 	margin: 0 5px;
 }
 
-span.tsn8_default_avatar {
+span.tsn8_default_avatar, span.tsn8_default_avatar_mini {
 	background: url('../imageset/tsn8/tsn_icon_avatar.png') no-repeat center center;
 	display: block;
 	width: 100px;
 	height: 100px;
+}
+
+span.tsn8_default_avatar_mini {
+	background-size: 30px 30px;
+	width: 30px;
+	height: 30px;
+	margin: 0 auto;
 }
 
 span.tsn8_avatar_right {
@@ -749,19 +756,24 @@ div.tsn8_forum_thread_control_wrapper {
 	vertical-align: top;
 }
 
+div.tsn8_forum_control_wrapper {
+	display: block;
+	margin: 0 5px;
+	position: relative;
+	height: 45px;
+}
 div.tsn8_forum_mod_wrapper {
-	text-align: left;
-	margin: 5px;
-	color: #587eaa;
+	position: absolute;
+	left: 0;
 	display: inline-block;
+	text-align: left;
 }
 
 div.tsn8_forum_jumpbox_wrapper {
+	position: absolute;
+	right: 0;
 	display: inline-block;
 	text-align: right;
-	margin: 5px;
-	color: #587eaa;
-	float: right;
 }
 
 div.tsn8_forum_mod_wrapper span, div.tsn8_forum_jumpbox_wrapper span {
@@ -1407,6 +1419,10 @@ input.tsn8_input_radio {
 }
 
 /*************** Custom Override Styles *******************/
+.overflow_200 {
+	height: 200px;
+	overflow-y: auto;
+}
 .align_left {
 	text-align: left;
 }

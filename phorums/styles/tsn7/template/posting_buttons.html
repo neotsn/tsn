@@ -3,9 +3,7 @@
 
 	// Define the bbCode tags
 	var bbcode = [];
-	var bbtags = ['[b]', '[/b]', '[i]', '[/i]', '[u]', '[/u]', '[quote]', '[/quote]', '[code]', '[/code]', '[list][*]', '[/list]', '[list=1][*]', '[/list]', '[img]', '[/img]', '[url]', '[/url]', '[flash=]', '[/flash]', '[size=]', '[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME
-	}<!-- END custom_tags -->]
-	;
+	var bbtags = ['[b]', '[/b]', '[i]', '[/i]', '[u]', '[/u]', '[quote]', '[/quote]', '[code]', '[/code]', '[list][*]', '[/list]', '[list=1][*]', '[/list]', '[img]', '[/img]', '[url]', '[/url]', '[flash=]', '[/flash]', '[size=]', '[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->];
 	var imageTag = false;
 
 	// Helpline messages
@@ -25,11 +23,7 @@
 		d: '{LA_BBCODE_D_HELP}',
 		t: '{LA_BBCODE_T_HELP}',
 		tip: '{L_STYLES_TIP}'
-		<!-- BEGIN custom_tags -->, cb_{custom_tags.BBCODE_ID
-	}
-	:
-	'{custom_tags.A_BBCODE_HELPLINE}'
-	<!-- END custom_tags -->
+		<!-- BEGIN custom_tags -->, cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'<!-- END custom_tags -->
 	}
 
 

@@ -1,16 +1,31 @@
+<script>
+	// <![CDATA[
+	$(document).ready(function() {
 
+		$('#jumpbox_select').selectmenu({
+			change: function(event, ui) {
+				if ($(this).val() == -1) {
+					return false;
+				} else {
+					$('#jumpbox_form').submit();
+				}
+			}
+		}).selectmenu( "menuWidget" ).addClass( "overflow_200" );
+	});
+	// ]]>
+</script>
 <!-- IF S_DISPLAY_JUMPBOX -->
-	<form method="post" name="jumpbox" action="{S_JUMPBOX_ACTION}" onsubmit="if(document.jumpbox.f.value == -1){return false;}">
+<div class="tsn8_forum_jumpbox_wrapper">
+	<form method="post" id="jumpbox_form" name="jumpbox" action="{S_JUMPBOX_ACTION}">
 		<span class="tsn8_forum_jumpbox_controls">
-		<!-- IF S_IN_MCP and S_MERGE_SELECT -->{L_SELECT_TOPICS_FROM}<!-- ELSEIF S_IN_MCP -->{L_MODERATE_FORUM}<!-- ELSE -->{L_JUMP_TO}<!-- ENDIF -->:&nbsp;<select name="f" onchange="if(this.options[this.selectedIndex].value != -1){ document.forms['jumpbox'].submit() }">
-
-		<!-- BEGIN jumpbox_forums -->
-			<!-- IF jumpbox_forums.S_FORUM_COUNT eq 1 --><option value="-1">------------------</option><!-- ENDIF -->
-			<option value="{jumpbox_forums.FORUM_ID}"{jumpbox_forums.SELECTED}><!-- BEGIN level -->&nbsp; &nbsp;<!-- END level -->{jumpbox_forums.FORUM_NAME}</option>
-		<!-- END jumpbox_forums -->
-
-		</select>&nbsp;<input class="tsn8_icon_mini tsn8_icon_send" type="submit" value=""/>
-
+			<select name="f" id="jumpbox_select" style="height: 200px;">
+				<option value="-1" selected="selected"><!-- IF S_IN_MCP and S_MERGE_SELECT -->{L_SELECT_TOPICS_FROM}<!-- ELSEIF S_IN_MCP -->{L_MODERATE_FORUM}<!-- ELSE -->{L_JUMP_TO}<!-- ENDIF --></option>
+				<!-- BEGIN jumpbox_forums -->
+				<!-- IF jumpbox_forums.S_FORUM_COUNT eq 1 --><option value="-1">------------------</option><!-- ENDIF -->
+				<option value="{jumpbox_forums.FORUM_ID}"><!-- BEGIN level -->&nbsp; &nbsp;<!-- END level -->{jumpbox_forums.FORUM_NAME}</option>
+				<!-- END jumpbox_forums -->
+			</select>
 		</span>
 	</form>
+</div>
 <!-- ENDIF -->

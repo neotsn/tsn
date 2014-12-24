@@ -173,7 +173,7 @@
 			</div>
 			<div class="tsn8_topic_last_post_wrapper">
 				<!-- IF topicrow.LAST_POST_TIME -->
-				<p class="topicdetails">{topicrow.LAST_POST_AUTHOR_AVATAR}</p>
+				<p class="topicdetails"><!-- IF topicrow.LAST_POST_AUTHOR_AVATAR -->{topicrow.LAST_POST_AUTHOR_AVATAR}<!-- ELSE --><span class="tsn8_default_avatar_mini"></span><!-- ENDIF --></p>
 
 				<p class="topicdetails"><a href="{topicrow.U_LAST_POST}">{topicrow.LAST_POST_TIME} {LAST_POST_IMG}</a>
 				</p>
@@ -218,7 +218,9 @@
 	</div>
 	<!-- ENDIF -->
 </div>
-<span class="tsn8_forum_jumpbox_wrapper"><!-- INCLUDE jumpbox.html --></span>
+<div class="tsn8_forum_control_wrapper">
+	<!-- INCLUDE jumpbox.html -->
+</div>
 <!-- INCLUDE breadcrumbs.html -->
 
 <div class="tsn8_viewforum_stats_wrapper">
