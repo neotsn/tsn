@@ -121,15 +121,15 @@
 			</span>
 		</div>
 		<div class="tsn8_viewtopic_post_body_wrapper">
-			<!-- IF postrow.S_POST_UNAPPROVED --><span class="tsn8_postapprove">{UNAPPROVED IMG}<br/><a href="{postrow.U_MCP_APPROVE}">{L_POST_UNAPPROVED}</a></span><!-- ENDIF -->
-			<!-- IF postrow.S_POST_REPORTED --><span class="tsn8_postreported">{REPORTED IMG}<br/><a href="{postrow.U_MCP_REPORT}">{L_POST_REPORTED}</a></span><!-- ENDIF -->
+			<!-- IF postrow.S_POST_UNAPPROVED --><span class="tsn8_postapprove tsn8_width_50">{UNAPPROVED IMG}<br/><a href="{postrow.U_MCP_APPROVE}">{L_POST_UNAPPROVED}</a></span><!-- ENDIF -->
+			<!-- IF postrow.S_POST_REPORTED --><span class="tsn8_postreported tsn8_width_50">{REPORTED IMG}<br/><a href="{postrow.U_MCP_REPORT}">{L_POST_REPORTED}</a></span><!-- ENDIF -->
 			<span class="tsn8_viewtopic_post_body">{postrow.MESSAGE}</span>
 
 			<!-- IF postrow.S_HAS_ATTACHMENTS -->
 			<!-- IF postrow.S_DISPLAY_NOTICE -->
-			<span class="tsn8_postapprove"><br/><br/>{L_DOWNLOAD_NOTICE}</span>
+			<span class="tsn8_postapprove tsn8_width_50"><br/><br/>{L_DOWNLOAD_NOTICE}</span>
 			<!-- ENDIF -->
-			<div class="tsn8_viewtopic_post_attachment_wrapper">
+			<div class="tsn8_viewtopic_post_attachment_wrapper tsn8_width_50">
 				<span class="tsn8_viewtopic_post_attachment_label">{L_ATTACHMENTS}:</span>
 				<!-- BEGIN attachment -->
 				<p class="tsn8_viewtopic_post_attachment_item">{postrow.attachment.DISPLAY_ATTACHMENT}</p>
@@ -214,7 +214,7 @@
 
 <div class="tsn8_viewforum_stats_wrapper">
 	<!-- IF S_DISPLAY_ONLINE_LIST -->
-	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper tsn8_width_33">
 		<span class="tsn8_myspot_module_header">{L_ONLINE_NOW}</span>
 
 		<div class="tsn8_myspot_module_stats">
@@ -222,7 +222,7 @@
 		</div>
 	</div>
 	<!-- ENDIF -->
-	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper tsn8_width_33">
 		<span class="tsn8_myspot_module_header">{L_PERMISSIONS}</span>
 
 		<div class="tsn8_myspot_module_stats">

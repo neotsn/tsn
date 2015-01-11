@@ -36,7 +36,7 @@ body {
 div.tsn8_page_wrapper {
 	position: relative;
 	display: block;
-	width: 100%;
+	/*width: 100%;*/
 	height: auto;
 	background: #fff url('./images/tsn8/tsnlogo-watermark.png') no-repeat fixed 15% 0;
 }
@@ -116,15 +116,15 @@ table.tsn8_myspot_content_wrapper td {
 }
 
 td.tsn8_myspot_left_sidebar {
-	width: 25%;
+	/*width: 25%;*/
 }
 
 td.tsn8_myspot_center_content {
-	width: 60%;
+	/*width: 60%;*/
 }
 
 td.tsn8_myspot_right_sidebar {
-	width: 15%;
+	/*width: 15%;*/
 }
 
 div.tsn8_bottom_menu_wrapper {
@@ -144,7 +144,7 @@ span.tsn8_copyright_info {
 	display: block;
 	bottom: 0;
 	text-align: center;
-	width: 100%;
+	/*width: 100%;*/
 }
 
 div.tsn8_myspot_module_wrapper {
@@ -247,7 +247,7 @@ span.tsn8_myspot_stat {
 	*display: inline;
 	zoom: 1;
 
-	width: 65px;
+	min-width: 65px;
 	border: 1px solid #d7e3f6;
 	padding: 3px;
 	margin: 3px;
@@ -392,7 +392,7 @@ span.tsn8_myspot_userstatus_stats_record {
 }
 
 div.tsn8_myspot_newest_posts_cards_wrapper {
-	width: 100%;
+	/*width: 100%;*/
 	display: block;
 	max-height: 700px;
 	overflow-y: auto;
@@ -529,7 +529,7 @@ div.tsn8_forum_folder_icon, div.tsn8_topic_folder_icon {
 
 div.tsn8_forum_list_info, div.tsn8_topic_list_info {
 	display: inline-block;
-	width: 60%;
+	/*width: 60%;*/
 	text-align: left;
 	vertical-align: top;
 	white-space: normal;
@@ -549,12 +549,12 @@ p.tsn8_forum_description {
 }
 
 div.tsn8_forum_topics_count {
-	width: 10%;
+	/*width: 10%;*/
 	display: inline-block;
 }
 
 div.tsn8_forum_last_post_wrapper, div.tsn8_topic_last_post_wrapper {
-	width: 15%;
+	/*width: 15%;*/
 	display: inline-block;
 	font-size: 1em;
 	color: #587eaa;
@@ -590,7 +590,7 @@ div.tsn8_myspot_viewforum_stats_wrapper {
 	zoom: 1;
 	vertical-align: top;
 	text-align: left;
-	width: 35%;
+	/*width: 35%;*/
 }
 
 span.tsn8_forum_online_user_avatars {
@@ -609,7 +609,7 @@ span.tsn8_forum_online_user_avatars a {
 /******************** Forum Body **************************/
 div.tsn8_information {
 	margin: 10px auto;
-	width: 75%;
+	/*width: 75%;*/
 }
 
 span.tsn8_information_header {
@@ -629,13 +629,13 @@ span.tsn8_information_text {
 form.tsn8_forum_login {
 	margin: 0 auto;
 	display: block;
-	width: 100%;
+	/*width: 100%;*/
 	text-align: center;
 }
 
 span.tsn8_forum_login_wrapper {
 	display: inline-block;
-	width: 25%;
+	/*width: 25%;*/
 	text-align: center;
 	margin: 10px auto;
 }
@@ -762,6 +762,7 @@ div.tsn8_forum_control_wrapper {
 	position: relative;
 	height: 45px;
 }
+
 div.tsn8_forum_mod_wrapper {
 	position: absolute;
 	left: 0;
@@ -928,7 +929,7 @@ div.tsn8_viewtopic_post_body_wrapper {
 
 span.tsn8_postapprove, span.tsn8_postreported {
 	display: block;
-	width: 50%;
+	/*width: 50%;*/
 	border-radius: 5px;
 	border: 1px solid orange;
 	box-shadow: 0 1px 2px #aaa;
@@ -947,7 +948,7 @@ span.tsn8_viewtopic_post_body {
 }
 
 div.tsn8_viewtopic_post_attachment_wrapper {
-	width: 50%;
+	/*width: 50%;*/
 	margin: 20px 0;
 	border-radius: 5px;
 	border: 1px solid #ccc;
@@ -965,7 +966,6 @@ span.tsn8_viewtopic_post_attachment_label {
 p.tsn8_viewtopic_post_attachment_item {
 	line-height: 1.4em;
 	margin-left: 10px;
-
 }
 
 span.tsn8_viewtopic_post_signature {
@@ -1423,6 +1423,7 @@ input.tsn8_input_radio {
 	height: 200px;
 	overflow-y: auto;
 }
+
 .align_left {
 	text-align: left;
 }
@@ -1433,6 +1434,53 @@ input.tsn8_input_radio {
 
 .align_right {
 	text-align: right;
+}
+
+.tsn8_width_10 {
+	width: 8%;
+}
+
+.tsn8_width_15 {
+	width: 13%;
+}
+
+.tsn8_width_20 {
+	width: 18%;
+}
+
+.tsn8_width_25 {
+	width: 23%;
+}
+
+.tsn8_width_33 {
+	width: 31%;
+}
+
+.tsn8_width_50 {
+	width: 48%;
+}
+
+.tsn8_width_60 {
+	width: 58%;
+}
+
+.tsn8_width_66 {
+	width: 65%;
+}
+
+.tsn8_width_75 {
+	width: 73%;
+}
+
+.tsn8_width_100 {
+	width: 98%;
+}
+
+.tsn8_width_10, .tsn8_width_15, .tsn8_width_20, .tsn8_width_25,
+.tsn8_width_33, .tsn8_width_50, .tsn8_width_60,
+.tsn8_width_66, .tsn8_width_75, .tsn8_width_100 {
+	margin-left: 1%;
+	margin-right: 1%;
 }
 
 .ui-widget {

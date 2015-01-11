@@ -1,7 +1,7 @@
 <!-- INCLUDE overall_header.html -->
 
 <!-- IF S_FORUM_RULES -->
-<div class="tsn8_information tsn8_myspot_wrapper_med">
+<div class="tsn8_information tsn8_myspot_wrapper_med tsn8_width_75">
 	<span class="tsn8_information_header">{L_FORUM_RULES}</span>
 		<span class="tsn8_information_text align_left">
 			<!-- IF U_FORUM_RULES -->
@@ -14,16 +14,16 @@
 <!-- ENDIF -->
 
 <!-- IF S_NO_READ_ACCESS -->
-<div class="tsn8_information tsn8_myspot_wrapper_med">
+<div class="tsn8_information tsn8_myspot_wrapper_med tsn8_width_75">
 	<span class="tsn8_information_header">{L_OOPS_ACCESS}</span>
 	<span class="tsn8_information_text align_left">{L_NO_READ_ACCESS}</span>
 	<!-- IF not S_USER_LOGGED_IN -->
-	<form method="post" action="{S_LOGIN_ACTION}" class="tsn8_forum_login">
-		<span class="tsn8_forum_login_wrapper">
+	<form method="post" action="{S_LOGIN_ACTION}" class="tsn8_forum_login tsn8_width_100">
+		<span class="tsn8_forum_login_wrapper tsn8_width_25">
 			<label for="username">{L_USERNAME}:</label><br/>
 			<input id="username" class="post" type="text" name="username" size="10"/>
 		</span>
-		<span class="tsn8_forum_login_wrapper">
+		<span class="tsn8_forum_login_wrapper tsn8_width_25">
 			<label for="pass">{L_PASSWORD}:</label><br/>
 			<input id="pass" class="post" type="password" name="password" size="10"/>
 		</span>
@@ -46,7 +46,7 @@
 	<!-- BEGIN topicrow -->
 	<div class="tsn8_topic_row_wrapper">
 		<div class="tsn8_topic_folder_icon">{topicrow.TOPIC_FOLDER_IMG}</div>
-		<div class="tsn8_topic_list_info">
+		<div class="tsn8_topic_list_info tsn8_width_60">
 			<p class="tsn8_topic_list_header">
 				<!-- IF S_TOPIC_ICONS and topicrow.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}" width="{topicrow.TOPIC_ICON_IMG_WIDTH}" height="{topicrow.TOPIC_ICON_IMG_HEIGHT}" alt="" title=""/><!-- ENDIF -->
 				<!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a><!-- ENDIF -->
@@ -62,19 +62,19 @@
 			<p class="tsn8_forum_description">{L_BY}: {topicrow.TOPIC_AUTHOR_FULL}<!-- IF topicrow.PAGINATION --> [
 				{GOTO_PAGE_IMG}{L_GOTO_PAGE}: {topicrow.PAGINATION} ]</p><!-- ENDIF -->
 		</div>
-		<div class="tsn8_forum_topics_count">
+		<div class="tsn8_forum_topics_count tsn8_width_10">
 			<span class="tsn8_myspot_stat">
 				<span class="tsn8_topic_stat_value">{topicrow.REPLIES}</span>
 				<span class="tsn8_topic_stat_header">{L_REPLIES}</span>
 			</span>
 		</div>
-		<div class="tsn8_forum_topics_count">
+		<div class="tsn8_forum_topics_count tsn8_width_10">
 			<span class="tsn8_myspot_stat">
 				<span class="tsn8_topic_stat_value">{topicrow.VIEWS}</span>
 				<span class="tsn8_topic_stat_header">{L_VIEWS}</span>
 			</span>
 		</div>
-		<div class="tsn8_topic_last_post_wrapper">
+		<div class="tsn8_topic_last_post_wrapper tsn8_width_15">
 			<!-- IF topicrow.LAST_POST_TIME -->
 			<p class="topicdetails">{topicrow.LAST_POST_AUTHOR_AVATAR}</p>
 
@@ -140,7 +140,7 @@
 		<!-- ENDIF -->
 		<div class="tsn8_topic_row_wrapper">
 			<div class="tsn8_topic_folder_icon">{topicrow.TOPIC_FOLDER_IMG}</div>
-			<div class="tsn8_topic_list_info">
+			<div class="tsn8_topic_list_info tsn8_width_60">
 				<p class="tsn8_topic_list_header">
 					<!-- IF S_TOPIC_ICONS and topicrow.TOPIC_ICON_IMG --><img
 						src="{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}" width="{topicrow.TOPIC_ICON_IMG_WIDTH}"
@@ -159,19 +159,19 @@
 				<p class="tsn8_forum_description">{L_BY}: {topicrow.TOPIC_AUTHOR_FULL}<!-- IF topicrow.PAGINATION --> [
 					{GOTO_PAGE_IMG}{L_GOTO_PAGE}: {topicrow.PAGINATION} ]</p><!-- ENDIF -->
 			</div>
-			<div class="tsn8_forum_topics_count">
+			<div class="tsn8_forum_topics_count tsn8_width_10">
 			<span class="tsn8_myspot_stat">
 				<span class="tsn8_topic_stat_value">{topicrow.REPLIES}</span>
 				<span class="tsn8_topic_stat_header">{L_REPLIES}</span>
 			</span>
 			</div>
-			<div class="tsn8_forum_topics_count">
+			<div class="tsn8_forum_topics_count tsn8_width_10">
 			<span class="tsn8_myspot_stat">
 				<span class="tsn8_topic_stat_value">{topicrow.VIEWS}</span>
 				<span class="tsn8_topic_stat_header">{L_VIEWS}</span>
 			</span>
 			</div>
-			<div class="tsn8_topic_last_post_wrapper">
+			<div class="tsn8_topic_last_post_wrapper tsn8_width_15">
 				<!-- IF topicrow.LAST_POST_TIME -->
 				<p class="topicdetails"><!-- IF topicrow.LAST_POST_AUTHOR_AVATAR -->{topicrow.LAST_POST_AUTHOR_AVATAR}<!-- ELSE --><span class="tsn8_default_avatar_mini"></span><!-- ENDIF --></p>
 
@@ -225,7 +225,7 @@
 
 <div class="tsn8_viewforum_stats_wrapper">
 	<!-- IF S_DISPLAY_ONLINE_LIST -->
-	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper tsn8_width_33">
 		<span class="tsn8_myspot_module_header">{L_ONLINE_NOW}</span>
 
 		<div class="tsn8_myspot_module_stats">
@@ -234,7 +234,7 @@
 	</div>
 	<!-- ENDIF -->
 	<!-- IF S_HAS_PERMISSIONS -->
-	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper">
+	<div class="tsn8_myspot_viewforum_stats_wrapper tsn8_myspot_wrapper tsn8_width_33">
 		<span class="tsn8_myspot_module_header">{L_PERMISSIONS}</span>
 
 		<div class="tsn8_myspot_module_stats">
