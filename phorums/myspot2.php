@@ -2,7 +2,7 @@
 
 /********************************************************************
  *	MySpot.php
- *	By: ***REMOVED***
+ *	By: neotsn
  *	Date: 3/31/08
  *	Version: 7.00
  *	(C) 2006-2008 - The-Spot.Network LLC
